@@ -11,7 +11,9 @@ class User(db.Model):
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    ingredients = db.relationship('Ingredient', backref='recipe' nullable=False)
+    ingredients = db.relationship('Ingredient', backref='recipe', nullable=False)
+    gluten_free = db.Column(db.Boolean, default=False)
+    vegan = db.Column(db.Boolean, default=False)
     instructions = db.Column(db.Text, nullable=False)
     version = db.Column(db.Integer, default=1)
     parent_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=True)
