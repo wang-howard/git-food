@@ -34,4 +34,4 @@ class Ingredient(db.Model):
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
     
     def __repr__(self):
-        return f'<Ingredient {self.name}, Quantity: {self.quantity}>'
+        return f'<Ingredient {self.name}, Quantity: {self.quantity}, Measurement: {self.measurement}>'
