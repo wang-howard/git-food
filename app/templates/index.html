@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Git Food - Home</title>
+</head>
+<body>
+    <h1>Welcome to Git Food</h1>
+    <p>Discover and track your favorite recipes!</p>
+    <ul>
+        {% for recipe in recipes %}
+            <li>
+                <a href="{{ url_for('recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a> - by {{ recipe.user.username }}
+                {% if recipe.gluten_free %}<span>Gluten Free</span>{% endif %}
+                {% if recipe.vegan %}<span>Vegan</span>{% endif %}
+            </li>
+        {% else %}
+            <li>No recipes found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
