@@ -9,7 +9,7 @@ class User(db.Model):
     recipes = db.relationship('Recipe', backref='user', lazy='dynamic')
 
     def __repr__(self):
-        return f"User {self.id}"
+        return f"User ID: {self.id}, Username: {self.username}, Email: {self.email}, Password: {self.password}, Recipes: {self.recipes}"
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -28,6 +28,9 @@ class Recipe(db.Model):
 
     def revert_to_version(self, version):
         pass
+
+    def __repr__(self):
+        return f"Recipe ID: {self.id}, Title: {self.title}, Ingredients: {self.ingredients}, GF: {self.gluten_free}, V: {self.vegan}, instructions: {self.instructions}, Parent ID: {self.parent_id}"
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
