@@ -8,7 +8,7 @@ from uuid import uuid4
 
 import requests
 from lxml import etree
-from urllib import parse as urllib_parse
+from six.moves.urllib import parse as urllib_parse
 
 logger = logging.getLogger(__name__)
 
