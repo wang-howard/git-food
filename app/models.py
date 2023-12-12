@@ -8,6 +8,9 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     recipes = db.relationship('Recipe', backref='user', lazy='dynamic')
 
+    def __repr__(self):
+        return f"User {self.id}"
+
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
