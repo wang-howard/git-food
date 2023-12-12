@@ -3,14 +3,14 @@ from datetime import datetime
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), nullable=False)
+    username = db.Column(db.String, unique=True, nullable=False)
+    email = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
     recipes = db.relationship('Recipe', backref='user', lazy='dynamic')
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String, nullable=False)
     ingredients = db.relationship('Ingredient', backref='recipe', nullable=False)
     gluten_free = db.Column(db.Boolean, default=False)
     vegan = db.Column(db.Boolean, default=False)
@@ -28,9 +28,10 @@ class Recipe(db.Model):
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), nullable=False)
+    name = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    measurement = db.Column(db.String(120), nullable=False)
+    measurement = db.Column(db.String, nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
+    
     def __repr__(self):
         return f'<Ingredient {self.name}, Quantity: {self.quantity}>'
