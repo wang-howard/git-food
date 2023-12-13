@@ -9,7 +9,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from app.cas import CASClient
+# from app.cas import CASClient
 from config import Config
 
 db = SQLAlchemy()
@@ -33,7 +33,7 @@ def create_app(config_class=Config):
     from .main import bp as main_bp
     app.register_blueprint(main_bp)
     
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
+    # from .auth import auth as auth_blueprint
+    # app.register_blueprint(auth_blueprint)
 
     return app
