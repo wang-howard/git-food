@@ -13,8 +13,9 @@ from flask_login import LoginManager
 from config import Config
 
 db = SQLAlchemy()
-login_manager = LoginManager()
-login_manager.login_view = "auth.login"
+
+# login_manager = LoginManager()
+# login_manager.login_view = "auth.login"
 
 # TODO
 # cas_client = CASClient(version=3, service_url=os.getenv("SERVICE_URL"),
@@ -27,10 +28,10 @@ def create_app(config_class=Config):
 
     # Flask extensions
     db.init_app(app)
-    login_manager.init_app(app)
+    # login_manager.init_app(app)
 
     # register blueprints
-    from .main import bp as main_bp
+    from .views import bp as main_bp
     app.register_blueprint(main_bp)
     
     # from .auth import auth as auth_blueprint

@@ -1,10 +1,11 @@
 import sys
-from flask import render_template, url_for
+from flask import Blueprint, render_template, url_for
 from flask import session, request
 from flask_login import login_required
-from . import bp
-from .. import db
-from ..models import User, Recipe, Ingredient
+from . import db
+from .models import User, Recipe, Ingredient
+
+bp = Blueprint("main", __name__, template_folder="/templates")
 
 @bp.route("/", methods=["GET"])
 def index():

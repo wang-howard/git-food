@@ -3,7 +3,7 @@ Error handler file for Flask app.
 """
 
 from flask import render_template
-from . import bp
+from .views import bp
 
 @bp.app_errorhandler(404)
 def page_not_found(e):
