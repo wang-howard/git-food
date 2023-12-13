@@ -13,6 +13,12 @@ header.navbar {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 nav a {
   color: #fff;
   padding: 0.5rem 1rem;
@@ -25,10 +31,21 @@ nav a:hover {
   color: #fff;
 }
 
+.logout-button {
+  background-color: #d9534f;
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+  background-color: #c9302c;
+}
+
 .container {
   padding: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 2rem auto;
 }
 
 h1 {
