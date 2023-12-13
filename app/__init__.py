@@ -9,17 +9,12 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-# from app.cas import CASClient
 from config import Config
 
 db = SQLAlchemy()
 
 # login_manager = LoginManager()
 # login_manager.login_view = "auth.login"
-
-# TODO
-# cas_client = CASClient(version=3, service_url=os.getenv("SERVICE_URL"),
-#                        server_url="https://fed.princeton.edu/cas/")
 
 # TODO
 def create_app(config_class=Config):
@@ -33,7 +28,7 @@ def create_app(config_class=Config):
     # register blueprints
     from .views import bp
     app.register_blueprint(bp)
-    
+
     # from .auth import auth as auth_blueprint
     # app.register_blueprint(auth_blueprint)
 
