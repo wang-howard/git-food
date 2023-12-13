@@ -9,7 +9,7 @@ class User(db.Model):
     recipes = db.relationship('Recipe', backref='user', lazy='dynamic')
 
     def __repr__(self):
-        return f"User ID: {self.id}, Username: {self.username}, Email: {self.email}, Password: {self.password}, Recipes: {self.recipes}"
+        return f"<User ID: {self.id}, Username: {self.username}>"
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -30,14 +30,14 @@ class Recipe(db.Model):
         pass
 
     def __repr__(self):
-        return f"Recipe ID: {self.id}, Title: {self.title}, Ingredients: {self.ingredients}, GF: {self.gluten_free}, V: {self.vegan}, instructions: {self.instructions}, Parent ID: {self.parent_id}"
+        return f"<Recipe ID: {self.id}, Title: {self.title}>"
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    measurement = db.Column(db.String, nullable=False)
+    unit = db.Column(db.String, nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
 
     def __repr__(self):
-        return f'<Ingredient {self.name}, Quantity: {self.quantity}, Measurement: {self.measurement}>'
+        return f'<Ingredient {self.name}, Quantity: {self.quantity}, Unit: {self.unit}>'

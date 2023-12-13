@@ -1,6 +1,6 @@
 """
-Configuration file for Flask app. Sets necessary environment variables
-for Flask and SQLAlchemy.
+Configuration file for Flask app. Sets necessary environment variables for Flask
+and SQLAlchemy.
 """
 
 import os
