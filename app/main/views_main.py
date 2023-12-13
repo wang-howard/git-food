@@ -16,4 +16,3 @@ def index():
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
-
