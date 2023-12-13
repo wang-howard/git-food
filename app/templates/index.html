@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Git Food - Home</title>
     <!-- Link to the external stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
     <header class="navbar">
         <nav>
@@ -20,20 +22,22 @@
     <main class="container">
         <h1>Welcome to Git Food</h1>
         <p>Discover and track your favorite recipes!</p>
+        <p>Hello {{ name }}!!</p>
         <section class="recipes-list">
             <ul>
                 {% for recipe in recipes %}
-                    <li class="recipe-item">
-                        <a href="{{ url_for('recipe', recipe_id=recipe.id) }}" class="recipe-link">{{ recipe.title }}</a>
-                        <span class="recipe-author">by {{ recipe.user.username }}</span>
-                        {% if recipe.gluten_free %}<span class="tag gluten-free">Gluten Free</span>{% endif %}
-                        {% if recipe.vegan %}<span class="tag vegan">Vegan</span>{% endif %}
-                    </li>
+                <li class="recipe-item">
+                    <a href="{{ url_for('recipe', recipe_id=recipe.id) }}" class="recipe-link">{{ recipe.title }}</a>
+                    <span class="recipe-author">by {{ recipe.user.username }}</span>
+                    {% if recipe.gluten_free %}<span class="tag gluten-free">Gluten Free</span>{% endif %}
+                    {% if recipe.vegan %}<span class="tag vegan">Vegan</span>{% endif %}
+                </li>
                 {% else %}
-                    <li>No recipes found.</li>
+                <li>No recipes found.</li>
                 {% endfor %}
             </ul>
         </section>
     </main>
 </body>
+
 </html>
