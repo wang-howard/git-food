@@ -69,5 +69,5 @@ def logout():
 
 @auth.route("/home")
 @login_is_required
-def protected_area():
+def home():
     return render_template("index.html")

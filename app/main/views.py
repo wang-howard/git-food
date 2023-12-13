@@ -13,9 +13,8 @@ def index():
     """
     try:
         if "google_token" in session:
-            me = google.get("userinfo")
-            return jsonify({"data": me.data})
-        return render_template("landing.html")
+            return render_template(url_for("auth.home"))
+        return render_template("landing.html", name=session["name"])
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
