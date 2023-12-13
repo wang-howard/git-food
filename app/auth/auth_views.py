@@ -64,7 +64,7 @@ def signup():
 
 @auth.route("/logout")
 def logout():
-    session.pop("google_token", None)
+    session.clear()
     return redirect(url_for("main.index"))
 
 @auth.route("/home")

@@ -12,9 +12,10 @@ def index():
     Renders home/landing page
     """
     try:
-        if "google_token" in session:
+        if "google_id" in session:
             return render_template(url_for("auth.home"))
-        return render_template("landing.html", name=session["name"])
+        else:
+            return render_template("index.html", name="Anon")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
