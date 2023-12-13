@@ -1,13 +1,15 @@
-from gitfood import db
+from app import db
 from datetime import datetime
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
     recipes = db.relationship("Recipe", backref="user", lazy="dynamic")
 
     def __repr__(self):
-        return f"<NetID: {self.id}>"
+        return f"<User ID: {self.id}, Username: {self.username}>"
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
