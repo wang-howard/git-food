@@ -3,13 +3,11 @@ from datetime import datetime
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
     recipes = db.relationship("Recipe", backref="user", lazy="dynamic")
 
     def __repr__(self):
-        return f"<User ID: {self.id}, Username: {self.username}>"
+        return f"<NetID: {self.id}>"
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)

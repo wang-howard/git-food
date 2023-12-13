@@ -6,7 +6,7 @@ dependencies.
 
 from flask import Blueprint
 
-bp = Blueprint("main", __name__)
+main = Blueprint("main", __name__)
 
 # TODO
 from . import views_main, views_user, errors

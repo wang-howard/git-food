@@ -1,10 +1,10 @@
 """
 Configuration file for Flask app. Sets necessary environment variables for Flask
 and SQLAlchemy.
-SET ENVIRON w/ export:
+SET ENVIRON:
 export FLASK_APP=gitfood.py
 export DB_URI=postgresql://git_food_user:uelFgIGe9GCTYYttir2XHNJ9Y4auBX4G@dpg-clrqa1cm7d1c73f483tg-a.ohio-postgres.render.com/git_food
-export SEC_KEY=gitfood5717
+export SEC_KEY=uelFgIGe9GCTYYttir2XHNJ9Y4auBX4G
 export SERVICE_URL=
 """
 
@@ -14,9 +14,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 # TODO
 class Config:
-    SECRET_KEY = os.environ.get("SEC_KEY") or "gitfood5717"
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DB_URI') or \
-        "postgresql://git_food_user:uelFgIGe9GCTYYttir2XHNJ9Y4auBX4G@dpg-clrqa1cm7d1c73f483tg-a.ohio-postgres.render.com/git_food"
+    SECRET_KEY = os.environ.get("SEC_KEY")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DB_URI")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # connection pooling configurations

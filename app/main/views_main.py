@@ -2,11 +2,11 @@ import sys
 from flask import render_template, url_for
 from flask import session, request
 from flask_login import login_required
-from . import bp
+from . import main
 from .. import db
 from ..models import User, Recipe, Ingredient
 
-@bp.route("/", methods=["GET"])
+@main.route("/", methods=["GET"])
 def index():
     """
     Renders home/landing page

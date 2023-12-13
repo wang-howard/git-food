@@ -30,7 +30,7 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
 
     # register blueprints
-    from .main import bp as main_bp
+    from .main import main as main_bp
     app.register_blueprint(main_bp)
     
     # from .auth import auth as auth_blueprint
