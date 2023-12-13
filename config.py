@@ -1,6 +1,7 @@
 """
-Configuration file for Flask app. Sets necessary environment variables for Flask
-and SQLAlchemy.
+Configuration dictionary for Flask app. Sets necessary environment variables for
+Flask and SQLAlchemy.
+
 SET ENVIRON:
 export FLASK_APP=gitfood.py
 export DB_URI=postgresql://git_food_user:uelFgIGe9GCTYYttir2XHNJ9Y4auBX4G@dpg-clrqa1cm7d1c73f483tg-a.ohio-postgres.render.com/git_food

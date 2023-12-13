@@ -5,8 +5,8 @@ from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
 
-from . import db
-from ..gitfood import app
+from .. import db
+from gitfood import app
 
 app.secret_key = os.environ.get("CLIENT_SECRET")
 GOOGLE_CLIENT_ID = "213256229846-rappmhrpskr8hj7pp3lekhpiki14id7g.apps.googleusercontent.com"
