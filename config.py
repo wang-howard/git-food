@@ -9,7 +9,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 # TODO
 class Config:
-    SECRET_KEY = os.environ.get("SEC_KEY") or "------"
+    SECRET_KEY = os.environ.get("SEC_KEY") or "gitfood5717"
     SQLALCHEMY_DATABASE_URI = os.environ.get('DB_URI') or \
         "postgres://git_food_user:uelFgIGe9GCTYYttir2XHNJ9Y4auBX4G@dpg-clrqa1cm7d1c73f483tg-a.ohio-postgres.render.com/git_food"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
