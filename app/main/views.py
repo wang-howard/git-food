@@ -15,7 +15,7 @@ def index():
         if "google_id" in session:
             return render_template(url_for("auth.home"))
         else:
-            return render_template("index.html", name="Anon")
+            return render_template("base_anon.html")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitFood</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base_anon.css') }}">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="/"><img src="/static/gitfood-logo.png" alt="GitFood Logo" id="logo"></a>
+      <div id="navbar">
+        <!-- Include other navigation links here if necessary -->
+        <a href="/login" id="login-button">Login</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}
+    <!-- This block will be overridden by child templates -->
+    {% endblock %}
+  </main>
+
+  <footer>
+    <!-- Footer content goes here -->
+  </footer>
+
+  <script src="/path/to/your/javascript/file.js"></script> <!-- Update with the path to your JavaScript file -->
+  <!-- Add any other JavaScript files you need -->
+</body>
+
+</html>
