@@ -1,25 +1,25 @@
 import os, pathlib, requests
-from flask import Flask, Blueprint, session, abort, redirect, request, render_template
+from flask import Flask, Blueprint, session, abort, redirect, url_for, request, render_template
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
 
+from . import auth
 from .. import db
 from gitfood import app
 
 app.secret_key = os.environ.get("CLIENT_SECRET")
 GOOGLE_CLIENT_ID = "213256229846-rappmhrpskr8hj7pp3lekhpiki14id7g.apps.googleusercontent.com"
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
     # TODO
-    redirect_uri="http://localhost/callback"
+    redirect_uri="http://127.0.0.1:5553/callback"
 )
-
-auth = Blueprint("auth", __name__, template_folder="/templates")
 
 def login_is_required(function):
     def wrapper(*args, **kwargs):
@@ -64,8 +64,8 @@ def signup():
 
 @auth.route("/logout")
 def logout():
-    session.clear()
-    return redirect("/")
+    session.pop("google_token", None)
+    return redirect(url_for("main.index"))
 
 @auth.route("/home")
 @login_is_required
