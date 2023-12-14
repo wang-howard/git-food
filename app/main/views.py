@@ -25,8 +25,13 @@ def user():
     """
     Renders user page
     """
+    user = User.query.get(session["user_id"])
+    if user is None:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)
     try:
-        return render_template("user.html")
+        return render_template("user.html", name=user.name,
+                               pic_url=user.picture, about_me=user.about_me)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)

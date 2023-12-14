@@ -4,18 +4,18 @@ from datetime import datetime
 
 class User(UserMixin, db.Model):
     __tablename__ = "user"
-    id = db.Column(db.BigInteger, primary_key=True)
-    username = db.Column(db.String, unique=True, nullable=False)
+    id = db.Column(db.BigInteger, primary_key=True, nullable=False)
+    name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     picture = db.Column(db.String)
     about_me = db.Column(db.String, default="")
     recipes = db.relationship("Recipe", backref="user", lazy="dynamic")
 
     def __repr__(self):
-        return f"<User ID: {self.id}, Username: {self.username}>"
+        return f"<User ID: {self.id}, Name: {self.name}>"
 
 class Recipe(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String, nullable=False)
     gluten_free = db.Column(db.Boolean, default=False)
     vegan = db.Column(db.Boolean, default=False)
@@ -36,7 +36,7 @@ class Recipe(db.Model):
         return f"<Recipe ID: {self.id}, Title: {self.title}>"
 
 class Ingredient(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     unit = db.Column(db.String, nullable=False)

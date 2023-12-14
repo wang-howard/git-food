@@ -12,6 +12,7 @@
   <div class="container">
     <h1>Error</h1>
     <p class="message">Something went wrong. We're working on it!</p>
+    <p class="message">Error: {{ message }}</p>
     <p><a href="/" class="home-link">Go back to the homepage</a></p>
   </div>
   <script src="{{ url_for('static', filename='script/error.js') }}"></script>

@@ -3,7 +3,7 @@ View functions that pertain specifically to user authentification,
 login, and logout.
 """
 
-import sys, os, pathlib, requests, random
+import sys, os, pathlib, requests, random, zlib
 from flask import session, request, abort, render_template, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 
@@ -26,6 +26,15 @@ flow = Flow.from_client_secrets_file(
     # TODO
     redirect_uri="http://127.0.0.1:5553/callback"
 )
+
+def crc32_hash(num):
+    # Convert the integer to bytes
+    num_bytes = num.to_bytes((num.bit_length() + 7) // 8, "big")
+    
+    # Calculate the CRC32 hash and ensure it's positive
+    hash_value = zlib.crc32(num_bytes) & 0xffffffff
+    
+    return hash_value
 
 @auth.route("/login")
 def login():
@@ -51,13 +60,13 @@ def callback():
             audience=GOOGLE_CLIENT_ID
         )
 
-        id = id_info.get("sub")
+        id = crc32_hash(int(id_info.get("sub")))
         session["user_id"] = id
         user = None
         # new user, first time logging in w/ Google
         if User.query.get(id) is None:
             user = User(id=id,
-                        username=_generate_username(id_info),
+                        name=id_info.get("name"),
                         email=id_info.get("email"),
                         picture=id_info.get("picture"))
             db.session.add(user)
@@ -67,12 +76,6 @@ def callback():
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
-
-def _generate_username(id_info):
-    while True:
-        un = id_info.get("given_name")[0] + id_info.get("family_name") + str(random.randint(100, 999))
-        if User.query.filter_by(username=un) is None:
-            return un
 
 @auth.route("/logout")
 def logout():

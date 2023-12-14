@@ -135,11 +135,13 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 0.5em 2em;
-  margin: 0 auto; /* Center the navigation inside the header */
+  margin: 0 auto;
+  /* Center the navigation inside the header */
 }
 
 nav #logo {
-  height: 50px; /* Adjust height as needed */
+  height: 50px;
+  /* Adjust height as needed */
 }
 
 .navbar-nav {
@@ -148,7 +150,8 @@ nav #logo {
 
 .nav-item {
   padding: 10px 15px;
-  margin: 0 10px; /* Space out the nav items */
+  margin: 0 10px;
+  /* Space out the nav items */
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -160,12 +163,16 @@ nav #logo {
 
 .nav-item:hover,
 .nav-item:focus {
-  color: #0275d8; /* Highlight color for hover and focus */
-  background-color: #f8f9fa; /* Light background on hover for contrast */
+  color: #0275d8;
+  /* Highlight color for hover and focus */
+  background-color: #f8f9fa;
+  /* Light background on hover for contrast */
 }
 
 .main-content {
-  padding-top: 70px; /* Adjust this value based on the actual height of your navbar */
+  padding-top: 7%;
+  justify-content: space-between;
+  /* Adjust this value based on the actual height of your navbar */
 }
 
 #login-button {
