@@ -12,8 +12,8 @@ def index():
     Renders home/landing page
     """
     try:
-        if "google_id" in session:
-            return render_template(url_for("auth.home"))
+        if session:
+            return render_template("base_user.html")
         else:
             return render_template("base_anon.html")
     except Exception as ex:

@@ -18,10 +18,9 @@ def create_app(config_name=Config):
     db.init_app(app)
 
     # attach routes and custom error pages here
-    from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
-
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
-
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+    
     return app

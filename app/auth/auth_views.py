@@ -6,8 +6,8 @@ from pip._vendor import cachecontrol
 import google.auth.transport.requests
 
 from . import auth
-from .. import db
 from gitfood import app
+from .. import db
 
 app.secret_key = os.environ.get("CLIENT_SECRET")
 GOOGLE_CLIENT_ID = "213256229846-rappmhrpskr8hj7pp3lekhpiki14id7g.apps.googleusercontent.com"
@@ -55,7 +55,7 @@ def callback():
 
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
-    return redirect("/home")
+    return redirect("/")
 
 # TODO
 @auth.route("/signup")
@@ -67,7 +67,7 @@ def logout():
     session.clear()
     return redirect(url_for("main.index"))
 
-@auth.route("/home")
-@login_is_required
-def home():
-    return render_template("index.html", name=session["name"])
+# @auth.route("/home")
+# @login_is_required
+# def home():
+#     return render_template("base_user.html")
