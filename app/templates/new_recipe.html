@@ -14,7 +14,7 @@
       <h1 class="my-recipe">Create a Recipe</h1>
     </div>
 
-    <form action="/submit_recipe" method="post" class="recipe-form">
+    <form action="/u/{{ current_user.username }}/submit_recipe" method="post" class="recipe-form">
       <div class="form-group">
         <label for="title">Recipe Name:</label>
         <input type="text" id="recipe-name" name="recipe-name" class="form-control" required>
@@ -25,57 +25,20 @@
       <div class="form-group checkbox-group">
         <div>
           <label for="gluten_free" class="checkbox-label">Gluten Free</label>
-          <input type="checkbox" id="gluten-free" name="gluten-free" class="check form-control">
+          <input type="checkbox" id="gluten-free" name="gluten-free" class="check form-control" value="True">
         </div>
         <div>
           <label for="vegan" class="checkbox-label">Vegan</label>
-          <input type="checkbox" id="vegan" name="vegan" class=" check form-control">
+          <input type="checkbox" id="vegan" name="vegan" class=" check form-control" value="True">
         </div>
         <div>
           <label for="private" class="checkbox-label">Private</label>
-          <input type="checkbox" id="is-private" name="is-private" class="check form-control">
+          <input type="checkbox" id="is-private" name="is-private" class="check form-control" value="True">
         </div>
       </div>
 
       <h2 class="ingredients-title">Ingredients</h2>
       <div id="ingredients" class="form-group ingredients-list">
-        <div class="ingredient">
-          <div>
-            <label for="ingredient_name">Name</label>
-            <input type="text" name="ingredient_name" class="form-control" required>
-          </div>
-          <div>
-            <label for="quantity">Quantity</label>
-            <input type="number" name="quantity" min="0" class="form-control" required>
-          </div>
-          <div id="select-unit">
-            <label for="unit" style="margin-top: -10px;">Unit</label>
-            <select type="text" name="unit" class="form-control" required>
-
-              <option value="tsp">tsp</option>
-              <option value="tbsp">tbsp</option>
-              <option value="fl oz">fl oz</option>
-              <option value="cup">cup</option>
-              <option value="pt">pt</option>
-              <option value="qt">qt</option>
-              <option value="gal">gal</option>
-              <option value="pinch">pinch</option>
-              <option value="mL">mL</option>
-              <option value="L">L</option>
-              <option value="mg">mg</option>
-              <option value="g">g</option>
-              <option value="kg">kg</option>
-              <option value="lbs">lbs</option>
-              <option value="oz">oz</option>
-              <option value="sprig">sprig</option>
-              <option value="count">count</option>
-            </select>
-          </div>
-          <div>
-            <img src="../static/img/red-x.png" alt="remove" class="remove-icon" id="remove-icon"
-              onclick="removeIngredient(this)">
-          </div>
-        </div>
         <!-- Ingredient inputs will go here -->
       </div>
       <button type="button" class="add-ingredient-btn" style="margin: 5px 15px 25px;" onclick="addIngredient()">Add
@@ -84,7 +47,7 @@
         <label for="instructions">Instructions</label>
         <textarea id="instructions" name="instructions" class="form-control" rows="4" required></textarea>
       </div>
-      <input type="submit" class="recipe-submit" value="Submit Recipe">
+      <input type="submit" class="recipe-submit" value="Submit Recipe" onclick="countIngredients()">
       <button type="button" class="cancel-btn" onclick="location.href ='/u/{{ current_user.username }}';">
         Cancel
       </button>
@@ -92,4 +55,53 @@
   </div>
 </div>
 <script src="{{ url_for('static', filename='script/ingredient.js') }}"></script>
+<script>
+  var counter = 0
+  function addIngredient() {
+    var container = document.getElementById('ingredients');
+    var ingredientDiv = document.createElement('div');
+    ingredientDiv.classList.add('ingredient');
+    var ct = counter.toString()
+
+    ingredientDiv.innerHTML = `
+    <div>
+        <label for="ingredient_name">Name</label>
+        <input type="text" name="ingredient-name`+ ct + `" class="form-control" required>
+    </div>
+    <div>
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity`+ ct + `" min="0" class="form-control" required>
+    </div>
+    <div id="select-unit">
+        <label for="unit" style="margin-top: -10px;">Unit</label>
+        <select type="text" name="unit`+ ct + `" class="form-control" required>
+            <option value="tsp">tsp</option>
+            <option value="tbsp">tbsp</option>
+            <option value="fl oz">fl oz</option>
+            <option value="cup">cup</option>
+            <option value="pt">pt</option>
+            <option value="qt">qt</option>
+            <option value="gal">gal</option>
+            <option value="pinch">pinch</option>
+            <option value="mL">mL</option>
+            <option value="L">L</option>
+            <option value="mg">mg</option>
+            <option value="g">g</option>
+            <option value="kg">kg</option>
+            <option value="lbs">lbs</option>
+            <option value="oz">oz</option>
+            <option value="sprig">sprig</option>
+            <option value="count">count</option>
+        </select>
+    </div>
+    <div>
+        <img src="../static/img/red-x.png" alt="remove" class="remove-icon" id="remove-icon"
+        onclick="removeIngredient(this)">
+    </div>
+    <input type="hidden" id="ingredient-count" name="ingredient-count" value="">
+    `;
+    container.appendChild(ingredientDiv);
+    counter++;
+  }
+</script>
 {% endblock %}

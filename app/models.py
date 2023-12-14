@@ -30,12 +30,13 @@ class User(UserMixin, db.Model):
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     title = db.Column(db.String, nullable=False)
-    gluten_free = db.Column(db.Boolean, default=False)
+    description = db.Column(db.String)
+    gf = db.Column(db.Boolean, default=False)
     vegan = db.Column(db.Boolean, default=False)
-    instructions = db.Column(db.Text, nullable=False)
+    private = db.Column(db.Boolean, default=False)
     ingredients = db.relationship("Ingredient", backref="recipe")
+    instructions = db.Column(db.String, nullable=False)
     version = db.Column(db.Integer, default=1)
-    parent_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=True)
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
