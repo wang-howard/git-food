@@ -1,5 +1,5 @@
 import sys
-from flask import session, request, jsonify, abort, render_template, redirect, url_for
+from flask import render_template, abort, redirect, url_for, session, request, jsonify
 from flask_login import login_required, current_user
 from . import main
 from .. import db
@@ -64,6 +64,10 @@ def recipe(un):
 
 @main.route("/edit-user", methods=["POST"])
 def edit_user():
+    """
+    Called by JS AJAX to update database w/o refreshing page. Does not return a
+    template but a JSON file to AJAX method.
+    """
     new_data = request.form.get("new_data")
     type = request.form.get("item_changed")
     
