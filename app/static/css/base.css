@@ -111,6 +111,9 @@ a:visited,
 a:hover,
 a:active {
   text-decoration: none;
+}
+
+#logo {
   color: #1c4764;
 }
 

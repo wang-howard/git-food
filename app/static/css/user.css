@@ -133,4 +133,25 @@
   /* Centers content vertically within the flex container */
   height: 100%;
   /* Takes full height of the container */
+
+}
+
+.profile-container {
+  display: flex;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  padding-top: 7%;
+}
+
+#login-button {
+  display: inline-block;
+  padding: 0
+}
+
+#recipe-btn {
+  color: white;
+
 }
