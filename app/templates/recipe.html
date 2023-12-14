@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>{{ recipe.title }}</title>
+  <meta charset="UTF-8">
+  <title>{{ recipe.title }}</title>
 </head>
+
 <body>
-    <h2>{{ recipe.title }}</h2>
-    <p><strong>Author:</strong> {{ recipe.user.username }}</p>
-    <p><strong>Gluten Free:</strong> {{ 'Yes' if recipe.gluten_free else 'No' }}</p>
-    <p><strong>Vegan:</strong> {{ 'Yes' if recipe.vegan else 'No' }}</p>
-    <p><strong>Ingredients:</strong></p>
-    <ul>
-        {% for ingredient in ingredients %}
-            <li>{{ ingredient.quantity }} {{ ingredient.measurement }} of {{ ingredient.name }}</li>
-        {% endfor %}
-    </ul>
-    <p><strong>Instructions:</strong></p>
-    <div>{{ recipe.instructions }}</div>
-    <a href="{{ url_for('index') }}">Back to recipes</a>
+  <h2>{{ recipe.title }}</h2>
+  <p><strong>Author:</strong> {{ recipe.user.username }}</p>
+  <p><strong>Gluten Free:</strong> {{ 'Yes' if recipe.gluten_free else 'No' }}</p>
+  <p><strong>Vegan:</strong> {{ 'Yes' if recipe.vegan else 'No' }}</p>
+  <p><strong>Ingredients:</strong></p>
+  <ul>
+    {% for ingredient in ingredients %}
+    <li>{{ ingredient.quantity }} {{ ingredient.measurement }} of {{ ingredient.name }}</li>
+    {% endfor %}
+  </ul>
+  <p><strong>Instructions:</strong></p>
+  <div>{{ recipe.instructions }}</div>
+  <a href="{{ url_for('index') }}">Back to recipes</a>
 </body>
+
 </html>
