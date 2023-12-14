@@ -82,6 +82,7 @@ def callback():
         return render_template("error.html", message=ex)
 
 @auth.route("/logout")
+@login_required
 def logout():
     session.clear()
     logout_user()
