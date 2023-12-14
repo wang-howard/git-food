@@ -62,6 +62,8 @@ def view_recipe(un, recipe_id):
 @main.route("/u/<un>/<recipe_id>/edit", methods=["GET"])
 @login_required
 def edit_recipe(un, recipe_id):
+    if current_user.username != un:
+        abort (401)
     try:
         recipe = Recipe.query.filter_by(id=int(recipe_id), author_id=current_user.id).first()
         if current_user.username != un or recipe is None:
@@ -79,12 +81,12 @@ def edit_user(un):
     Called by JS AJAX to update database w/o refreshing page. Does not return a
     template but a JSON file to AJAX method.
     """
-    new_data = request.form.get("new_data")
-    type = request.form.get("item_changed")
 
     if current_user.username != un:
         abort(401)
-    
+
+    new_data = request.form.get("new_data")
+    type = request.form.get("item_changed")
     user = User.query.filter_by(username=un).first()
     if user:
         if type == "display-name":
@@ -127,6 +129,7 @@ def submit_recipe(un):
             abort(401)
         if user is None:
             return render_template("error.html", message="User Not Found")
+
         new_recipe = Recipe(id=generate_recipe_id(),
                         title=request.form.get("recipe-name"),
                         description=request.form.get("description"),
