@@ -53,17 +53,20 @@ def view_recipe(un, recipe_id):
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
 
-@main.route("/edit-user", methods=["POST"])
+@main.route("u/<un>/edit-user", methods=["POST"])
 @login_required
-def edit_user():
+def edit_user(un):
     """
     Called by JS AJAX to update database w/o refreshing page. Does not return a
     template but a JSON file to AJAX method.
     """
     new_data = request.form.get("new_data")
     type = request.form.get("item_changed")
+
+    if current_user.username != un:
+        abort(401)
     
-    user = User.query.get(session["user_id"])
+    user = User.query.get(un)
     if user:
         if type == "display-name":
             user.name = new_data
@@ -75,20 +78,6 @@ def edit_user():
         return jsonify({"status": "success"})
     else:
         return jsonify({"status": "error", "message": "User not found."}), 400
-    
-@main.route("/u/<un>/delete_recipe/<recipe_id>", methods=["POST"])
-@login_required
-def delete_recipe(un, recipe_id):
-    if current_user.username != un:
-        return jsonify({"status": "error", "message": "Unauthorized"}), 403
-
-    recipe = Recipe.query.get(recipe_id)
-    if recipe and recipe.author_id == current_user.id:
-        db.session.delete(recipe)
-        db.session.commit()
-        return jsonify({"status": "success"})
-    else:
-        return jsonify({"status": "error", "message": "Recipe not found"}), 404
 
 @main.route("/u/<un>/new-recipe", methods=["GET"])
 @login_required
@@ -109,7 +98,7 @@ def recipe(un):
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
 
-@main.route("/u/<un>/submit_recipe", methods=["POST"])
+@main.route("/u/<un>/submit-recipe", methods=["POST"])
 @login_required
 def submit_recipe(un):
     try:
@@ -143,3 +132,21 @@ def submit_recipe(un):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+
+@main.route("/u/<un>/delete-recipe/<recipe_id>", methods=["POST"])
+@login_required
+def delete_recipe(un, recipe_id):
+    """
+    function called by deleteRecipe() JS function to delete a recipe from a
+    user's profile page without needing to refresh.
+    """
+    if current_user.username != un:
+        return jsonify({"status": "error", "message": "Unauthorized"}), 403
+
+    recipe = Recipe.query.get(recipe_id)
+    if recipe and recipe.author_id == current_user.id:
+        db.session.delete(recipe)
+        db.session.commit()
+        return jsonify({"status": "success"})
+    else:
+        return jsonify({"status": "error", "message": "Recipe not found"}), 404

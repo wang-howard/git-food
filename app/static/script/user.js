@@ -57,7 +57,7 @@ function editAboutMe() {
 
 function updateUser(data, item) {
   $.ajax({
-    url: '/edit-user',
+    url: `/u/${current_user.username}/edit-user`,
     method: 'POST',
     data: {
       new_data: data,
@@ -82,24 +82,19 @@ function confirmDelete(recipeId) {
 }
 
 function deleteRecipe(recipeId) {
-  fetch(`/u/${current_user.username}/delete_recipe/${recipeId}`, {
+  $.ajax({
+    url: `/u/${current.user.username}/delete-recipe/${recipeId}`,
     method: 'POST',
-    credentials: 'include' // Necessary for including session cookie in request
-  })
-  .then(response => {
-    if (!response.ok) { throw response; }
-    return response.json();
-  })
-  .then(data => {
-    if (data.status === 'success') {
-      // Remove the recipe element from the DOM or refresh the page
-      location.reload();
-    } else {
-      alert('Error deleting recipe: ' + data.message);
+    data: {
+      recipe_id: recipeId,
+    },
+    success: function (response) {
+      if (response.status == 'success') {
+        alert('Recipe delete.');
+      }
+    },
+    error: function () {
+      alert('An error occurred while making the change. ' + response.message);
     }
-  })
-  .catch((error) => {
-    // If the response is not OK and it's not a JSON, it'll fail here
-    alert('An error occurred while attempting to delete the recipe.');
   });
 }

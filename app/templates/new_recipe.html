@@ -14,7 +14,7 @@
       <h1 class="my-recipe">Create a Recipe</h1>
     </div>
 
-    <form action="/u/{{ current_user.username }}/submit_recipe" method="post" class="recipe-form">
+    <form action="/u/{{ current_user.username }}/submit-recipe" method="post" class="recipe-form">
       <div class="form-group">
         <label for="title">Recipe Name:</label>
         <input type="text" id="recipe-name" name="recipe-name" class="form-control" required>
