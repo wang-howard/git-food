@@ -1,0 +1,23 @@
+{% extends 'base_user.html' %}
+
+{% block content %}
+<div class="user-profile">
+  <div class="user-header">
+    <img src="{{ url_for('static', filename='images/user-avatar.jpg') }}" alt="User's Avatar" class="avatar">
+    <h1>Username's Recipes</h1>
+    <a href="/new-recipe" class="btn btn-primary">New Recipe</a>
+  </div>
+
+  <div class="user-recipes">
+    {% for recipe in user_recipes %}
+    <div class="recipe">
+      <h2><a href="{{ url_for('recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a></h2>
+      <p>{{ recipe.summary }}</p>
+      <span class="update-info">Updated on {{ recipe.updated_at }}</span>
+    </div>
+    {% else %}
+    <p>No recipes found.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
