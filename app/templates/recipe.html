@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Recipe Details{% endblock %}
+{% block title %}{{ recipe.title }}{% endblock %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe.css') }}">
@@ -9,6 +9,7 @@
 
 {% block content %}
 <div class="profile-container">
+
     <!-- Recipe Content -->
     <div class="recipe-content">
         <div class="recipe-top">
@@ -39,6 +40,32 @@
             </div>
         </div>
         <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to Profile</button>
+
+  <!-- Recipe Content -->
+  <div class="recipe-content">
+    <h1 class="recipe-title">{{ recipe.title }}</h1>
+    <p class="recipe-description">{{ recipe.description }}</p>
+    <div class="recipe-details">
+      {% if recipe.gf %}
+      <span class="recipe-badge">Gluten Free</span>
+      {% endif %}
+      {% if recipe.vegan %}
+      <span class="recipe-badge">Vegan</span>
+      {% endif %}
     </div>
+    <h2 class="ingredients-label">Ingredients</h2>
+    <ul class="ingredients-list">
+      {% for ingredient in recipe.ingredients %}
+      <li>{{ ingredient.name }}, {{ ingredient.quantity }} {{ ingredient.unit }}</li>
+      {% endfor %}
+    </ul>
+    <h2 class="instructions-label">Instructions</h2>
+    <p>{{ recipe.instructions }}</p>
+    <div class="recipe-update-info">
+      <span>Created on: {{ recipe.created_at.strftime('%Y-%m-%d') }}</span>
+    </div>
+    <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
+      Profile</button>
+  </div>
 </div>
 {% endblock %}
