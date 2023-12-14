@@ -27,7 +27,6 @@ flow = Flow.from_client_secrets_file(
     redirect_uri="http://127.0.0.1:5553/callback"
 )
 
-
 @auth.route("/login")
 def login():
     authorization_url, state = flow.authorization_url()
