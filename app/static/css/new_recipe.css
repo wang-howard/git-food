@@ -86,8 +86,8 @@ select.select-arrow-active:after {
 .remove-icon {
   object-fit: contain;
   cursor: pointer;
-  width: 25px;
-  height: auto;
+  width: auto;
+  height: 2rem;
 }
 
 .form-wrapper {
