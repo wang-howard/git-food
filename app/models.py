@@ -1,13 +1,13 @@
 from app import db
+from flask_login import UserMixin
 from datetime import datetime
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
-    authenticated = db.Column(db.Boolean, default=False)
+    picture = db.Column(db.String)
     about_me = db.Column(db.String, default="")
     recipes = db.relationship("Recipe", backref="user", lazy="dynamic")
 

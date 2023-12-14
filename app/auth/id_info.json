@@ -1,0 +1,17 @@
+{
+  "at_hash": "ra-mB75XswfGqZ0S9W6LTw",
+  "aud": "213256229846-rappmhrpskr8hj7pp3lekhpiki14id7g.apps.googleusercontent.com",
+  "azp": "213256229846-rappmhrpskr8hj7pp3lekhpiki14id7g.apps.googleusercontent.com",
+  "email": "hw14@princeton.edu",
+  "email_verified": true,
+  "exp": 1702517929,
+  "family_name": "Wang",
+  "given_name": "Howard",
+  "hd": "princeton.edu",
+  "iat": 1702514329,
+  "iss": "https://accounts.google.com",
+  "locale": "en",
+  "name": "Howard Wang",
+  "picture": "https://lh3.googleusercontent.com/a/ACg8ocJVIcgGJfNTlKRyKrzPwuft7jyPL_dw63Qqfak3qD83N7M=s96-c",
+  "sub": "113546109403991707132"
+}
