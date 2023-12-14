@@ -56,7 +56,7 @@ def recipe(un):
         return render_template("error.html", message=ex)
 
     try:
-        return render_template("recipe.html")
+        return render_template("new_recipe.html")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)

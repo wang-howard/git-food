@@ -1,104 +1,148 @@
 /* Ensure that all form elements include padding and border in their width */
 .form-control {
-    box-sizing: border-box;
-    padding: 10px;
-    margin-top: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Set the width of text inputs and textareas to 100% */
-  input[type="text"],
-  input[type="number"],
-  textarea {
-    width: 100%; /* This will match the width of the title box */
-  }
-  
-  /* Override the width for checkboxes to keep them at their default size */
-  input[type="checkbox"] {
-    width: auto; /* Default width for checkboxes */
-  }
-  
-  /* Align the labels for the checkboxes to the left */
-  .checkbox-group {
-    display: block; /* Override any flex settings */
-    text-align: left;
-  }
-  
-  /* Align the checkboxes next to their labels */
-  .checkbox-label {
-    display: inline-block; /* Allows the label to sit next to the checkbox */
-    margin-right: 5px; /* Spacing between the label and the checkbox */
-  }
-  
-  /* Remove flex settings from ingredient container */
-  .ingredient {
-    display: block;
-  }
-  
-  /* Style adjustments for ingredients section */
-  .ingredient > label,
-  .ingredient > input {
-    display: block; /* Stack them instead of side by side */
-    margin-bottom: 8px; /* Spacing between each label and input */
-  }
-  
-  /* Adjust the last element in the ingredient div to remove the margin-bottom */
-  .ingredient > input:last-child {
-    margin-bottom: 0;
-  }
-  
-  .form-wrapper {
-    padding: 2rem; /* This gives padding inside the form on all sides */
+  box-sizing: border-box;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Set the width of text inputs and textareas to 100% */
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  /* This will match the width of the title box */
+}
+
+/* Override the width for checkboxes to keep them at their default size */
+input[type="checkbox"] {
+  width: auto;
+  /* Default width for checkboxes */
+}
+
+/* Align the labels for the checkboxes to the left */
+.checkbox-group {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: left;
+  text-align: left;
+}
+
+.check {
+  cursor: pointer;
+}
+
+/* Align the checkboxes next to their labels */
+.checkbox-label {
+  display: inline-block;
+  /* Allows the label to sit next to the checkbox */
+  margin-right: 5px;
+  /* Spacing between the label and the checkbox */
+}
+
+/* Remove flex settings from ingredient container */
+.ingredient {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 15px;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+select {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 2px 5px;
+}
+
+select.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+#select-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+}
+
+/* Style adjustments for ingredients section */
+.ingredient>label,
+.ingredient>input {
+  margin-bottom: 8px;
+}
+
+/* Adjust the last element in the ingredient div to remove the margin-bottom */
+.ingredient>input:last-child {
+  margin-bottom: 0;
+}
+
+.remove-icon {
+  object-fit: contain;
+  cursor: pointer;
+  width: 25px;
+  height: auto;
+}
+
+.form-wrapper {
+  padding: 2rem;
+  /* This gives padding inside the form on all sides */
+}
+
+/* Button styles */
+.add-ingredient-btn,
+input[type=submit] {
+  background-color: #213442;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.cancel-btn {
+  background-color: #213442;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.add-ingredient-btn:hover,
+input[type=submit]:hover,
+.cancel-btn:hover {
+  background-color: #216491;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+
+  /* Undo any block display for ingredient inputs on smaller screens */
+  .ingredient>label,
+  .ingredient>input {
+    display: inline-block;
   }
 
-  /* Button styles */
-  .add-ingredient-btn,
-  input[type=submit]{
-    background-color: #213442;
-    color: white;
-    padding: 10px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    transition: background-color 0.3s;
+  .form-control {
+    width: auto;
+    /* Allow inputs to adjust to smaller screen sizes */
   }
-
-  .cancel-btn {
-    background-color: #213442;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    transition: background-color 0.3s;
-  }
-  
-  .add-ingredient-btn:hover,
-  input[type=submit]:hover,
-  .cancel-btn:hover {
-    background-color: #216491;
-  }
-  
-  /* Media query for smaller screens */
-  @media (max-width: 768px) {
-    /* Undo any block display for ingredient inputs on smaller screens */
-    .ingredient > label,
-    .ingredient > input {
-      display: inline-block;
-    }
-    .form-control {
-        width: auto; /* Allow inputs to adjust to smaller screen sizes */
-      }
-  }
-  
+}
