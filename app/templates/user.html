@@ -11,9 +11,9 @@
 {% block content %}
 <div class="profile-container">
   <aside class="sidebar">
-    <img src="{{ pic_url }}" alt="User's Avatar" class="avatar">
+    <img src="{{ current_user.picture }}" alt="User's Avatar" class="avatar">
     <div class="username-container">
-      <h1 class="user-text" id="display-name">{{ name }}</h1>
+      <h1 class="user-text" id="display-name">{{ current_user.name }}</h1>
       <img src="../static/img/edit-pencil.png" alt="Edit" class="edit-icon" id="edit-name"
         onclick="editUsername('{{ current_user.username }}')">
     </div>
@@ -28,10 +28,10 @@
 
     <div class="about-me" id="about-me">
       <div id="about-me-text">
-        {% if about_me == "" %}
+        {% if current_user.about_me == "" %}
         It's so empty here...
         {% else %}
-        {{about_me}}
+        {{ current_user.about_me }}
         {% endif %}
       </div>
     </div>

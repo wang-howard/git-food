@@ -32,7 +32,7 @@ def user(un):
 
     try:
         if user.username == un:
-            return render_template("user.html", name=user.name, pic_url=user.picture, about_me=user.about_me)
+            return render_template("user.html")
         else:
             other = User.query.filter_by(username=un).first()
             return render_template("view_other_user.html", other=other)
@@ -43,13 +43,18 @@ def user(un):
 @main.route("/u/<un>/<recipe_id>", methods=["GET"])
 @login_required
 def view_recipe(un, recipe_id):
-    recipe = Recipe.query.filter_by(id=int(recipe_id), author_id=current_user.id).first()
+    recipe = Recipe.query.get(int(recipe_id))
     
-    if current_user.username != un or recipe is None:
+    if recipe is None:
         abort(404)
-    
+
     try:
-        return render_template("recipe.html", recipe=recipe)
+        if current_user.username == un:
+            return render_template("recipe.html", recipe=recipe)
+        else:
+            other_user = User.query.filter_by(username=un)
+            return render_template("view_public_recipe.html", recipe=recipe, other=other_user)
+
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
