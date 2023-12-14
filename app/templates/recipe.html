@@ -21,17 +21,18 @@
                 <span class="recipe-badge">Vegan</span>
             {% endif %}
         </div>
-        <h2>Ingredients</h2>
+        <h2 class="ingredients-label">Ingredients</h2>
         <ul class="ingredients-list">
             {% for ingredient in recipe.ingredients %}
-                <li>{{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name }}</li>
+                <li>{{ ingredient.name }}, {{ ingredient.quantity }} {{ ingredient.unit }}</li>
             {% endfor %}
         </ul>
-        <h2>Instructions</h2>
+        <h2 class="instructions-label">Instructions</h2>
         <p>{{ recipe.instructions }}</p>
         <div class="recipe-update-info">
             <span>Created on: {{ recipe.created_at.strftime('%Y-%m-%d') }}</span>
         </div>
+        <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to Profile</button>
     </div>
 </div>
 {% endblock %}
