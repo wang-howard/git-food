@@ -1,6 +1,6 @@
 function editUsername() {
   var usernameElem = document.getElementById('display-name');
-  var currentName = usernameElem.innerHTML;
+  var currentName = usernameElem.textContent.trim();
   var inputElem = '<input type="text" id="username-input" value="' + currentName + '">';
 
   usernameElem.innerHTML = inputElem;
@@ -29,7 +29,7 @@ function editUsername() {
 
 function editAboutMe() {
   var aboutElem = document.getElementById('about-me-text');
-  var currentAbout = aboutElem.innerHTML;
+  var currentAbout = aboutElem.textContent.trim();
   var inputElem = '<input type="text" id="about-input" style="height:auto; width:100%; text-align:left;" value="' + currentAbout + '">';
 
   aboutElem.innerHTML = inputElem;
@@ -48,7 +48,7 @@ function editAboutMe() {
       // Set the username to the new value and remove the input box
       aboutElem.innerHTML = newAbout;
       var newAboutElem = document.createElement('div');
-      newUsernameElem.id = 'about-me';
+      newUsernameElem.id = 'about-me-text';
       newUsernameElem.innerText = newAbout;
       inputElem.parentNode.replaceChild(newAboutElem, inputElem);
     }
