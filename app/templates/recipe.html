@@ -12,23 +12,24 @@
 
     <!-- Recipe Content -->
     <div class="recipe-content">
-        <div class="recipe-top">
+        <div class="recipe-top-own">
             <h1 class="recipe-title">{{ recipe.title }}</h1>
-            <button class="edit-btn" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
+            <button class="edit-btn"
+                onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
         </div>
         <p class="recipe-description">{{ recipe.description }}</p>
         <div class="recipe-details">
             {% if recipe.gf %}
-                <span class="recipe-badge">Gluten Free</span>
+            <span class="recipe-badge">Gluten Free</span>
             {% endif %}
             {% if recipe.vegan %}
-                <span class="recipe-badge">Vegan</span>
+            <span class="recipe-badge">Vegan</span>
             {% endif %}
         </div>
         <h2 class="ingredients-label">Ingredients</h2>
         <ul class="ingredients-list" id="ingredients-list">
             {% for ingredient in recipe.ingredients %}
-                <li>{{ ingredient.name }}, {{ ingredient.quantity }} {{ ingredient.unit }}</li>
+            <li>{{ ingredient.name }}, {{ ingredient.quantity }} {{ ingredient.unit }}</li>
             {% endfor %}
         </ul>
         <h2 class="instructions-label">Instructions</h2>
@@ -39,6 +40,7 @@
                 <span>Version: {{ recipe.version }}</span>
             </div>
         </div>
-        <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to Profile</button>
-</div>
-{% endblock %}
+        <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
+            Profile</button>
+    </div>
+    {% endblock %}

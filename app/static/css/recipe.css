@@ -15,6 +15,13 @@
     margin-bottom: 20px;
 }
 
+.recipe-top-own {
+    display: flex;
+    justify-content: space-between;
+    align-items: Center;
+    margin-bottom: 20px;
+}
+
 .recipe-content {
     width: calc(100% - 40px);
     /* Adjust width to take into account padding */
