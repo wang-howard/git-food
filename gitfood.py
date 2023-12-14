@@ -3,15 +3,15 @@ Defines application instance.
 """
 
 import os
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager
+
 from app import create_app, db
 from app.models import User, Recipe, Ingredient
 
 app = create_app()
 migrate = Migrate(app, db)
+
+app.secret_key = os.environ.get("CLIENT_SECRET")
 
 @app.shell_context_processor
 def make_shell_context():
