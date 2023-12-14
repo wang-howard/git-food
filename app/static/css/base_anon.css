@@ -1,3 +1,16 @@
+@font-face {
+  font-family: "Gilroy";
+  src: url("fonts/Gilroy-ExtraBold.eot");
+  src: url("fonts/Gilroy-ExtraBold.eot?#iefix") format("embedded-opentype"),
+    url("fonts/Gilroy-ExtraBold.woff2") format("woff2"),
+    url("fonts/Gilroy-ExtraBold.woff") format("woff"),
+    url("fonts/Gilroy-ExtraBold.ttf") format("truetype"),
+    url("fonts/Gilroy-ExtraBold.svg#Gilroy-ExtraBold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Reset some basic elements */
 html,
 body,
@@ -114,7 +127,7 @@ ul {
 
 /* Set base font and background properties for the body */
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   background-color: #f4f4f4;
@@ -148,6 +161,10 @@ nav #logo {
   display: flex;
 }
 
+.navbar-brand {
+  font-family: Gilroy, Helvetica, sans-serif;
+}
+
 .nav-item {
   padding: 10px 15px;
   margin: 0 10px;
@@ -177,8 +194,10 @@ nav #logo {
   margin: 2rem auto;
   padding: 1rem;
 }
+
 .sidebar {
-  flex-basis: 300px; /* Sidebar width */
+  flex-basis: 300px;
+  /* Sidebar width */
   padding: 1rem;
   background-color: #fff;
   border-radius: 10px;
@@ -187,7 +206,8 @@ nav #logo {
 
 .avatar {
   width: 100%;
-  max-width: 200px; /* Adjust avatar size */
+  max-width: 200px;
+  /* Adjust avatar size */
   height: auto;
   border-radius: 50%;
   margin: 0 auto 1rem;
@@ -217,10 +237,13 @@ nav #logo {
 .profile-container {
   display: flex;
   width: 100%;
-  max-width: 960px; /* Adjust this based on your layout */
-  margin: 0 auto; /* Center the container */
+  max-width: 960px;
+  /* Adjust this based on your layout */
+  margin: 0 auto;
+  /* Center the container */
   padding: 1rem;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  box-sizing: border-box;
+  /* Include padding and border in the element"s total width and height */
   padding-top: 7%;
 }
 
