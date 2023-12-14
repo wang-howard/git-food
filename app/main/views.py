@@ -1,5 +1,5 @@
 import sys
-from flask import render_template, abort, redirect, url_for, session
+from flask import render_template, abort, redirect, url_for, session, request, jsonify
 from flask_login import login_required, current_user
 from . import main
 from .. import db
@@ -41,6 +41,7 @@ def user(un):
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
     
+
 @main.route("/u/<un>/new-recipe", methods=["GET"])
 @login_required
 def recipe(un):
@@ -60,3 +61,22 @@ def recipe(un):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+
+@main.route("/edit-user", methods=["POST"])
+def edit_user():
+    new_data = request.form.get("new_data")
+    type = request.form.get("item_changed")
+    
+    user = User.query.get(session["user_id"])
+    if user:
+        if type == "display-name":
+            user.name = new_data
+        elif type == "about-me":
+            user.about_me = new_data
+        else:
+            return jsonify({"status": "error", "message": "Improperly formatted response."}), 400
+        db.session.commit()
+        return jsonify({"status": "success"})
+    else:
+        return jsonify({"status": "error", "message": "User not found."}), 400
+
