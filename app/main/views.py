@@ -1,5 +1,5 @@
 import sys
-from flask import render_template, abort, redirect, url_for, session
+from flask import render_template, abort, redirect, url_for, session, request, jsonify
 from flask_login import login_required, current_user
 from . import main
 from .. import db
@@ -40,3 +40,15 @@ def user(un):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+    
+@main.route("/edit-display-name", methods=["POST"])
+def edit_display_name():
+    new_username = request.form.get("new_username")
+    
+    user = User.query.get(session["user_id"])
+    if user:
+        user.name = new_username
+        db.session.commit()
+        return jsonify({"status": "success", "new_username": new_username})
+    else:
+        return jsonify({"status": "error", "message": "User not found"}), 500
