@@ -36,11 +36,9 @@
   <div class="my-recipe">
     <h1>My Recipes</h1>
   </div>
-
-
-    <button='btn' class="recipe-btn" onclick="location.href ='/u/{{ username }}/new-recipe';">New Recipe</button>
-
-
+  <button=btn class="recipe-btn" onclick="location.href ='/u/{{ current_user.username }}/new-recipe';">
+    New Recipe
+  </button=btn>
 </div>
 
 <section class="recipes-list">

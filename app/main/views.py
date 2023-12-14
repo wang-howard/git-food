@@ -12,7 +12,7 @@ def index():
     """
     try:
         if current_user.is_authenticated:
-            return render_template("base.html", username=session["username"])
+            return render_template("base.html")
         else:
             return render_template("base.html")
     except Exception as ex:
@@ -35,8 +35,7 @@ def user(un):
         return render_template("error.html", message=ex)
     
     try:
-        return render_template("user.html", username=user.username,
-                               name=user.name, pic_url=user.picture, about_me=user.about_me)
+        return render_template("user.html", name=user.name, pic_url=user.picture, about_me=user.about_me)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
@@ -52,12 +51,12 @@ def recipe(un):
 
     if user.username != un:
         abort(401)
-
     if user is None:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+
     try:
-        return render_template("recipe.html", username=un)
+        return render_template("recipe.html")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
