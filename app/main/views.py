@@ -116,6 +116,8 @@ def submit_recipe(un):
                         private=bool(request.form.get("is-private")) if request.form.get("is-private") else False,
                         instructions=request.form.get("instructions"),
                         author_id = user.id)
+        db.session.add(new_recipe)
+        db.session.commit()
 
         num_ingredients = request.form.get("ingredient-count")
         for i in range(int(num_ingredients)):
@@ -125,9 +127,8 @@ def submit_recipe(un):
                                         unit=request.form.get(f"unit{i}"),
                                         recipe_id = new_recipe.id)
             db.session.add(new_ingredient)
-        
-        db.session.add(new_recipe)
         db.session.commit()
+        
         return redirect(f"/u/{user.username}")
     except Exception as ex:
         print(ex, file=sys.stderr)

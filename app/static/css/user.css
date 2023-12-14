@@ -60,6 +60,14 @@
   margin-left: 8px;
 }
 
+.remove-icon {
+  object-fit: contain;
+  margin: auto;
+  cursor: pointer;
+  width: auto;
+  height: 1rem;
+}
+
 .content {
   flex-grow: 1;
   background-color: #fff;
@@ -106,7 +114,7 @@
 }
 
 .recipes-list {
-  display: block; 
+  display: block;
   gap: 1rem;
   justify-content: center;
   background-color: #fff;
@@ -119,32 +127,35 @@
 }
 
 .recipe {
-  width: 100%; 
-  margin: 25px 0; 
-  padding: 20px; 
-  box-sizing: border-box; 
-  background-color: #f0f5f8; 
-  border-radius: 10px; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  transition: box-shadow 0.3s; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 25px 0;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f0f5f8;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
 }
 
 .recipe:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
-  transform: translateY(-5px); 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
   cursor: pointer;
 }
 
 
 .recipe h2 {
   margin-top: 0;
-  color: #213442; 
+  color: #213442;
   font-weight: bold;
   font-size: 20px;
 }
 
 .recipe p {
-  color: #333; 
+  color: #333;
 }
 
 .no-recipes {
@@ -199,5 +210,6 @@
 }
 
 .delete-recipe-btn:hover {
-  background-color: #c40000; /* Darker shade of red for hover effect */
+  background-color: #c40000;
+  /* Darker shade of red for hover effect */
 }

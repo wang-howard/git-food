@@ -65,15 +65,15 @@
     ingredientDiv.innerHTML = `
     <div>
         <label for="ingredient_name">Name</label>
-        <input type="text" name="ingredient-name`+ ct + `" class="form-control" required>
+        <input type="text" name="ingredient-name${ct}" class="form-control" required>
     </div>
     <div>
         <label for="quantity">Quantity</label>
-        <input type="number" name="quantity`+ ct + `" min="0" class="form-control" required>
+        <input type="number" name="quantity${ct}" min="0" class="form-control" required>
     </div>
     <div id="select-unit">
         <label for="unit" style="margin-top: -10px;">Unit</label>
-        <select type="text" name="unit`+ ct + `" class="form-control" required>
+        <select type="text" name="unit${ct}" class="form-control" required>
             <option value="tsp">tsp</option>
             <option value="tbsp">tbsp</option>
             <option value="fl oz">fl oz</option>
