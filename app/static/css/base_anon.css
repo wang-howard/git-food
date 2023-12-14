@@ -1,15 +1,5 @@
-@font-face {
-  font-family: "Gilroy";
-  src: url("fonts/Gilroy-ExtraBold.eot");
-  src: url("fonts/Gilroy-ExtraBold.eot?#iefix") format("embedded-opentype"),
-    url("fonts/Gilroy-ExtraBold.woff2") format("woff2"),
-    url("fonts/Gilroy-ExtraBold.woff") format("woff"),
-    url("fonts/Gilroy-ExtraBold.ttf") format("truetype"),
-    url("fonts/Gilroy-ExtraBold.svg#Gilroy-ExtraBold") format("svg");
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans&display=swap');
 
 /* Reset some basic elements */
 html,
@@ -116,8 +106,8 @@ section {
   display: block;
 }
 
-body {
-  line-height: 1;
+a {
+  text-decoration: none;
 }
 
 ol,
@@ -127,7 +117,7 @@ ul {
 
 /* Set base font and background properties for the body */
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Rethink Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   background-color: #f4f4f4;
@@ -152,9 +142,8 @@ nav {
   /* Center the navigation inside the header */
 }
 
-nav #logo {
-  height: 50px;
-  /* Adjust height as needed */
+.navbar {
+  color: #213442;
 }
 
 .navbar-nav {
@@ -162,7 +151,8 @@ nav #logo {
 }
 
 .navbar-brand {
-  font-family: Gilroy, Helvetica, sans-serif;
+  font-family: "Righteous", sans-serif;
+  font-size: 40px;
 }
 
 .nav-item {
