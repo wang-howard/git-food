@@ -88,13 +88,14 @@
 }
 
 .recipe-update-info span {
+    padding-top: 30px;
     font-style: italic; 
 }
 
 .back-to-profile-btn {
     width: 140px;
     text-align: center;
-    padding: 10px 20px;
+    padding: 10px;
     background-color: #213442;
     color: white;
     border: none;
