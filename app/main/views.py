@@ -87,8 +87,8 @@ def delete_recipe(un, recipe_id):
     if current_user.username != un:
         return jsonify({"status": "error", "message": "Unauthorized"}), 403
 
-    recipe = Recipe.query.filter_by(id=recipe_id, author_id=current_user.id).first()
-    if recipe:
+    recipe = Recipe.query.get(recipe_id)
+    if recipe and recipe.author_id == current_user.id:
         db.session.delete(recipe)
         db.session.commit()
         return jsonify({"status": "success"})

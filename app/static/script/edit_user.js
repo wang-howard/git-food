@@ -84,9 +84,12 @@ function confirmDelete(recipeId) {
 function deleteRecipe(recipeId) {
   fetch(`/u/${current_user.username}/delete_recipe/${recipeId}`, {
     method: 'POST',
-    // Add any needed headers here, such as CSRF tokens if you're using them
+    credentials: 'include' // Necessary for including session cookie in request
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) { throw response; }
+    return response.json();
+  })
   .then(data => {
     if (data.status === 'success') {
       // Remove the recipe element from the DOM or refresh the page
@@ -96,6 +99,7 @@ function deleteRecipe(recipeId) {
     }
   })
   .catch((error) => {
-    console.error('Error:', error);
+    // If the response is not OK and it's not a JSON, it'll fail here
+    alert('An error occurred while attempting to delete the recipe.');
   });
 }
