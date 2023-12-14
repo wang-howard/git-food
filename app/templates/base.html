@@ -15,11 +15,11 @@
         <a href="/">GitFood</a>
       </div>
       <div class="navbar-nav">
-        {% if active %}
-        <a href="/profile" class="nav-item">Profile</a>
-        <a href="/logout" class="nav-item">Log Out</a>
-        {% else %}
+        {% if current_user.is_anonymous %}
         <a href="/login" class="nav-item">Log In</a>
+        {% else %}
+        <a href="/u/{{ username }}" class="nav-item">Profile</a>
+        <a href="/logout" class="nav-item">Log Out</a>
       </div>
       {% endif %}
     </nav>

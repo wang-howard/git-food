@@ -12,14 +12,14 @@ def index():
     """
     try:
         if session:
-            return render_template("base_user.html")
+            return render_template("base.html", active=True, username=session["username"])
         else:
-            return render_template("base_anon.html")
+            return render_template("base.html", active=False)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
 
-@main.route("/profile", methods=["GET"])
+@main.route("/u/<user>", methods=["GET"])
 @login_required
 def user():
     """
@@ -29,9 +29,10 @@ def user():
     if user is None:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+    
     try:
-        return render_template("user.html", name=user.name,
-                               pic_url=user.picture, about_me=user.about_me)
+        return render_template("user.html", active=True, username=session["username"],
+                               name=user.name, pic_url=user.picture, about_me=user.about_me)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)

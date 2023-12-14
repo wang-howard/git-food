@@ -1,4 +1,4 @@
-{% extends 'base_user.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <div class="profile-container">
@@ -15,34 +15,34 @@
       {% if about_me == "" %}
       <p>I am a mystery...</p>
       {% else %}
-    <div class="user-about">
-      <p>{{ about_me }}</p>
-    </div>
+      <div class="user-about">
+        <p>{{ about_me }}</p>
+      </div>
       {% endif %}
     </div>
-    
+
   </section>
 </div>
 
-  <div class="recipes-header">
-    <div class="my-recipe">
-        <h1>My Recipes</h1>
-    </div>
-    <div class="recipe-btn">
-        <button="btn">New Recipe</button>
-      </div>
+<div class="recipes-header">
+  <div class="my-recipe">
+    <h1>My Recipes</h1>
   </div>
+  <div class="recipe-btn">
+    <button="btn">New Recipe</button>
+  </div>
+</div>
 
 
-  <div class="recipes-list">
-    {% for recipe in user_recipes %}
-    <div class="recipe">
-      <h2><a href="{{ url_for('recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a></h2>
-      <p>{{ recipe.summary }}</p>
-      <span class="update-info">Updated on {{ recipe.updated_at }}</span>
-    </div>
-    {% else %}
-    <p class="no-recipes">No current recipes.</p>
-    {% endfor %}
+<div class="recipes-list">
+  {% for recipe in user_recipes %}
+  <div class="recipe">
+    <h2><a href="{{ url_for('recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a></h2>
+    <p>{{ recipe.summary }}</p>
+    <span class="update-info">Updated on {{ recipe.updated_at }}</span>
   </div>
+  {% else %}
+  <p class="no-recipes">No current recipes.</p>
+  {% endfor %}
+</div>
 {% endblock %}

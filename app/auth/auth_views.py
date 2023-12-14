@@ -62,17 +62,19 @@ def callback():
 
         id = crc32_hash(int(id_info.get("sub")))
         session["user_id"] = id
+        session["username"] = id_info.get("family_name")+id_info.get("given_name")[0]+str(id)[0:4]
         user = None
         # new user, first time logging in w/ Google
         if User.query.get(id) is None:
             user = User(id=id,
                         name=id_info.get("name"),
+                        username=session["username"],
                         email=id_info.get("email"),
                         picture=id_info.get("picture"))
             db.session.add(user)
             db.session.commit()
         login_user(User.query.get(id))
-        return redirect(url_for("main.index"))
+        return redirect(f"/u/{user.username}")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)

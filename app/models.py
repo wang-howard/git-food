@@ -6,6 +6,7 @@ class User(UserMixin, db.Model):
     __tablename__ = "user"
     id = db.Column(db.BigInteger, primary_key=True, nullable=False)
     name = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     picture = db.Column(db.String)
     about_me = db.Column(db.String, default="")
@@ -13,6 +14,18 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f"<User ID: {self.id}, Name: {self.name}>"
+    
+    def is_active(self):
+        return True
+    
+    def is_authenticated(self):
+        return True
+    
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
