@@ -1,5 +1,5 @@
 import sys
-from flask import render_template, abort, redirect, url_for, session, request, jsonify
+from flask import session, request, jsonify, abort, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from . import main
 from .. import db
