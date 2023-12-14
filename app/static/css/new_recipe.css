@@ -96,6 +96,11 @@ select.select-arrow-active:after {
   /* This gives padding inside the form on all sides */
 }
 
+#instruction-container {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Button styles */
 .add-ingredient-btn,
 input[type=submit] {

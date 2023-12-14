@@ -54,10 +54,23 @@ def view_recipe(un, recipe_id):
         else:
             other_user = User.query.filter_by(username=un)
             return render_template("view_public_recipe.html", recipe=recipe, other=other_user)
-
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+    
+
+@main.route("/u/<un>/<recipe_id>/edit", methods=["GET"])
+@login_required
+def edit_recipe(un, recipe_id):
+    try:
+        recipe = Recipe.query.filter_by(id=int(recipe_id), author_id=current_user.id).first()
+        if current_user.username != un or recipe is None:
+            abort(404)
+        return render_template("edit_recipe.html", recipe=recipe)
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)
+
 
 @main.route("/u/<un>/edit-user", methods=["POST"])
 @login_required
@@ -163,3 +176,4 @@ def delete_recipe(un, recipe_id):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+    
