@@ -27,14 +27,15 @@ def user(un):
     Renders user profile page
     """
     user = User.query.get(session["user_id"])
-
-    if user.username != un:
-        abort(401)
     if user is None:
         return render_template("error.html", message="User Not Found")
-    
+
     try:
-        return render_template("user.html", name=user.name, pic_url=user.picture, about_me=user.about_me)
+        if user.username == un:
+            return render_template("user.html", name=user.name, pic_url=user.picture, about_me=user.about_me)
+        else:
+            other = User.query.filter_by(username=un).first()
+            return render_template("view_other_user.html", other=other)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
