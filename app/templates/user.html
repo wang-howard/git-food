@@ -2,31 +2,29 @@
 
 {% block content %}
 <div class="profile-container">
-    <aside class="sidebar">
-        <img src="{{ pic_url }}" alt="User's Avatar" class="avatar">
-        <div class="username-container">
-          <h1 class="username">{{ name }}</h1>
-          <img src="app/static/edit_pencil.png" alt="Edit" class="edit-icon" onclick="editUsername()">
-        </div>
-    </aside>
+  <aside class="sidebar">
+    <img src="{{ pic_url }}" alt="User's Avatar" class="avatar">
+    <div class="username-container">
+      <h1 class="username">{{ name }}</h1>
+      <img src="app/static/edit_pencil.png" alt="Edit" class="edit-icon" onclick="editUsername()">
+    </div>
+  </aside>
 
   <section class="content">
     <div class="user-info">
       <h2>About Me</h2>
       <img src="app/static/edit_pencil.png" alt="Edit" class="edit-icon" onclick="editAboutMe()">
     </div>
-    
-      {% if about_me == "" %}
-      <div class="empty-about">
+
+    {% if about_me == "" %}
+    <div class="empty-about">
       <p>I am a mystery...</p>
     </div>
-      {% else %}
-      <div class="user-about">
-        <p>{{ about_me }}</p>
-      </div>
-      {% endif %}
-
-
+    {% else %}
+    <div class="user-about">
+      <p>{{ about_me }}</p>
+    </div>
+    {% endif %}
   </section>
 </div>
 
