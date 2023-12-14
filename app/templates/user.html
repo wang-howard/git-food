@@ -10,14 +10,14 @@
     <img src="{{ pic_url }}" alt="User's Avatar" class="avatar">
     <div class="username-container">
       <h1 class="username">{{ name }}</h1>
-      <img src="./static/edit-pencil.png" alt="Edit" class="edit-icon" onclick="editUsername()">
+      <img src="../static/img/edit-pencil.png" alt="Edit" class="edit-icon" onclick="editUsername()">
     </div>
   </aside>
 
   <section class="content">
     <div class="user-info">
       <h2>About Me</h2>
-      <img src="./static/edit-pencil.png" alt="Edit" class="edit-icon" onclick="editAboutMe()">
+      <img src="../static/img/edit-pencil.png" alt="Edit" class="edit-icon" onclick="editAboutMe()">
     </div>
 
     {% if about_me == "" %}
@@ -52,4 +52,6 @@
   <p class="no-recipes">No current recipes.</p>
   {% endfor %}
 </section>
+
+<script src="{{ url_for('static', filename='script/edit_user.js') }}"></script>
 {% endblock %}
