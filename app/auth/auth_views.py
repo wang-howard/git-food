@@ -1,17 +1,21 @@
+"""
+View functions that pertain specifically to user authentification,
+login, and logout.
+"""
+
 import sys, os, pathlib, requests, random
-from flask import session, abort, redirect, url_for, request, render_template
-from google.oauth2 import id_token
-from google_auth_oauthlib.flow import Flow
-from pip._vendor import cachecontrol
-import google.auth.transport.requests
+from flask import session, request, abort, render_template, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 
-from . import auth
-from gitfood import app
-from ..models import User, Recipe, Ingredient
-from .. import db
+from google_auth_oauthlib.flow import Flow
+from google.oauth2 import id_token
+from pip._vendor import cachecontrol
+import google.auth.transport.requests
 
-app.secret_key = os.environ.get("CLIENT_SECRET")
+from . import auth
+from .. import db
+from ..models import User, Recipe, Ingredient
+
 GOOGLE_CLIENT_ID = "213256229846-rappmhrpskr8hj7pp3lekhpiki14id7g.apps.googleusercontent.com"
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -22,6 +26,7 @@ flow = Flow.from_client_secrets_file(
     # TODO
     redirect_uri="http://127.0.0.1:5553/callback"
 )
+
 
 @auth.route("/login")
 def login():
