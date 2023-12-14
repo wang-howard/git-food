@@ -33,8 +33,7 @@
   </div>
 </div>
 
-<>
-<div class="recipes-list">
+<section class="recipes-list">
   {% for recipe in user_recipes %}
   <div class="recipe">
     <h2><a href="{{ url_for('recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a></h2>
@@ -44,5 +43,5 @@
   {% else %}
   <p class="no-recipes">No current recipes.</p>
   {% endfor %}
-</div>
+</section>
 {% endblock %}
