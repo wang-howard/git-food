@@ -41,14 +41,20 @@ def user(un):
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
     
-@main.route("/edit-display-name", methods=["POST"])
-def edit_display_name():
-    new_username = request.form.get("new_username")
+@main.route("/edit-user", methods=["POST"])
+def edit_user():
+    new_data = request.form.get("new_data")
+    type = request.form.get("item_changed")
     
     user = User.query.get(session["user_id"])
     if user:
-        user.name = new_username
+        if type == "display-name":
+            user.name = new_data
+        elif type == "about-me":
+            user.about_me = new_data
+        else:
+            return jsonify({"status": "error", "message": "Improperly formatted response."}), 400
         db.session.commit()
-        return jsonify({"status": "success", "new_username": new_username})
+        return jsonify({"status": "success"})
     else:
-        return jsonify({"status": "error", "message": "User not found"}), 500
+        return jsonify({"status": "error", "message": "User not found."}), 400

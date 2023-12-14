@@ -20,15 +20,16 @@
       <img src="../static/img/edit-pencil.png" alt="Edit" class="edit-icon" onclick="editAboutMe()">
     </div>
 
-    {% if about_me == "" %}
-    <div class="empty-about">
-      <p>I am a mystery...</p>
+
+    <div id="about-me">
+      <div id="about-me-text">
+        {% if about_me == "" %}
+        I am a mystery...
+        {% else %}
+        {{ about_me }}
+        {% endif %}
+      </div>
     </div>
-    {% else %}
-    <div class="user-about">
-      <p>{{ about_me }}</p>
-    </div>
-    {% endif %}
   </section>
 </div>
 
