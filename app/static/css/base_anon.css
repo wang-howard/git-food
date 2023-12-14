@@ -170,9 +170,58 @@ nav #logo {
 }
 
 .main-content {
-  padding-top: 7%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+.sidebar {
+  flex-basis: 300px; /* Sidebar width */
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+  width: 100%;
+  max-width: 200px; /* Adjust avatar size */
+  height: auto;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+}
+
+.content {
+  flex-grow: 1;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recipes-header {
+  display: flex;
   justify-content: space-between;
-  /* Adjust this value based on the actual height of your navbar */
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.recipes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.profile-container {
+  display: flex;
+  width: 100%;
+  max-width: 960px; /* Adjust this based on your layout */
+  margin: 0 auto; /* Center the container */
+  padding: 1rem;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  padding-top: 7%;
 }
 
 #login-button {

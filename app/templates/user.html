@@ -1,17 +1,21 @@
 {% extends 'base_user.html' %}
 
 {% block content %}
-<div class="main-content">
-  <div class="user-profile">
-    <div class="user-header">
-      <img src="{{ pic_url }}" alt="User's Avatar" class="avatar">
+<div class="profile-container">
+  <aside class="sidebar">
+    <img src="{{ pic_url }}" alt="User's Avatar" class="avatar">
+    <h1>{{ name }}</h1>
+    <h2>About Me</h2>
+    <p>{{ about_me }}</p>
+  </aside>
+
+  <section class="content">
+    <div class="recipes-header">
       <h1>{{ name }}'s Recipes</h1>
-      <h2>About Me</h2>
-      <p>{{ about_me }}</p>
-      <a href="/new-recipe" class="btn btn-primary">New Recipe</a>
+      <a href="/new-recipe" class="btn">New Recipe</a>
     </div>
 
-    <div class="user-recipes">
+    <div class="recipes-list">
       {% for recipe in user_recipes %}
       <div class="recipe">
         <h2><a href="{{ url_for('recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a></h2>
@@ -19,9 +23,9 @@
         <span class="update-info">Updated on {{ recipe.updated_at }}</span>
       </div>
       {% else %}
-      <p>No recipes found.</p>
+      <p class="no-recipes">No recipes found.</p>
       {% endfor %}
     </div>
-  </div>
+  </section>
 </div>
 {% endblock %}
