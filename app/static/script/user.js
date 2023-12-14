@@ -1,7 +1,7 @@
 function editUsername(un) {
   var displayName = document.getElementById('display-name');
   var currentName = displayName.textContent.trim();
-  var inputElem = '<input type="text" id="username-input" value="' + currentName + '">';
+  var inputElem = `<input type="text" class="user-text" id="username-input" value="${currentName}" size="${currentName.length}" style="width: auto;">`;
 
   displayName.innerHTML = inputElem;
 
@@ -18,11 +18,6 @@ function editUsername(un) {
 
       // Set the username to the new value and remove the input box
       displayName.innerHTML = newDisplayName;
-      var newDisplayNameElem = document.createElement('h1');
-      newDisplayNameElem.id = 'display-name';
-      newDisplayNameElem.className = 'username';
-      newDisplayNameElem.innerText = newDisplayName;
-      inputElem.parentNode.replaceChild(newDisplayNameElem, inputElem);
     }
   });
 }
@@ -47,10 +42,6 @@ function editAboutMe(un) {
 
       // Set the username to the new value and remove the input box
       aboutElem.innerHTML = newAbout;
-      var newAboutElem = document.createElement('div');
-      newAboutElem.id = 'about-me-text';
-      newAboutElem.innerText = newAbout;
-      inputElem.parentNode.replaceChild(newAboutElem, inputElem);
     }
   });
 }
@@ -68,7 +59,7 @@ function updateUser(un, data, item) {
         alert('Update successful.');
       }
     },
-    error: function () {
+    error: function (response) {
       alert('An error occurred while making the change. ' + response.message);
     }
   });
@@ -93,7 +84,7 @@ function deleteRecipe(un, recipeId) {
         alert('Recipe deleted.');
       }
     },
-    error: function () {
+    error: function (response) {
       alert('An error occurred while making the change. ' + response.message);
     }
   });

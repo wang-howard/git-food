@@ -66,7 +66,7 @@ def edit_user(un):
     if current_user.username != un:
         abort(401)
     
-    user = User.query.get(un)
+    user = User.query.filter_by(username=un).first()
     if user:
         if type == "display-name":
             user.name = new_data

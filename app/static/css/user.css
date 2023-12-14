@@ -18,6 +18,7 @@
 }
 
 .avatar {
+  flex-grow: 1;
   width: 100%;
   max-width: 200px;
   height: auto;
@@ -36,9 +37,10 @@
   padding: 0.5rem;
 }
 
-.username {
+.user-text {
   font-size: 24px;
   margin-top: 0.5rem;
+  max-width: 200px;
   color: #333;
   font-weight: bold;
 }
@@ -71,6 +73,7 @@
 .content {
   flex-grow: 1;
   background-color: #fff;
+  max-width: 760px;
   padding: 1rem;
   padding-top: 0;
   border-radius: 10px;
