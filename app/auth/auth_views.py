@@ -75,6 +75,7 @@ def callback():
             db.session.commit()
         
         session["user_id"] = id
+        session["username"] = user.username
         login_user(User.query.get(id))
         return redirect(f"/u/{user.username}")
     except Exception as ex:
