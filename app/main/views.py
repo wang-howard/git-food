@@ -52,10 +52,6 @@ def view_recipe(un, recipe_id):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
-    
-
-    
-
 
 @main.route("/edit-user", methods=["POST"])
 @login_required
@@ -80,7 +76,6 @@ def edit_user():
     else:
         return jsonify({"status": "error", "message": "User not found."}), 400
     
-    
 @main.route("/u/<un>/delete_recipe/<recipe_id>", methods=["POST"])
 @login_required
 def delete_recipe(un, recipe_id):
@@ -94,7 +89,6 @@ def delete_recipe(un, recipe_id):
         return jsonify({"status": "success"})
     else:
         return jsonify({"status": "error", "message": "Recipe not found"}), 404
-    
 
 @main.route("/u/<un>/new-recipe", methods=["GET"])
 @login_required
