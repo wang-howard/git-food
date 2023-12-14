@@ -145,6 +145,9 @@ def delete_recipe(un, recipe_id):
 
     recipe = Recipe.query.get(recipe_id)
     if recipe and recipe.author_id == current_user.id:
+        assoc_igs = Ingredient.query.filter_by(recipe_id=recipe_id).all()
+        for ig in assoc_igs:
+            db.session.delete(ig)
         db.session.delete(recipe)
         db.session.commit()
         return jsonify({"status": "success"})

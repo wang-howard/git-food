@@ -1,9 +1,9 @@
-function editUsername() {
-  var usernameElem = document.getElementById('display-name');
-  var currentName = usernameElem.textContent.trim();
+function editUsername(un) {
+  var displayName = document.getElementById('display-name');
+  var currentName = displayName.textContent.trim();
   var inputElem = '<input type="text" id="username-input" value="' + currentName + '">';
 
-  usernameElem.innerHTML = inputElem;
+  displayName.innerHTML = inputElem;
 
   // Focus on new input and select the text
   var inputField = document.getElementById('username-input');
@@ -13,21 +13,21 @@ function editUsername() {
   // Handle when the user presses enter key to save the new name
   inputField.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
-      var newUsername = inputField.value;
-      updateUser(newUsername, 'display-name');
+      var newDisplayName = inputField.value;
+      updateUser(un, newDisplayName, 'display-name');
 
       // Set the username to the new value and remove the input box
-      usernameElem.innerHTML = newUsername;
-      var newUsernameElem = document.createElement('h1');
-      newUsernameElem.id = 'display-name';
-      newUsernameElem.className = 'username';
-      newUsernameElem.innerText = newUsername;
-      inputElem.parentNode.replaceChild(newUsernameElem, inputElem);
+      displayName.innerHTML = newDisplayName;
+      var newDisplayNameElem = document.createElement('h1');
+      newDisplayNameElem.id = 'display-name';
+      newDisplayNameElem.className = 'username';
+      newDisplayNameElem.innerText = newDisplayName;
+      inputElem.parentNode.replaceChild(newDisplayNameElem, inputElem);
     }
   });
 }
 
-function editAboutMe() {
+function editAboutMe(un) {
   var aboutElem = document.getElementById('about-me-text');
   var currentAbout = aboutElem.textContent.trim();
   var inputElem = '<input type="text" id="about-input" style="height:auto; width:100%; text-align:left;" value="' + currentAbout + '">';
@@ -43,7 +43,7 @@ function editAboutMe() {
   inputField.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       var newAbout = inputField.value;
-      updateUser(newAbout, 'about-me');
+      updateUser(un, newAbout, 'about-me');
 
       // Set the username to the new value and remove the input box
       aboutElem.innerHTML = newAbout;
@@ -55,9 +55,9 @@ function editAboutMe() {
   });
 }
 
-function updateUser(data, item) {
+function updateUser(un, data, item) {
   $.ajax({
-    url: `/u/${current_user.username}/edit-user`,
+    url: `/u/${un}/edit-user`,
     method: 'POST',
     data: {
       new_data: data,
@@ -74,23 +74,23 @@ function updateUser(data, item) {
   });
 }
 
-function confirmDelete(recipeId) {
-  event.stopPropagation();
+function confirmDelete(un, recipeId) {
+  event.stopPropagation()
   if (confirm('Are you sure you want to delete this recipe?')) {
-    deleteRecipe(recipeId);
+    deleteRecipe(un, recipeId);
   }
 }
 
-function deleteRecipe(recipeId) {
+function deleteRecipe(un, recipeId) {
   $.ajax({
-    url: `/u/${current.user.username}/delete-recipe/${recipeId}`,
+    url: `/u/${un}/delete-recipe/${recipeId}`,
     method: 'POST',
     data: {
       recipe_id: recipeId,
     },
     success: function (response) {
       if (response.status == 'success') {
-        alert('Recipe delete.');
+        alert('Recipe deleted.');
       }
     },
     error: function () {
