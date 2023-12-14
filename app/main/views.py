@@ -40,3 +40,23 @@ def user(un):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+    
+@main.route("/u/<un>/new-recipe", methods=["GET"])
+@login_required
+def recipe(un):
+    """
+    Renders create new recipe page
+    """
+    user = User.query.get(session["user_id"])
+
+    if user.username != un:
+        abort(401)
+
+    if user is None:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)
+    try:
+        return render_template("recipe.html", username=un)
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)

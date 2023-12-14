@@ -33,11 +33,11 @@ class Recipe(db.Model):
     gluten_free = db.Column(db.Boolean, default=False)
     vegan = db.Column(db.Boolean, default=False)
     instructions = db.Column(db.Text, nullable=False)
+    ingredients = db.relationship("Ingredient", backref="recipe")
     version = db.Column(db.Integer, default=1)
     parent_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=True)
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    ingredients = db.relationship("Ingredient", backref="recipe")
 
     def save_version(self):
         pass
