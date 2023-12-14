@@ -36,7 +36,14 @@
     font-size: 16px; 
     color: #666; 
     margin-bottom: 20px; 
+    display: flex;
+    flex-direction: column;
 }
+
+.version-lable span {
+    font-size: 14px;
+}
+
 .ingredients-label {
     font-size: 20px; 
     color: #213442; 
