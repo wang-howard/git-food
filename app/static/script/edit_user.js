@@ -73,3 +73,29 @@ function updateUser(data, item) {
     }
   });
 }
+
+function confirmDelete(recipeId) {
+  event.stopPropagation();
+  if (confirm('Are you sure you want to delete this recipe?')) {
+    deleteRecipe(recipeId);
+  }
+}
+
+function deleteRecipe(recipeId) {
+  fetch(`/u/${current_user.username}/delete_recipe/${recipeId}`, {
+    method: 'POST',
+    // Add any needed headers here, such as CSRF tokens if you're using them
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status === 'success') {
+      // Remove the recipe element from the DOM or refresh the page
+      location.reload();
+    } else {
+      alert('Error deleting recipe: ' + data.message);
+    }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}

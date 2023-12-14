@@ -38,9 +38,27 @@ def user(un):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+
+@main.route("/u/<un>/<recipe_id>", methods=["GET"])
+@login_required
+def view_recipe(un, recipe_id):
+    recipe = Recipe.query.filter_by(id=int(recipe_id), author_id=current_user.id).first()
+    
+    if current_user.username != un or recipe is None:
+        abort(404)
+    
+    try:
+        return render_template("recipe.html", recipe=recipe)
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)
     
 
+    
+
+
 @main.route("/edit-user", methods=["POST"])
+@login_required
 def edit_user():
     """
     Called by JS AJAX to update database w/o refreshing page. Does not return a
@@ -61,6 +79,22 @@ def edit_user():
         return jsonify({"status": "success"})
     else:
         return jsonify({"status": "error", "message": "User not found."}), 400
+    
+    
+@main.route("/u/<un>/delete_recipe/<recipe_id>", methods=["POST"])
+@login_required
+def delete_recipe(un, recipe_id):
+    if current_user.username != un:
+        return jsonify({"status": "error", "message": "Unauthorized"}), 403
+
+    recipe = Recipe.query.filter_by(id=recipe_id, author_id=current_user.id).first()
+    if recipe:
+        db.session.delete(recipe)
+        db.session.commit()
+        return jsonify({"status": "success"})
+    else:
+        return jsonify({"status": "error", "message": "Recipe not found"}), 404
+    
 
 @main.route("/u/<un>/new-recipe", methods=["GET"])
 @login_required

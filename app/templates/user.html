@@ -43,9 +43,10 @@
 
 <section class="recipes-list">
   {% for recipe in current_user.recipes %}
-  <div class="recipe">
+  <div class="recipe" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}';">
     <h2>{{ recipe.title }}</h2>
       <p>{{ recipe.description or 'No description provided.' }}</p>
+      <button class="delete-recipe-btn" onclick="confirmDelete('{{ recipe.id }}')">X</button>
   </div>
   {% else %}
   <p class="no-recipes">No current recipes.</p>
