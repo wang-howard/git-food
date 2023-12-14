@@ -142,14 +142,17 @@ def delete_recipe(un, recipe_id):
     """
     if current_user.username != un:
         return jsonify({"status": "error", "message": "Unauthorized"}), 403
-
-    recipe = Recipe.query.get(recipe_id)
-    if recipe and recipe.author_id == current_user.id:
-        assoc_igs = Ingredient.query.filter_by(recipe_id=recipe_id).all()
-        for ig in assoc_igs:
-            db.session.delete(ig)
-        db.session.delete(recipe)
-        db.session.commit()
-        return jsonify({"status": "success"})
-    else:
-        return jsonify({"status": "error", "message": "Recipe not found"}), 404
+    try:
+        recipe = Recipe.query.get(recipe_id)
+        if recipe and recipe.author_id == current_user.id:
+            assoc_igs = Ingredient.query.filter_by(recipe_id=recipe_id).all()
+            for ig in assoc_igs:
+                db.session.delete(ig)
+            db.session.delete(recipe)
+            db.session.commit()
+            return jsonify({"status": "success"})
+        else:
+            return jsonify({"status": "error", "message": "Recipe not found"}), 404
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)

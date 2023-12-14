@@ -48,8 +48,8 @@ function editAboutMe(un) {
       // Set the username to the new value and remove the input box
       aboutElem.innerHTML = newAbout;
       var newAboutElem = document.createElement('div');
-      newUsernameElem.id = 'about-me-text';
-      newUsernameElem.innerText = newAbout;
+      newAboutElem.id = 'about-me-text';
+      newAboutElem.innerText = newAbout;
       inputElem.parentNode.replaceChild(newAboutElem, inputElem);
     }
   });
