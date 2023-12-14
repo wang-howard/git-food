@@ -18,3 +18,14 @@ def index():
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+
+@main.route("/profile", methods=["GET"])
+def user():
+    """
+    Renders user page
+    """
+    try:
+        return render_template("user.html")
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)

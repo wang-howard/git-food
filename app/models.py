@@ -8,6 +8,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     picture = db.Column(db.String)
+    about_me = db.Column(db.String, default="")
     recipes = db.relationship("Recipe", backref="user", lazy="dynamic")
 
     def __repr__(self):
