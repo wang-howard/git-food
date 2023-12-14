@@ -20,6 +20,7 @@ def index():
         return render_template("error.html", message=ex)
 
 @main.route("/profile", methods=["GET"])
+@login_required
 def user():
     """
     Renders user page
