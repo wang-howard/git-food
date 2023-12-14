@@ -14,9 +14,9 @@
   <div class="recipe-content">
     <div class="recipe-top">
       <h1 class="recipe-title">{{ recipe.title }}</h1>
+      <h2>Author: {{ other.name }}</h2>
     </div>
     <p class="recipe-description">{{ recipe.description }}</p>
-    <p>Author: {{ other.name }}</p>
     <div class="recipe-details">
       {% if recipe.gf %}
       <span class="recipe-badge">Gluten Free</span>

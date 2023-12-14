@@ -1,5 +1,5 @@
 import sys
-from flask import render_template, abort, redirect, url_for, session, request, jsonify
+from flask import render_template, abort, redirect, session, request, jsonify
 from flask_login import login_required, current_user
 from . import main
 from .. import db
@@ -26,15 +26,15 @@ def user(un):
     """
     Renders user profile page
     """
-    user = User.query.get(session["user_id"])
-    if user is None:
-        return render_template("error.html", message="User Not Found")
+    user = User.query.get(current_user.id)
+    other = User.query.filter_by(username=un).first()
+    if user == None or other == None:
+        abort(404)
 
     try:
         if user.username == un:
             return render_template("user.html")
         else:
-            other = User.query.filter_by(username=un).first()
             return render_template("view_other_user.html", other=other)
     except Exception as ex:
         print(ex, file=sys.stderr)
@@ -44,15 +44,14 @@ def user(un):
 @login_required
 def view_recipe(un, recipe_id):
     recipe = Recipe.query.get(int(recipe_id))
-    
-    if recipe is None:
+    other_user = User.query.filter_by(username=un).first()
+    if recipe == None or other_user == None:
         abort(404)
 
     try:
         if current_user.username == un:
             return render_template("recipe.html", recipe=recipe)
         else:
-            other_user = User.query.filter_by(username=un)
             return render_template("view_public_recipe.html", recipe=recipe, other=other_user)
     except Exception as ex:
         print(ex, file=sys.stderr)
