@@ -43,7 +43,7 @@
   </button=btn>
 </div>
 
-<section class="recipes-list">
+<section class="recipes-list" id="recipes-list">
   {% for recipe in current_user.recipes %}
   <div class="recipe" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}';">
     <div>
@@ -52,7 +52,7 @@
     </div>
     <div style="padding-right: 20px;">
       <img src="../../static/img/red-x.png" alt="remove" class="remove-icon" id="remove-icon"
-        onclick="confirmDelete('{{ current_user.username }}', '{{ recipe.id }}')">
+        onclick="confirmDelete(this, '{{ current_user.username }}', '{{ recipe.id }}')">
     </div>
   </div>
   {% else %}

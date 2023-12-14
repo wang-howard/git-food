@@ -6,7 +6,7 @@ function removeIngredient(removeIcon) {
 
 function countIngredients() {
     var ingredientList = document.getElementById("ingredients").children
-    if (ingredientList.length == 0) {
+    if (ingredientList.length === 0) {
         event.preventDefault()
         return alert('You are missing ingredients!')
     }

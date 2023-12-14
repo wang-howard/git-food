@@ -65,10 +65,17 @@ function updateUser(un, data, item) {
   });
 }
 
-function confirmDelete(un, recipeId) {
+function confirmDelete(obj, un, recipeId) {
   event.stopPropagation()
   if (confirm('Are you sure you want to delete this recipe?')) {
     deleteRecipe(un, recipeId);
+    var recipeNode = obj.parentNode.parentNode
+    var container = document.getElementById("recipes-list")
+    container.removeChild(recipeNode)
+    if (container.children.length === 0) {
+      para = '<p class="no-recipes">No current recipes.</p>'
+      container.innerHTML = para
+    }
   }
 }
 
