@@ -69,6 +69,7 @@
     border: none;
     transition: background-color 0.3s;
   }
+
   .cancel-btn {
     background-color: #213442;
     color: white;
