@@ -55,7 +55,7 @@
 
   /* Button styles */
   .add-ingredient-btn,
-  input[type=submit] {
+  input[type=submit]{
     background-color: #213442;
     color: white;
     padding: 10px 15px;
@@ -69,9 +69,23 @@
     border: none;
     transition: background-color 0.3s;
   }
+  .cancel-btn {
+    background-color: #213442;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s;
+  }
   
   .add-ingredient-btn:hover,
-  input[type=submit]:hover {
+  input[type=submit]:hover,
+  .cancel-btn:hover {
     background-color: #216491;
   }
   
