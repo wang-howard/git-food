@@ -1,6 +1,5 @@
-import os, sys, requests
-from flask import render_template, redirect, url_for, session, request, jsonify
-from flask_oauthlib.client import OAuth
+import sys
+from flask import render_template, redirect, url_for, session
 from flask_login import login_required
 from . import main
 from .. import db
