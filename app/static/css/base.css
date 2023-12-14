@@ -91,7 +91,6 @@ video {
   vertical-align: baseline;
 }
 
-/* HTML5 display-role reset for older browsers */
 article,
 aside,
 details,
@@ -120,7 +119,6 @@ ul {
   list-style: none;
 }
 
-/* Set base font and background properties for the body */
 body {
   font-family: "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -129,7 +127,6 @@ body {
   color: #333;
 }
 
-/* Header and navigation styles */
 header {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
@@ -144,7 +141,6 @@ nav {
   justify-content: space-between;
   padding: 0.5em 2em;
   margin: 0 auto;
-  /* Center the navigation inside the header */
 }
 
 .navbar-nav {
@@ -172,23 +168,11 @@ nav {
 .nav-item:hover,
 .nav-item:focus {
   color: #0275d8;
-  /* Highlight color for hover and focus */
   background-color: #f8f9fa;
-  /* Light background on hover for contrast */
-}
-
-.main-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 1rem;
 }
 
 .sidebar {
   flex-basis: 300px;
-  /* Sidebar width */
   padding: 1rem;
   background-color: #fff;
   border-radius: 10px;
@@ -199,7 +183,6 @@ nav {
 .avatar {
   width: 100%;
   max-width: 200px;
-  /* Adjust avatar size */
   height: auto;
   border-radius: 50%;
   display: block;
@@ -208,20 +191,15 @@ nav {
 
 .username {
   font-size: 24px;
-  /* Larger font size for the username */
   margin-top: 0.5rem;
-  /* Spacing between the image and the username */
   color: #333;
   font-weight: bold;
-  /* Makes the username stand out */
 }
 
-/* Styling for the user info section */
 .user-info {
   font-weight: bold;
   font-size: 24px;
   text-align: center;
-  /* Center the about me content */
   padding: 1rem;
 }
 
@@ -240,7 +218,6 @@ nav {
   align-items: center;
   width: 100%;
   max-width: 900px;
-  /* Adjust this based on your layout */
   margin: auto;
 }
 
@@ -256,48 +233,50 @@ nav {
   margin-bottom: 1rem;
   text-align: center;
   padding: 10px 20px;
-  /* Add padding to make the button larger */
   background-color: #213442;
-  /* Use a nice color for the button */
   color: white;
-  /* Contrast the text color against the button color */
   border: none;
-  /* Remove the border */
   border-radius: 5px;
-  /* Add rounded corners */
   font-weight: bold;
-  /* Make the text bold */
   text-decoration: none;
-  /* Remove the underline */
   cursor: pointer;
-  /* Change cursor to pointer to indicate it's clickable */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  /* Add a subtle shadow for depth */
   transition: background-color 0.3s;
-  /* Smooth transition for hover effect */
 }
 
 .recipe-btn:hover {
   background-color: #256692;
-  /* Slightly darker shade on hover for interaction feedback */
 }
 
 .recipes-list {
   display: grid;
   gap: 1rem;
   justify-content: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 880px;
+  margin: auto;
+  min-height: 280px;
+  padding: 1rem;
+}
+.no-recipes {
+  text-align: center; /* Centers text horizontally */
+  font-weight: bold; /* Makes text bold */
+  font-size: 24px; /* Increases the font size */
+  display: flex; /* Enables flexbox */
+  justify-content: center; /* Centers content horizontally within the flex container */
+  align-items: center; /* Centers content vertically within the flex container */
+  height: 100%; /* Takes full height of the container */
 }
 
 .profile-container {
   display: flex;
   width: 100%;
   max-width: 960px;
-  /* Adjust this based on your layout */
   margin: 0 auto;
-  /* Center the container */
   padding: 1rem;
   box-sizing: border-box;
-  /* Include padding and border in the element"s total width and height */
   padding-top: 7%;
 }
 
