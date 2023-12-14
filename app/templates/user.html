@@ -42,11 +42,10 @@
 </div>
 
 <section class="recipes-list">
-  {% for recipe in user_recipes %}
+  {% for recipe in current_user.recipes %}
   <div class="recipe">
-    <h2><a href="{{ url_for('recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a></h2>
-    <p>{{ recipe.summary }}</p>
-    <span class="update-info">Updated on {{ recipe.updated_at }}</span>
+    <h2>{{ recipe.title }}</h2>
+      <p>{{ recipe.description or 'No description provided.' }}</p>
   </div>
   {% else %}
   <p class="no-recipes">No current recipes.</p>

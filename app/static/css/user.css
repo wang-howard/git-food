@@ -106,7 +106,7 @@
 }
 
 .recipes-list {
-  display: grid;
+  display: block; 
   gap: 1rem;
   justify-content: center;
   background-color: #fff;
@@ -116,6 +116,37 @@
   margin: auto;
   min-height: 280px;
   padding: 1rem;
+}
+
+.recipe {
+  width: 100%; 
+  margin: 25px 0; 
+  padding: 20px; 
+  box-sizing: border-box; 
+  background-color: #f0f5f8; 
+  border-radius: 10px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  transition: box-shadow 0.3s; 
+}
+
+/* Style for the hover effect */
+.recipe:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Larger shadow for lifted effect */
+  transform: translateY(-5px); /* Move the card up slightly */
+  cursor: pointer;
+}
+
+/* Style for the recipe title */
+.recipe h2 {
+  margin-top: 0;
+  color: #213442; /* Dark color for the title */
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* Style for the recipe summary */
+.recipe p {
+  color: #333; /* Dark grey color for text */
 }
 
 .no-recipes {
