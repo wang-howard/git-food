@@ -4,28 +4,45 @@
 <div class="profile-container">
   <aside class="sidebar">
     <img src="{{ pic_url }}" alt="User's Avatar" class="avatar">
-    <h1>{{ name }}</h1>
-    <h2>About Me</h2>
-    <p>{{ about_me }}</p>
+    <h1 class="username">{{ name }}</h1>
   </aside>
 
   <section class="content">
-    <div class="recipes-header">
-      <h1>{{ name }}'s Recipes</h1>
-      <a href="/new-recipe" class="btn">New Recipe</a>
+    <div class="user-info">
+      <h2>About Me</h2>
     </div>
-
-    <div class="recipes-list">
-      {% for recipe in user_recipes %}
-      <div class="recipe">
-        <h2><a href="{{ url_for('recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a></h2>
-        <p>{{ recipe.summary }}</p>
-        <span class="update-info">Updated on {{ recipe.updated_at }}</span>
-      </div>
+    <div class="empty-about">
+      {% if about_me == "" %}
+      <p>I am a mystery...</p>
       {% else %}
-      <p class="no-recipes">No recipes found.</p>
-      {% endfor %}
+    <div class="user-about">
+      <p>{{ about_me }}</p>
     </div>
+      {% endif %}
+    </div>
+    
   </section>
 </div>
+
+  <div class="recipes-header">
+    <div class="my-recipe">
+        <h1>My Recipes</h1>
+    </div>
+    <div class="recipe-btn">
+        <button="btn">New Recipe</button>
+      </div>
+  </div>
+
+
+  <div class="recipes-list">
+    {% for recipe in user_recipes %}
+    <div class="recipe">
+      <h2><a href="{{ url_for('recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a></h2>
+      <p>{{ recipe.summary }}</p>
+      <span class="update-info">Updated on {{ recipe.updated_at }}</span>
+    </div>
+    {% else %}
+    <p class="no-recipes">No current recipes.</p>
+    {% endfor %}
+  </div>
 {% endblock %}

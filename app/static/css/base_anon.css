@@ -183,6 +183,7 @@ nav #logo {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .avatar {
@@ -190,13 +191,30 @@ nav #logo {
   max-width: 200px; /* Adjust avatar size */
   height: auto;
   border-radius: 50%;
-  margin: 0 auto 1rem;
+  display: block; 
+  margin: 0 auto; 
+}
+
+.username {
+  font-size: 24px; /* Larger font size for the username */
+  margin-top: 0.5rem; /* Spacing between the image and the username */
+  color: #333;
+  font-weight: bold; /* Makes the username stand out */
+}
+
+/* Styling for the user info section */
+.user-info {
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center; /* Center the about me content */
+  padding: 1rem;
 }
 
 .content {
   flex-grow: 1;
   background-color: #fff;
   padding: 1rem;
+  padding-top: 0;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -205,13 +223,42 @@ nav #logo {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 900px; /* Adjust this based on your layout */
+  margin: auto;
+}
+
+.my-recipe {
+  margin-bottom: 1%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.recipe-btn {
+  width: 100px;
   margin-bottom: 1rem;
+  text-align: center;
+  padding: 10px 20px; /* Add padding to make the button larger */
+  background-color: #213442; /* Use a nice color for the button */
+  color: white; /* Contrast the text color against the button color */
+  border: none; /* Remove the border */
+  border-radius: 5px; /* Add rounded corners */
+  font-weight: bold; /* Make the text bold */
+  text-decoration: none; /* Remove the underline */
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.recipe-btn:hover {
+  background-color: #256692; /* Slightly darker shade on hover for interaction feedback */
 }
 
 .recipes-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
+  justify-content: center;
 }
 
 .profile-container {
