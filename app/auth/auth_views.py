@@ -61,11 +61,11 @@ def callback():
         )
 
         id = crc32_hash(int(id_info.get("sub")))
-        session["user_id"] = id
-        session["username"] = id_info.get("family_name")+id_info.get("given_name")[0]+str(id)[0:4]
-        user = None
+        user = User.query.get(id)
+
         # new user, first time logging in w/ Google
-        if User.query.get(id) is None:
+        if user is None:
+            session["username"] = id_info.get("family_name")+id_info.get("given_name")[0]+str(id)[0:4]
             user = User(id=id,
                         name=id_info.get("name"),
                         username=session["username"],
@@ -73,6 +73,8 @@ def callback():
                         picture=id_info.get("picture"))
             db.session.add(user)
             db.session.commit()
+        
+        session["user_id"] = id
         login_user(User.query.get(id))
         return redirect(f"/u/{user.username}")
     except Exception as ex:

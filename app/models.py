@@ -20,7 +20,7 @@ class User(UserMixin, db.Model):
     
     def is_authenticated(self):
         return True
-    
+        
     def is_anonymous(self):
         return False
 
