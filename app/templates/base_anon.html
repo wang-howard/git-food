@@ -15,8 +15,13 @@
         <a href="/">GitFood</a>
       </div>
       <div class="navbar-nav">
+        {% if active %}
+        <a href="/profile" class="nav-item">Profile</a>
+        <a href="/logout" class="nav-item">Log Out</a>
+        {% else %}
         <a href="/login" class="nav-item">Log In</a>
       </div>
+      {% endif %}
     </nav>
   </header>
 

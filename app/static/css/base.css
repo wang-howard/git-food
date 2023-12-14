@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 
 /* Reset some basic elements */
 html,
@@ -106,8 +106,13 @@ section {
   display: block;
 }
 
-a {
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
   text-decoration: none;
+  color: #1c4764;
 }
 
 ol,
@@ -117,7 +122,7 @@ ul {
 
 /* Set base font and background properties for the body */
 body {
-  font-family: "Rethink Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   background-color: #f4f4f4;
@@ -140,10 +145,6 @@ nav {
   padding: 0.5em 2em;
   margin: 0 auto;
   /* Center the navigation inside the header */
-}
-
-.navbar {
-  color: #213442;
 }
 
 .navbar-nav {
