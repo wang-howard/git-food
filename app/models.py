@@ -8,6 +8,7 @@ class User(db.Model):
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
     authenticated = db.Column(db.Boolean, default=False)
+    about_me = db.Column(db.String, default="")
     recipes = db.relationship("Recipe", backref="user", lazy="dynamic")
 
     def __repr__(self):

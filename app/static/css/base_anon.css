@@ -135,14 +135,33 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 0.5em 2em;
+  margin: 0 auto; /* Center the navigation inside the header */
 }
 
 nav #logo {
-  height: 50px;
+  height: 50px; /* Adjust height as needed */
 }
 
-#navbar {
-  align-self: center;
+.navbar-nav {
+  display: flex;
+}
+
+.nav-item {
+  padding: 10px 15px;
+  margin: 0 10px; /* Space out the nav items */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-item:hover,
+.nav-item:focus {
+  color: #0275d8; /* Highlight color for hover and focus */
+  background-color: #f8f9fa; /* Light background on hover for contrast */
 }
 
 #login-button {
