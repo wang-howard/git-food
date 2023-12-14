@@ -164,6 +164,10 @@ nav #logo {
   background-color: #f8f9fa; /* Light background on hover for contrast */
 }
 
+.main-content {
+  padding-top: 70px; /* Adjust this value based on the actual height of your navbar */
+}
+
 #login-button {
   display: inline-block;
   padding: 0
