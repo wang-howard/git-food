@@ -53,7 +53,7 @@ def view_recipe(un, recipe_id):
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
 
-@main.route("u/<un>/edit-user", methods=["POST"])
+@main.route("/u/<un>/edit-user", methods=["POST"])
 @login_required
 def edit_user(un):
     """
