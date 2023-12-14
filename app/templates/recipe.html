@@ -11,7 +11,10 @@
 <div class="profile-container">
     <!-- Recipe Content -->
     <div class="recipe-content">
-        <h1 class="recipe-title">{{ recipe.title }}</h1>
+        <div class="recipe-top">
+            <h1 class="recipe-title">{{ recipe.title }}</h1>
+            <button class="edit-btn" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
+        </div>
         <p class="recipe-description">{{ recipe.description }}</p>
         <div class="recipe-details">
             {% if recipe.gf %}
@@ -22,7 +25,7 @@
             {% endif %}
         </div>
         <h2 class="ingredients-label">Ingredients</h2>
-        <ul class="ingredients-list">
+        <ul class="ingredients-list" id="ingredients-list">
             {% for ingredient in recipe.ingredients %}
                 <li>{{ ingredient.name }}, {{ ingredient.quantity }} {{ ingredient.unit }}</li>
             {% endfor %}
