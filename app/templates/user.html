@@ -6,7 +6,6 @@ Your Profile
 
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
-<script src="{{ url_for('static', filename='script/user.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -75,4 +74,6 @@ Your Profile
   <p class="no-recipes">No current recipes.</p>
   {% endfor %}
 </section>
+
+<script src="{{ url_for('static', filename='script/user.js') }}"></script>
 {% endblock %}

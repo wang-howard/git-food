@@ -148,6 +148,7 @@
 
 .back-to-profile-btn:hover,
 .edit-btn:hover,
-.prev-version-button:hover {
+.prev-version-button:hover,
+.add-collaborator-button:hover {
     background-color: #256692;
 }
