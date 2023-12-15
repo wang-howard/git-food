@@ -21,7 +21,6 @@ def index():
         return render_template("error.html", message=ex)
 
 @main.route("/u/<un>", methods=["GET"])
-@login_required
 def user(un):
     """
     Renders user profile page
@@ -41,7 +40,6 @@ def user(un):
         return render_template("error.html", message=ex)
 
 @main.route("/u/<un>/<recipe_id>", methods=["GET"])
-@login_required
 def view_recipe(un, recipe_id):
     recipe = Recipe.query.get(int(recipe_id))
     other_user = User.query.filter_by(username=un).first()
@@ -208,9 +206,7 @@ def delete_recipe(un, recipe_id):
     try:
         recipe = Recipe.query.get(int(recipe_id))
         parent_recipe = Recipe.query.filter_by(child_id=recipe_id).first()
-        if parent_recipe == None:
-            pass
-        else:
+        if parent_recipe != None:
             delete_recipe(un, parent_recipe.id)
         
         if recipe and recipe.author_id == current_user.id:

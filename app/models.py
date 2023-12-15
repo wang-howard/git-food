@@ -42,12 +42,6 @@ class Recipe(db.Model):
     is_head = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def save_version(self):
-        pass
-
-    def revert_to_version(self, version):
-        pass
-
     def __repr__(self):
         return f"<Recipe ID: {self.id}, Title: {self.title}>"
 
