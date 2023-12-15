@@ -9,50 +9,48 @@
 
 {% block content %}
 <div class="profile-container">
-
-    <!-- Recipe Content -->
-    <div class="recipe-content">
-        <div class="recipe-top-own">
-            <h1 class="recipe-title">{{ recipe.title }}</h1>
-            <div class="top-btns">
-                <script>
-                    function redirectToVersions() {
-                      window.location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/versions';
-                    }
-                </script>
-                {% if recipe.version == 1%}
-                {% else %}
-                <button class="prev-version-button" onclick="redirectToVersions()">Previous Versions</button>
-                {% endif %}
-                <button class="edit-btn" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
-            </div>
-        </div>
-        <h2 class="section-label">Description</h2>
-        <p class="recipe-description">{{ recipe.description }}</p>
-        <div class="recipe-details">
-            {% if recipe.gf %}
-            <span class="recipe-badge">Gluten Free</span>
-            {% endif %}
-            {% if recipe.vegan %}
-            <span class="recipe-badge">Vegan</span>
-            {% endif %}
-        </div>
-        <h2 class="section-label">Ingredients</h2>
-        <ul class="ingredients-list" id="ingredients-list">
-            {% for ingredient in recipe.ingredients %}
-            <li>{{ ingredient.name }}, {{ ingredient.quantity }} {{ ingredient.unit }}</li>
-            {% endfor %}
-        </ul>
-        <h2 class="section-label">Instructions</h2>
-        <p>{{ recipe.instructions }}</p>
-        <div class="recipe-update-info">
-            <span>Created on: {{ recipe.created_at.strftime('%Y-%m-%d') }}</span>
-            <div class="version-lable">
-                <span>Version: {{ recipe.version }}</span>
-            </div>
-        </div>
-        <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
-            Profile</button>
+  <!-- Recipe Content -->
+  <div class="recipe-content">
+    <div class="recipe-top-own">
+      <h1 class="recipe-title">{{ recipe.title }}</h1>
+      <div class="top-btns">
+        <script>
+          function redirectToVersions() {
+            window.location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/versions';
+          }
+        </script>
+        {% if recipe.version == 1%}
+        {% else %}
+        <button class="prev-version-button" onclick="redirectToVersions()">Previous Versions</button>
+        {% endif %}
+        <button class="edit-btn" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
+      </div>
     </div>
-</div>
-    {% endblock %}
+    <h2 class="section-label">Description</h2>
+    <p class="recipe-description">{{ recipe.description }}</p>
+    <div class="recipe-details">
+      {% if recipe.gf %}
+      <span class="recipe-badge">Gluten Free</span>
+      {% endif %}
+      {% if recipe.vegan %}
+      <span class="recipe-badge">Vegan</span>
+      {% endif %}
+    </div>
+    <h2 class="section-label">Ingredients</h2>
+    <ul class="ingredients-list" id="ingredients-list">
+      {% for ingredient in recipe.ingredients %}
+      <li>{{ ingredient.name }}, {{ ingredient.quantity }} {{ ingredient.unit }}</li>
+      {% endfor %}
+    </ul>
+    <h2 class="section-label">Instructions</h2>
+    <p>{{ recipe.instructions }}</p>
+    <div class="recipe-update-info">
+      <span>Created on: {{ recipe.created_at.strftime('%Y-%m-%d') }}</span>
+      <div class="version-lable">
+        <span>Version: {{ recipe.version }}</span>
+      </div>
+    </div>
+    <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
+      Profile</button>
+  </div>
+  {% endblock %}
