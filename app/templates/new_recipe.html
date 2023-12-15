@@ -6,8 +6,6 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/new_recipe.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
-<script src="{{ url_for('static', filename='script/ingredient.js') }}"></script>
-<script src="{{ url_for('static', filename='script/modal.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -67,10 +65,13 @@
     <span class="close">&times;</span>
     <h2>Invite Collaborator</h2>
     <div class="modal-search-container">
-      <input type="text" id="collaboratorUsername" placeholder="Enter username" />
+      <input type="text" id="collaboratorUsername" placeholder="Enter username (name next to logout)" />
       <button type="button" id="searchCollaborator">Search</button>
     </div>
     <p class="disclaimer">Note: Max 1 collaborator</p>
   </div>
 </div>
+
+<script src="{{ url_for('static', filename='script/ingredient.js') }}"></script>
+<script src="{{ url_for('static', filename='script/modal.js') }}"></script>
 {% endblock %}
