@@ -62,11 +62,12 @@
           </div>
           <div>
             <label for="quantity">Quantity</label>
-            <input type="number" name="quantity${ct}" min="0" class="form-control" step="any" required>
+            <input type="number" name="quantity{{ ct.c }}" min="0" class="form-control" step="any"
+              value="{{ ingredient.quantity }}" required>
           </div>
-          <div id="select-unit">
+          <div id=" select-unit">
             <label for="unit" style="margin-top: -10px;">Unit</label>
-            <select type="text" name="unit${ct}" class="form-control" required>
+            <select type="text" name="unit{{ ct.c }}" class="form-control" value="{{ ingredient.name }}" required>
               <option value="count">count</option>
               <option value="tsp">tsp</option>
               <option value="tbsp">tbsp</option>
