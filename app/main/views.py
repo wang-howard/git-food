@@ -156,7 +156,7 @@ def submit_recipe(un):
 @login_required
 def show_edit_recipe(un, recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
-    if current_user.username != un and current_user.user != recipe.collab_id:
+    if current_user.username != un and current_user.id != recipe.collab_id:
         abort (401)
     try:
         recipe = Recipe.query.get(int(recipe_id))
