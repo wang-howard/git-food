@@ -17,11 +17,12 @@
         <h1 class="recipe-title">{{ recipe.title }}</h1>
         <h2>Author: {{ other.name }}</h2>
       </div>
-      {% %}
+      {% if current_user.id == recipe.collab_id %}
       <div class="top-btns">
         <button class="edit-btn"
           onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
       </div>
+      {% endif %}
     </div>
     <h2 class="section-label">Description</h2>
     <p class="recipe-description">{{ recipe.description }}</p>
