@@ -8,6 +8,10 @@
   border-radius: 5px;
 }
 
+.add-collaborator-button {
+
+}
+
 /* Set the width of text inputs and textareas to 100% */
 input[type="text"],
 input[type="number"],
@@ -78,6 +82,11 @@ select.select-arrow-active:after {
   margin-bottom: 8px;
 }
 
+.bottom-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Adjust the last element in the ingredient div to remove the margin-bottom */
 .ingredient>input:last-child {
   margin-bottom: 0;
@@ -103,7 +112,8 @@ select.select-arrow-active:after {
 
 /* Button styles */
 .add-ingredient-btn,
-input[type=submit] {
+input[type=submit],
+.add-collaborator-button {
   background-color: #213442;
   color: white;
   padding: 10px 15px;
@@ -134,9 +144,58 @@ input[type=submit] {
 
 .add-ingredient-btn:hover,
 input[type=submit]:hover,
-.cancel-btn:hover {
+.add-collaborator-button:hover {
   background-color: #216491;
 }
+
+.cancel-btn:hover {
+  background-color: #a72828;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Add some styling to buttons if you like */
+button {
+  padding: 10px;
+  margin-top: 10px;
+}
+
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {

@@ -46,14 +46,31 @@
         <label for="instructions">Instructions</label>
         <textarea id="instructions" name="instructions" class="form-control" rows="4" required></textarea>
       </div>
-      <input type="submit" class="recipe-submit" value="Create Recipe" onclick="countIngredients()">
-      <button type="button" class="cancel-btn" onclick="location.href ='/u/{{ current_user.username }}';">
-        Cancel
-      </button>
+      <div class="bottom-btns">
+        <div class="bottom-left-btns">
+          <input type="submit" class="recipe-submit" value="Create Recipe" onclick="countIngredients()">
+          <button type="button" id="add-collaborator-button" class="add-collaborator-button">Add Collaborator</button>
+
+          <div id="collaboratorModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Invite Collaborator</h2>
+              <div class="modal-search-container">
+                <input type="text" id="collaboratorUsername" placeholder="Enter username" />
+                <button type="button" id="searchCollaborator">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="cancel-btn" onclick="location.href ='/u/{{ current_user.username }}';">
+          Cancel 
+        </button>
+      </div>
     </form>
   </div>
 </div>
 <script src="{{ url_for('static', filename='script/ingredient.js') }}"></script>
+<script src="{{ url_for('static', filename='script/modal.js') }}"></script>
 <script>
   function addIngredient() {
     var container = document.getElementById('ingredients');
