@@ -220,6 +220,7 @@ def make_recipe_edit(un, recipe_id):
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
 
+
 @main.route("/u/<un>/<recipe_id>/delete-recipe", methods=["POST"])
 @login_required
 def delete_recipe(un, recipe_id):
@@ -249,7 +250,38 @@ def delete_recipe(un, recipe_id):
         return render_template("error.html", message=ex)
     
 
+@main.route("/u/<un>/<recipe_id>/restore", methods=["POST"])
+@login_required
+def restore_version(un, recipe_id):
+    if current_user.username != un:
+        return jsonify({"status": "error", "message": "Unauthorized"}), 403
+    try:
+        restored_recipe = Recipe.query.get_or_404(int(recipe_id))
+        if restored_recipe.author_id != current_user.id:
+            return jsonify({"status": "error", "message": "Unauthorized"}), 403
 
+        if not restored_recipe.is_head:
+            restored_recipe.is_head = True
+            restored_recipe.child_id = None
+            db.session.add(restored_recipe)
+
+            newer_versions = Recipe.query.filter(Recipe.id != restored_recipe.id,
+                                                 Recipe.author_id == current_user.id,
+                                                 Recipe.version > restored_recipe.version).all()
+            for version in newer_versions:
+                Ingredient.query.filter_by(recipe_id=version.id).delete()
+                db.session.delete(version)
+
+            db.session.commit()
+            return jsonify({"status": "success", "message": "Recipe version restored and newer versions deleted."})
+        else:
+            return jsonify({"status": "error", "message": "Recipe is already the head version."})
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return jsonify({"status": "error", "message": str(ex)}), 500
+
+    
+    
 @main.route("/u/<un>/<recipe_id>/versions", methods=["GET"])
 @login_required
 def view_versions(un, recipe_id):
