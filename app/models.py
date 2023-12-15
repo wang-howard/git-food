@@ -46,6 +46,23 @@ class Recipe(db.Model):
     def __repr__(self):
         return f"<Recipe ID: {self.id}, Title: {self.title}>"
 
+    def __eq__(self, other):
+        self_ingredients = Ingredient.query.filter_by(recipe_id=self.id).all()
+        other_ingredients = Ingredient.query.filter_by(recipe_id=other.id).all()
+
+        if len(self_ingredients) != len(other_ingredients):
+            return False
+        
+        for i in range(len(self_ingredients)):
+            if self_ingredients[i] != other_ingredients[i]:
+                return False
+
+        return self.title == other.title and self.description == other.description \
+            and self.gf == other.gf and self.vegan == other.vegan \
+            and self.instructions == other.instructions and self.author_id == other.author_id \
+            and self.collab_id == other.collab_id
+        
+
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String, nullable=False)
@@ -55,3 +72,6 @@ class Ingredient(db.Model):
 
     def __repr__(self):
         return f"<Ingredient {self.name}, Quantity: {self.quantity}, Unit: {self.unit}>"
+    
+    def __eq__(self, other):
+        return self.name == other.name and self.quantity == other.quantity and self.unit == other.unit

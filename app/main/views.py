@@ -183,6 +183,8 @@ def make_recipe_edit(un, recipe_id):
                         collab_id=parent_recipe.collab_id)
         db.session.add(new_recipe)
 
+        if parent_recipe.title == new_recipe.title 
+
         parent_recipe.is_head = False
         parent_recipe.child_id = new_recipe.id
         db.session.add(parent_recipe)
@@ -235,21 +237,18 @@ def delete_recipe(un, recipe_id):
 
 @main.route("/u/<un>/<recipe_id>/versions", methods=["GET"])
 @login_required
-def view_versions(un, recipe_id,):
+def view_versions(un, recipe_id):
     # Ensure that the user requesting the versions is the author
     if current_user.username != un:
-        return jsonify({"status": "error", "message": "Unauthorized"}), 403
-    
-    try:
-        current_recipe = Recipe.query.get(int(recipe_id))
-        if current_recipe.author_id != current_user.id:
-            return jsonify({"status": "error", "message": "Unauthorized"}), 403
-        
-        
-        previous_versions = collect_previous_versions(recipe_id)
-    
-        return render_template("previous_versions.html", recipe=current_recipe, recipe_versions=previous_versions)
+        return abort(401)
 
+    try:
+        current_recipe = Recipe.query.get_or_404(int(recipe_id))
+        if current_recipe.author_id != current_user.id:
+            return abort(401)
+
+        previous_versions = collect_previous_versions(recipe_id)
+        return render_template("previous_versions.html", recipe=current_recipe, recipe_versions=previous_versions)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=str(ex))
