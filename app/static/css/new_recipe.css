@@ -144,7 +144,8 @@ input[type=submit],
 
 .add-ingredient-btn:hover,
 input[type=submit]:hover,
-.add-collaborator-button:hover {
+.add-collaborator-button:hover,
+#searchCollaborator:hover {
   background-color: #216491;
 }
 
@@ -172,7 +173,7 @@ input[type=submit]:hover,
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 40%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
@@ -189,11 +190,26 @@ input[type=submit]:hover,
   text-decoration: none;
   cursor: pointer;
 }
+.modal-search-container {
+  margin-top: 20px;
+}
 
-/* Add some styling to buttons if you like */
-button {
+#collaboratorUsername {
   padding: 10px;
-  margin-top: 10px;
+  margin-right: 10px;
+  width: calc(100% - 120px); /* Adjust width as needed */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#searchCollaborator {
+  padding: 10px 20px;
+  background-color: #213442;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 
