@@ -19,8 +19,7 @@
             window.location.href = '/u/{{ current_user.username }}/{{ recipe.id }}/versions';
           }
         </script>
-        {% if recipe.version == 1%}
-        {% else %}
+        {% if recipe.is_head %}
         <button class="prev-version-button" onclick="redirectToVersions()">Previous Versions</button>
         {% endif %}
         {% if recipe.is_head %}
