@@ -5,6 +5,7 @@
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -50,7 +51,25 @@
         <span>Version: {{ recipe.version }}</span>
       </div>
     </div>
-    <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
-      Profile</button>
+    <div class="bottom-btns">
+        <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
+        Profile</button>
+        <button type="button" id="add-collaborator-button" class="add-collaborator-button">Add Collaborator</button>
+    </div>
   </div>
+
+
+  <div id="collaboratorModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Invite Collaborator</h2>
+      <div class="modal-search-container">
+        <input type="text" id="collaboratorUsername" placeholder="Enter username" />
+        <button type="button" id="searchCollaborator">Search</button>
+      </div>
+      <p class="disclaimer">Note: Max 1 collaborator</p>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script/modal.js') }}"></script>
   {% endblock %}
