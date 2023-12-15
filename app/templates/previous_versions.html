@@ -12,7 +12,6 @@
   <div class="versions-container">
     <div class="version-top">
       <h1 class="title-version">Previous Versions of "{{ recipe.title }}"</h1>
-
     </div>
     <div class="version-list">
       {% for version in recipe_versions %}
@@ -29,5 +28,6 @@
       {% endfor %}
     </div>
   </div>
+  <button class="back-btn" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}';">Back</button>
 </div>
 {% endblock %}
