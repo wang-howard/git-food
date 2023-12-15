@@ -24,7 +24,7 @@ flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
     # TODO
-    redirect_uri="http://127.0.0.1:5553/callback"
+    redirect_uri=os.environ["CALLBACK_URI"]
 )
 
 def crc32_hash(num):
