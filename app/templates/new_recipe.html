@@ -55,12 +55,11 @@
 </div>
 <script src="{{ url_for('static', filename='script/ingredient.js') }}"></script>
 <script>
-  var counter = 0
   function addIngredient() {
     var container = document.getElementById('ingredients');
     var ingredientDiv = document.createElement('div');
     ingredientDiv.classList.add('ingredient');
-    var ct = counter.toString()
+    var ct = container.children.length
 
     ingredientDiv.innerHTML = `
     <div>
@@ -97,7 +96,7 @@
         <img src="../../static/img/red-x.png" alt="remove" class="remove-icon" id="remove-icon"
         onclick="removeIngredient(this)">
     </div>
-    <input type="hidden" id="ingredient-count" name="ingredient-count" value="">
+    <input type="hidden" id="ingredient-count" name="ingredient-count" value="0">
     `;
     container.appendChild(ingredientDiv);
     counter++;

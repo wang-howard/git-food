@@ -37,7 +37,9 @@ class Recipe(db.Model):
     ingredients = db.relationship("Ingredient", backref="recipe")
     instructions = db.Column(db.String, nullable=False)
     version = db.Column(db.Integer, default=1)
+    child_id = db.Column(db.Integer, default=None)
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    is_head = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def save_version(self):

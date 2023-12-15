@@ -14,7 +14,7 @@
       <h1 class="my-recipe">Edit the Recipe</h1>
     </div>
 
-    <form action="/u/{{ current_user.username }}/submit-recipe" method="post" class="recipe-form">
+    <form action="/u/{{ current_user.username }}/{{ recipe.id }}/save-recipe-edit" method="post" class="recipe-form">
       <div class="form-group">
         <label for="title">Recipe Name:</label>
         <input type="text" id="recipe-name" name="recipe-name" class="form-control" value="{{ recipe.title }}" required>
@@ -50,22 +50,22 @@
 
       <h2 class="ingredients-title">Ingredients</h2>
       <div id="ingredients" class="form-group ingredients-list">
+        {% set ct = namespace(c = 0) %}
         {% for ingredient in recipe.ingredients %}
         <div class="ingredient">
           <div>
             <label for="ingredient_name">Name</label>
-            <input type="text" name="ingredient-name{{ loop.index0 }}" class="form-control"
-              value="{{ ingredient.name }}" required>
+            <input type="text" name="ingredient-name{{ ct.c }}" class="form-control" value="{{ ingredient.name }}"
+              required>
           </div>
           <div>
             <label for="quantity">Quantity</label>
-            <input type="number" name="quantity{{ loop.index0 }}" min="0" class="form-control"
+            <input type="number" name="quantity{{ ct.c }}" min="0" class="form-control"
               value="{{ ingredient.quantity }}" required>
           </div>
           <div id="select-unit">
             <label for="unit" style="margin-top: -10px;">Unit</label>
-            <select type="text" name="unit{{ loop.index0 }}" class="form-control" value="{{ ingredient.unit }}"
-              required>
+            <select type="text" name="unit{{ ct.c }}" class="form-control" value="{{ ingredient.unit }}" required>
               <option value="tsp">tsp</option>
               <option value="tbsp">tbsp</option>
               <option value="fl oz">fl oz</option>
@@ -89,8 +89,9 @@
             <img src="../../../static/img/red-x.png" alt="remove" class="remove-icon" id="remove-icon"
               onclick="removeIngredient(this)">
           </div>
-          <input type="hidden" id="ingredient-count" name="ingredient-count" value="">
+          <input type="hidden" id="ingredient-count" name="ingredient-count" value="0">
         </div>
+        {% set ct.c = ct.c + 1 %}
         {% endfor %}
       </div>
       <button type="button" class="add-ingredient-btn" style="margin: 5px 15px 25px;" onclick="addIngredient()">Add
@@ -110,12 +111,11 @@
 </div>
 <script src="{{ url_for('static', filename='script/ingredient.js') }}"></script>
 <script>
-  var counter = 0
   function addIngredient() {
     var container = document.getElementById('ingredients');
     var ingredientDiv = document.createElement('div');
     ingredientDiv.classList.add('ingredient');
-    var ct = counter.toString()
+    var ct = container.children.length
 
     ingredientDiv.innerHTML = `
     <div>
@@ -149,13 +149,12 @@
         </select>
     </div>
     <div>
-        <img src="../../static/img/red-x.png" alt="remove" class="remove-icon" id="remove-icon"
+        <img src="../../../static/img/red-x.png" alt="remove" class="remove-icon" id="remove-icon"
         onclick="removeIngredient(this)">
     </div>
-    <input type="hidden" id="ingredient-count" name="ingredient-count" value="">
+    <input type="hidden" id="ingredient-count" name="ingredient-count" value="0">
     `;
     container.appendChild(ingredientDiv);
-    counter++;
   }
 </script>
 {% endblock %}

@@ -48,7 +48,7 @@ Your Profile
 </div>
 
 <section class="recipes-list" id="recipes-list">
-  {% for recipe in current_user.recipes %}
+  {% for recipe in current_user.recipes if recipe.is_head %}
   <div class="recipe" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}';">
     <div class="recipe-label">
       <h2>{{ recipe.title }}</h2>

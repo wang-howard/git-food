@@ -56,22 +56,6 @@ def view_recipe(un, recipe_id):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
-    
-
-@main.route("/u/<un>/<recipe_id>/edit", methods=["GET"])
-@login_required
-def edit_recipe(un, recipe_id):
-    if current_user.username != un:
-        abort (401)
-    try:
-        recipe = Recipe.query.filter_by(id=int(recipe_id), author_id=current_user.id).first()
-        if current_user.username != un or recipe is None:
-            abort(404)
-        return render_template("edit_recipe.html", recipe=recipe)
-    except Exception as ex:
-        print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
-
 
 @main.route("/u/<un>/edit-user", methods=["POST"])
 @login_required
@@ -105,12 +89,11 @@ def recipe(un):
     """
     Renders create new recipe page
     """
-    user = User.query.get(session["user_id"])
-
-    if user.username != un:
-        abort(401)
+    user = User.query.filter_by(username=un).first()
     if user is None:
         return render_template("error.html", message="User Not Found")
+    if current_user.username != un:
+        abort(401)
 
     try:
         return render_template("new_recipe.html")
@@ -121,14 +104,13 @@ def recipe(un):
 @main.route("/u/<un>/submit-recipe", methods=["POST"])
 @login_required
 def submit_recipe(un):
+    user = User.query.filter_by(username=un).first()
+    if user is None:
+        return render_template("error.html", message="User Not Found")
+    if current_user.username != un:
+        abort(401)
+    
     try:
-        user = User.query.get(session["user_id"])
-
-        if user.username != un:
-            abort(401)
-        if user is None:
-            return render_template("error.html", message="User Not Found")
-
         new_recipe = Recipe(id=generate_recipe_id(),
                         title=request.form.get("recipe-name"),
                         description=request.form.get("description"),
@@ -154,8 +136,67 @@ def submit_recipe(un):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
+    
+@main.route("/u/<un>/<recipe_id>/edit", methods=["GET"])
+@login_required
+def show_edit_recipe(un, recipe_id):
+    if current_user.username != un:
+        abort (401)
+    try:
+        recipe = Recipe.query.get(int(recipe_id))
+        if current_user.username != un or recipe is None:
+            abort(404)
+        return render_template("edit_recipe.html", recipe=recipe)
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)
 
-@main.route("/u/<un>/delete-recipe/<recipe_id>", methods=["POST"])
+@main.route("/u/<un>/<recipe_id>/save-recipe-edit", methods=["POST"])
+@login_required
+def make_recipe_edit(un, recipe_id):
+    user = User.query.filter_by(username=un).first()
+    if user is None:
+        return render_template("error.html", message="User Not Found")
+    if current_user.username != un:
+        abort(401)
+
+    parent_recipe = Recipe.query.get(int(recipe_id))
+    if parent_recipe == None:
+        abort(500)
+
+    try:
+        new_recipe = Recipe(id=generate_recipe_id(),
+                        title=request.form.get("recipe-name"),
+                        description=request.form.get("description"),
+                        gf = bool(request.form.get("gluten-free")) if request.form.get("gluten-free") else False,
+                        vegan=bool(request.form.get("vegan")) if request.form.get("vegan") else False,
+                        private=bool(request.form.get("is-private")) if request.form.get("is-private") else False,
+                        instructions=request.form.get("instructions"),
+                        version=parent_recipe.version+1,
+                        author_id = user.id)
+        db.session.add(new_recipe)
+
+        parent_recipe.is_head = False
+        parent_recipe.child_id = new_recipe.id
+        db.session.add(parent_recipe)
+        db.session.commit()
+
+        num_ingredients = request.form.get("ingredient-count")
+        for i in range(int(num_ingredients)):
+            new_ingredient = Ingredient(id=generate_ingredient_id(),
+                                        name=request.form.get(f"ingredient-name{i}"),
+                                        quantity=request.form.get(f"quantity{i}"),
+                                        unit=request.form.get(f"unit{i}"),
+                                        recipe_id = new_recipe.id)
+            db.session.add(new_ingredient)
+        db.session.commit()
+        
+        return redirect(f"/u/{user.username}")
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)
+
+@main.route("/u/<un>/<recipe_id>/delete-recipe", methods=["POST"])
 @login_required
 def delete_recipe(un, recipe_id):
     """
@@ -165,9 +206,15 @@ def delete_recipe(un, recipe_id):
     if current_user.username != un:
         return jsonify({"status": "error", "message": "Unauthorized"}), 403
     try:
-        recipe = Recipe.query.get(recipe_id)
+        recipe = Recipe.query.get(int(recipe_id))
+        parent_recipe = Recipe.query.filter_by(child_id=recipe_id).first()
+        if parent_recipe == None:
+            pass
+        else:
+            delete_recipe(un, parent_recipe.id)
+        
         if recipe and recipe.author_id == current_user.id:
-            assoc_igs = Ingredient.query.filter_by(recipe_id=recipe_id).all()
+            assoc_igs = Ingredient.query.filter_by(recipe_id=int(recipe_id)).all()
             for ig in assoc_igs:
                 db.session.delete(ig)
             db.session.delete(recipe)

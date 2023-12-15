@@ -81,7 +81,7 @@ function confirmDelete(obj, un, recipeId) {
 
 function deleteRecipe(un, recipeId) {
   $.ajax({
-    url: `/u/${un}/delete-recipe/${recipeId}`,
+    url: `/u/${un}/${recipeId}/delete-recipe`,
     method: 'POST',
     data: {
       recipe_id: recipeId,
