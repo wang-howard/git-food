@@ -259,8 +259,11 @@ def view_versions(un, recipe_id):
         current_recipe = Recipe.query.get_or_404(recipe_id)
         if current_recipe.author_id != current_user.id:
             return abort(401)
+        
+        while not current_recipe.is_head:
+            current_recipe = Recipe.query.get(int(current_recipe.child_id))
 
-        previous_versions = collect_previous_versions(recipe_id)
+        previous_versions = collect_previous_versions(current_recipe.id)
         return render_template("previous_versions.html", recipe=current_recipe, recipe_versions=previous_versions)
     except Exception as ex:
         print(ex, file=sys.stderr)
