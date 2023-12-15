@@ -227,3 +227,36 @@ def delete_recipe(un, recipe_id):
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
     
+
+
+@main.route("/u/<un>/<recipe_id>/versions", methods=["GET"])
+@login_required
+def view_versions(un, recipe_id,):
+    # Ensure that the user requesting the versions is the author
+    if current_user.username != un:
+        return jsonify({"status": "error", "message": "Unauthorized"}), 403
+    
+    try:
+        current_recipe = Recipe.query.get(int(recipe_id))
+        if current_recipe.author_id != current_user.id:
+            return jsonify({"status": "error", "message": "Unauthorized"}), 403
+        
+        
+        previous_versions = collect_previous_versions(recipe_id)
+    
+        return render_template("previous_versions.html", recipe=current_recipe, recipe_versions=previous_versions)
+
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=str(ex))
+
+def collect_previous_versions(recipe_id):
+    previous_recipes = []
+    parent_recipe = Recipe.query.filter_by(child_id=recipe_id).first()
+    
+    while parent_recipe:
+        previous_recipes.append(parent_recipe)
+        parent_recipe = Recipe.query.filter_by(child_id=parent_recipe.id).first()
+    
+    # Return the list in reverse order to start from the first version
+    return previous_recipes[::-1]

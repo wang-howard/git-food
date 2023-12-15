@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Previous Versions of {{ recipe.title }}{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/versions.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="versions-container">
+        <div class="version-top">
+            <h1 class="title-version">Previous Versions of "{{ recipe.title }}"</h1>
+            
+        </div>
+    <div class="version-list">
+        {% for version in recipe_versions %}
+        <div class="version-item">
+        <div class="version-details">
+            <span class="version-number">Version {{ version.version }}</span>
+            <span class="version-date">{{ version.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+        </div>
+        <a href="{{ url_for('main.view_recipe', recipe_id=version.id, un=current_user.username)}}" class="btn-view">View This Version</a>
+        </div>
+        {% else %}
+        <p class="no-versions-flag">No previous versions available.</p>
+        {% endfor %}
+    </div>
+    </div>
+</div>
+{% endblock %}
