@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{ current_user.username }}'s Profile
+Your Profile
 {% endblock %}
 
 {% block style %}
@@ -50,21 +50,17 @@
 <section class="recipes-list" id="recipes-list">
   {% for recipe in current_user.recipes %}
   <div class="recipe" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}';">
-    <div class="recipe-label-allergies">
-      <div>
-        <h2>{{ recipe.title }}</h2>
-        <p>{{ recipe.description or 'No description provided.' }}</p>
-      </div>
+    <div class="recipe-label">
+      <h2>{{ recipe.title }}</h2>
+      <p>{{ recipe.description or 'No description provided.' }}</p>
+    </div>
+    <div class="recipe-icons" style="padding-right: 20px;">
       {% if recipe.gf %}
       <img src="../../static/img/gluten-free-icon.png" alt="gf" class="gf-icon" id="gf-icon">
-      {% else %}
       {% endif %}
       {% if recipe.vegan %}
       <img src="../../static/img/vegan.png" alt="vegan" class="v-icon" id="v-icon">
-      {% else %}
       {% endif %}
-    </div>
-    <div style="padding-right: 20px;">
       <img src="../../static/img/red-x.png" alt="remove" class="remove-icon" id="remove-icon"
         onclick="confirmDelete(this, '{{ current_user.username }}', '{{ recipe.id }}')">
     </div>

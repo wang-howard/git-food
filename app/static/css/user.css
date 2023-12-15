@@ -27,10 +27,6 @@
   margin: 0 auto;
 }
 
-.recipe-label-allergies {
-  display: flex;
-}
-
 .username-container {
   display: flex;
   align-items: center;
@@ -112,6 +108,19 @@
   text-align: center;
   font-weight: bold;
   font-size: 30px;
+}
+
+.recipe-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin-right: 5px;
+}
+
+.recipe-icons {
+  display: flex;
+  gap: 8px;
+
 }
 
 .recipe-btn {

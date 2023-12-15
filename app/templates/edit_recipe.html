@@ -52,41 +52,44 @@
       <div id="ingredients" class="form-group ingredients-list">
         {% for ingredient in recipe.ingredients %}
         <div class="ingredient">
-            <div>
-                <label for="ingredient_name">Name</label>
-                <input type="text" name="ingredient-name{{ loop.index0 }}" class="form-control" value="{{ ingredient.name }}" required>
-            </div>
-            <div>
-                <label for="quantity">Quantity</label>
-                <input type="number" name="quantity{{ loop.index0 }}" min="0" class="form-control" value="{{ ingredient.quantity }}" required>
-            </div>
-            <div id="select-unit">
-                <label for="unit" style="margin-top: -10px;">Unit</label>
-                <select type="text" name="unit{{ loop.index0 }}" class="form-control" value="{{ ingredient.unit }}" required>
-                    <option value="tsp">tsp</option>
-                    <option value="tbsp">tbsp</option>
-                    <option value="fl oz">fl oz</option>
-                    <option value="cup">cup</option>
-                    <option value="pt">pt</option>
-                    <option value="qt">qt</option>
-                    <option value="gal">gal</option>
-                    <option value="pinch">pinch</option>
-                    <option value="mL">mL</option>
-                    <option value="L">L</option>
-                    <option value="mg">mg</option>
-                    <option value="g">g</option>
-                    <option value="kg">kg</option>
-                    <option value="lbs">lbs</option>
-                    <option value="oz">oz</option>
-                    <option value="sprig">sprig</option>
-                    <option value="count">count</option>
-                </select>
-            </div>
-            <div>
-                <img src="../../../static/img/red-x.png" alt="remove" class="remove-icon" id="remove-icon"
-                onclick="removeIngredient(this)">
-            </div>
-            <input type="hidden" id="ingredient-count" name="ingredient-count" value="">
+          <div>
+            <label for="ingredient_name">Name</label>
+            <input type="text" name="ingredient-name{{ loop.index0 }}" class="form-control"
+              value="{{ ingredient.name }}" required>
+          </div>
+          <div>
+            <label for="quantity">Quantity</label>
+            <input type="number" name="quantity{{ loop.index0 }}" min="0" class="form-control"
+              value="{{ ingredient.quantity }}" required>
+          </div>
+          <div id="select-unit">
+            <label for="unit" style="margin-top: -10px;">Unit</label>
+            <select type="text" name="unit{{ loop.index0 }}" class="form-control" value="{{ ingredient.unit }}"
+              required>
+              <option value="tsp">tsp</option>
+              <option value="tbsp">tbsp</option>
+              <option value="fl oz">fl oz</option>
+              <option value="cup">cup</option>
+              <option value="pt">pt</option>
+              <option value="qt">qt</option>
+              <option value="gal">gal</option>
+              <option value="pinch">pinch</option>
+              <option value="mL">mL</option>
+              <option value="L">L</option>
+              <option value="mg">mg</option>
+              <option value="g">g</option>
+              <option value="kg">kg</option>
+              <option value="lbs">lbs</option>
+              <option value="oz">oz</option>
+              <option value="sprig">sprig</option>
+              <option value="count">count</option>
+            </select>
+          </div>
+          <div>
+            <img src="../../../static/img/red-x.png" alt="remove" class="remove-icon" id="remove-icon"
+              onclick="removeIngredient(this)">
+          </div>
+          <input type="hidden" id="ingredient-count" name="ingredient-count" value="">
         </div>
         {% endfor %}
       </div>
@@ -94,10 +97,12 @@
         Ingredient</button>
       <div class="form-group" id="instruction-container">
         <label for="instructions">Instructions</label>
-        <textarea id="instructions" name="instructions" class="form-control" rows="4" required>{{ recipe.instructions }}</textarea>
+        <textarea id="instructions" name="instructions" class="form-control" rows="4"
+          required>{{ recipe.instructions }}</textarea>
       </div>
       <input type="submit" class="recipe-save" value="Save" onclick="countIngredients()">
-      <button type="button" class="cancel-btn" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}';">
+      <button type="button" class="cancel-btn"
+        onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}';">
         Cancel
       </button>
     </form>

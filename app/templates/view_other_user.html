@@ -44,8 +44,10 @@
   {% for recipe in other.recipes %}
   {% if not recipe.private: %}
   <div class="recipe" onclick="location.href ='/u/{{ other.username }}/{{ recipe.id }}';">
-    <h2>{{ recipe.title }}</h2>
-    <p>{{ recipe.description or 'No description provided.' }}</p>
+    <div class="recipe-label">
+      <h2>{{ recipe.title }}</h2>
+      <p>{{ recipe.description or 'No description provided.' }}</p>
+    </div>
   </div>
   {% endif %}
   {% else %}

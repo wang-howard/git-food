@@ -57,11 +57,7 @@
     font-size: 14px;
 }
 
-.ingredients-label {
-    font-size: 20px;
-    color: #213442;
-    font-weight: bold;
-}
+
 
 .ingredients-list {
     list-style: disc;
@@ -80,7 +76,7 @@
     border-radius: 5px;
 }
 
-.instructions-label {
+.section-label {
     font-size: 20px;
     color: #213442;
     font-weight: bold;
