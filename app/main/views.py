@@ -255,6 +255,7 @@ def delete_recipe(un, recipe_id):
         return render_template("error.html", message=ex)
     
 
+
 @main.route("/u/<un>/<recipe_id>/restore", methods=["POST"])
 @login_required
 def restore_version(un, recipe_id):
@@ -267,23 +268,29 @@ def restore_version(un, recipe_id):
 
         if not restored_recipe.is_head:
             restored_recipe.is_head = True
+            delete_newer_versions(restored_recipe)
+
             restored_recipe.child_id = None
-            db.session.add(restored_recipe)
-
-            newer_versions = Recipe.query.filter(Recipe.id != restored_recipe.id,
-                                                 Recipe.author_id == current_user.id,
-                                                 Recipe.version > restored_recipe.version).all()
-            for version in newer_versions:
-                Ingredient.query.filter_by(recipe_id=version.id).delete()
-                db.session.delete(version)
-
             db.session.commit()
-            return jsonify({"status": "success", "message": "Recipe version restored and newer versions deleted."})
+            return jsonify({"status": "success", "message": "Recipe version restored."})
         else:
             return jsonify({"status": "error", "message": "Recipe is already the head version."})
     except Exception as ex:
         print(ex, file=sys.stderr)
         return jsonify({"status": "error", "message": str(ex)}), 500
+    
+
+def delete_newer_versions(version):
+    if version.child_id is None:
+        return
+
+    child_version = Recipe.query.get(version.child_id)
+    if child_version:
+        delete_newer_versions(child_version)
+        ingredients = Ingredient.query.filter_by(recipe_id=child_version.id).all()
+        for ingredient in ingredients:
+            db.session.delete(ingredient)
+        db.session.delete(child_version)
 
     
     
