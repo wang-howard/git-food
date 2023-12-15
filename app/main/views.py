@@ -37,14 +37,13 @@ def user(un):
     """
     Renders user profile page
     """
-    user = User.query.get_or_404(current_user.id)
     other = User.query.filter_by(username=un).first_or_404()
 
     try:
-        if user.username == un:
-            return render_template("user.html")
-        else:
+        if not current_user.is_authenticated or current_user.username != un:
             return render_template("view_other_user.html", other=other)
+        else:
+            return render_template("user.html")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
@@ -81,7 +80,7 @@ def view_recipe(un, recipe_id):
     other_user = User.query.filter_by(username=un).first_or_404()
 
     try:
-        if current_user.username == un:
+        if current_user.is_authenticated and current_user.username == un:
             return render_template("recipe.html", recipe=recipe)
         else:
             return render_template("view_public_recipe.html", recipe=recipe, other=other_user)

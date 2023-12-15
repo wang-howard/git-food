@@ -41,7 +41,7 @@
 </div>
 
 <section class="recipes-list" id="recipes-list">
-  {% for recipe in other.recipes if not recipe.private %}
+  {% for recipe in other.recipes if not recipe.private and recipe.is_head %}
   <div class="recipe" onclick="location.href ='/u/{{ other.username }}/{{ recipe.id }}';">
     <div class="recipe-label">
       <h2>{{ recipe.title }}</h2>
