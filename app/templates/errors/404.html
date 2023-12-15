@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="home-wrapper">
+  <div class="welcome-container">
+    <h1>Whoops!</h1>
+    <p>It seems like you're the page you're trying to reach doesn't exist.</p>
+    <p class="emote">:/</p>
+    <div class="error-code">(404 Not Found)</div>
+    <a class="home-link" href="/">Take me back home</a>
+  </div>
+</div>
+{% endblock %}

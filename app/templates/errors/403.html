@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="home-wrapper">
+  <div class="welcome-container">
+    <h1>Hey!</h1>
+    <p>You are trying to access a forbidden page.</p>
+    <p class="emote">>:(</p>
+    <div class="error-code">(403 Forbidden)</div>
+    <a class="home-link" href="/">Take me back home</a>
+  </div>
+</div>
+{% endblock %}

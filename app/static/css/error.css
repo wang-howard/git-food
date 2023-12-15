@@ -1,34 +1,21 @@
-body {
-  text-align: center;
-  padding: 50px;
-  font-family: inherit;
-  background-color: #f0f0f0;
-  color: #333;
+.error-code {
+  color: darkgray;
+  font-size: 14px;
+  font-style: italic;
+  margin-bottom: 10px;
 }
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  font-size: 80px;
-  color: #0077cc;
-}
-
-.message {
+.emote {
   font-size: 20px;
+  font-weight: bold;
+  font-stretch: expanded;
 }
 
-.home-link {
-  color: #0077cc;
-  text-decoration: none;
-  font-weight: bold;
+.home-link,
+.home-link:visited {
+  color: darkblue;
 }
 
 .home-link:hover {
-  text-decoration: underline;
+  color: blue;
 }

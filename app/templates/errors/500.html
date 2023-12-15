@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="home-wrapper">
+  <div class="welcome-container">
+    <h1>Sorry!</h1>
+    <p>Your request seemed to have caused an internal server error.</p>
+    <p>Please try again later!</p>
+    <div class="error-code">(500 Internal Server Error)</div>
+    <a class="home-link" href="/">Take me back home</a>
+  </div>
+</div>
+{% endblock %}
