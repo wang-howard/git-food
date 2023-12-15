@@ -1,6 +1,7 @@
   .versions-container {
     width: 100%;
     padding-top: 100px;
+    padding-bottom: 20px;
     max-width: 800px;
     min-height: 200px;
     margin: auto;
