@@ -23,12 +23,14 @@ def index():
 @main.route("/search", methods=["POST"])
 def search_recipes():
     search_text = request.form["query"]
+    results = None
     if search_text == None:
         results = Recipe.query.filter_by(is_head=True, private=False).all()
-    results = Recipe.query.filter(Recipe.is_head==True,
-                                  Recipe.private==False,
-                                  Recipe.title.like("%" + search_text + "%")).all()
-    return render_template("search_results.html", recipe_query=results)
+    else:
+        results = Recipe.query.filter(Recipe.is_head==True,
+                                      Recipe.private==False,
+                                      Recipe.title.like("%" + search_text + "%")).all()
+    return render_template("search_results.html", recipe_query=results, user=User)
 
 @main.route("/u/<un>", methods=["GET"])
 def user(un):

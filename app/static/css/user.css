@@ -113,7 +113,8 @@
 .recipe-label {
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  justify-content: center;
+  align-items: left;
   margin-right: 5px;
 }
 

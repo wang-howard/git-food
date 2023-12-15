@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Home
-{% endblock %}
+{% block title %}GitFood Home{% endblock %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
@@ -35,7 +33,7 @@ Home
 <script src="{{ url_for('static', filename='script/home.js') }}"></script>
 <script>
   $(document).ready(function () {
-    getRecipes(None)
+    getRecipes(null)
   });
 </script>
 {% endblock %}

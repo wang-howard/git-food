@@ -6,23 +6,16 @@ $(document).ready(function () {
 });
 
 function getRecipes(query) {
-  if (query != "") {
-    $.ajax({
-      url: "/search",
-      method: "POST",
-      data: { query: query },
-      success: function (data) {
-        $('#search-results').html(data);
-      }
-    });
-  } else {
-    $.ajax({
-      url: "/search",
-      method: "POST",
-      data: { query: None },
-      success: function (data) {
-        $('#search-results').html(data);
-      }
-    });
+  if (query == "") {
+    query = null
   }
+  $.ajax({
+    url: "/search",
+    method: "POST",
+    data: { query: query },
+    success: function (data) {
+      searchDisplay = document.getElementById("search-results")
+      searchDisplay.innerHTML = data
+    }
+  });
 }
