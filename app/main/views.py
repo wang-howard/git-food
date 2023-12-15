@@ -145,7 +145,8 @@ def submit_recipe(un):
 @main.route("/u/<un>/<recipe_id>/edit", methods=["GET"])
 @login_required
 def show_edit_recipe(un, recipe_id):
-    if current_user.username != un:
+    recipe = Recipe.query.get_or_404(recipe_id)
+    if current_user.username != un and current_user.user != recipe.collab_id:
         abort (401)
     try:
         recipe = Recipe.query.get(int(recipe_id))
@@ -167,9 +168,9 @@ def make_recipe_edit(un, recipe_id):
     if parent_recipe == None:
         abort(500)
 
-    if current_user.id == parent_recipe.collab_id:
-        abort(401)
-
+    if current_user.username != user.username or current_user.id != parent_recipe.collab_id:
+            abort(401)
+        
     try:
         new_recipe = Recipe(id=generate_recipe_id(),
                         title=request.form.get("recipe-name"),
@@ -183,7 +184,9 @@ def make_recipe_edit(un, recipe_id):
                         collab_id=parent_recipe.collab_id)
         db.session.add(new_recipe)
 
-        if parent_recipe.title == new_recipe.title 
+        if parent_recipe == new_recipe:
+            db.session.remove(new_recipe)
+            return redirect(f"/u/{un}")
 
         parent_recipe.is_head = False
         parent_recipe.child_id = new_recipe.id
