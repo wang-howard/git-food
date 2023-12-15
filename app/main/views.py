@@ -238,6 +238,7 @@ def delete_recipe(un, recipe_id):
     recipe = Recipe.query.get(recipe_id)
     if recipe == None:
         return jsonify({"status": "error", "message": "Recipe not found"})
+    
     parent_recipe = Recipe.query.filter_by(child_id=recipe_id).first()
     try:
         if parent_recipe:
