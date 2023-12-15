@@ -1,7 +1,19 @@
-{% for recipe in recipes %}
-<div class="recipe-result">
-  <div>{{ recipe.title }}</div>
-</div class="recipe-result">
+{% for recipe in recipe_query %}
+{% set owner_username = User.query.get(recipe.author_id) %}
+<div class="recipe" onclick="location.href ='/u/{{ owner_username }}/{{ recipe.id }}';">
+  <div class="recipe-label">
+    <h2>{{ recipe.title }}</h2>
+    <p>{{ recipe.description or 'No description provided.' }}</p>
+  </div>
+  <div class="recipe-icons" style="padding-right: 20px;">
+    {% if recipe.gf %}
+    <img src="../../static/img/gluten-free-icon.png" alt="gf" class="gf-icon" id="gf-icon">
+    {% endif %}
+    {% if recipe.vegan %}
+    <img src="../../static/img/vegan.png" alt="vegan" class="v-icon" id="v-icon">
+    {% endif %}
+  </div>
+</div>
 {% else %}
-<p>No recipes found.</p>
+<p class="no-recipes">No current recipes.</p>
 {% endfor %}

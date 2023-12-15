@@ -25,9 +25,10 @@ def search_recipes():
     search_text = request.form["query"]
     if search_text == None:
         results = Recipe.query.filter_by(is_head=True, private=False).all()
-    results = Recipe.query.filter(Recipe.is_head: True,
+    results = Recipe.query.filter(Recipe.is_head==True,
+                                  Recipe.private==False,
                                   Recipe.title.like("%" + search_text + "%")).all()
-    return render_template("search_results.html", recipes=results)
+    return render_template("search_results.html", recipe_query=results)
 
 @main.route("/u/<un>", methods=["GET"])
 def user(un):
