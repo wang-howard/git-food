@@ -5,6 +5,7 @@
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/new_recipe.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -50,17 +51,6 @@
         <div class="bottom-left-btns">
           <input type="submit" class="recipe-submit" value="Create Recipe" onclick="countIngredients()">
           <button type="button" id="add-collaborator-button" class="add-collaborator-button">Add Collaborator</button>
-
-          <div id="collaboratorModal" class="modal">
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <h2>Invite Collaborator</h2>
-              <div class="modal-search-container">
-                <input type="text" id="collaboratorUsername" placeholder="Enter username" />
-                <button type="button" id="searchCollaborator">Search</button>
-              </div>
-            </div>
-          </div>
         </div>
         <button type="button" class="cancel-btn" onclick="location.href ='/u/{{ current_user.username }}';">
           Cancel 
@@ -69,6 +59,19 @@
     </form>
   </div>
 </div>
+
+<div id="collaboratorModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Invite Collaborator</h2>
+    <div class="modal-search-container">
+      <input type="text" id="collaboratorUsername" placeholder="Enter username" />
+      <button type="button" id="searchCollaborator">Search</button>
+    </div>
+    <p class="disclaimer">Note: Max 1 collaborator</p>
+  </div>
+</div>
+
 <script src="{{ url_for('static', filename='script/ingredient.js') }}"></script>
 <script src="{{ url_for('static', filename='script/modal.js') }}"></script>
 <script>

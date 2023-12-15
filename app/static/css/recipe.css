@@ -122,7 +122,8 @@
 }
 
 .edit-btn,
-.prev-version-button  {
+.prev-version-button,
+.add-collaborator-button  {
     text-align: center;
     padding: 10px 20px;
     background-color: #213442;
