@@ -128,7 +128,7 @@ def submit_recipe(un):
         for i in range(int(num_ingredients)):
             new_ingredient = Ingredient(id=generate_ingredient_id(),
                                         name=request.form.get(f"ingredient-name{i}"),
-                                        quantity=int(request.form.get(f"quantity{i}")),
+                                        quantity=float(request.form.get(f"quantity{i}")),
                                         unit=request.form.get(f"unit{i}"),
                                         recipe_id = new_recipe.id)
             db.session.add(new_ingredient)
