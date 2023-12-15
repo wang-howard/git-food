@@ -56,6 +56,9 @@
     <div class="bottom-btns">
         <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
         Profile</button>
+        {% if recipe.is_head == false %}
+        <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/versions';">Back to Versions</button>
+        {% endif %}
         {% if recipe.is_head %}
         <button type="button" id="add-collaborator-button" class="add-collaborator-button">Add Collaborator</button>
         {% endif %}
