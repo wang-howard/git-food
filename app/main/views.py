@@ -245,8 +245,6 @@ def delete_recipe(un, recipe_id):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
-    
-
 
 @main.route("/u/<un>/<recipe_id>/versions", methods=["GET"])
 @login_required
