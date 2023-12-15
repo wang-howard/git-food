@@ -13,9 +13,9 @@ def index():
     """
     try:
         if current_user.is_authenticated:
-            return render_template("base.html")
+            return render_template("home.html")
         else:
-            return render_template("base.html")
+            return render_template("home.html")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
