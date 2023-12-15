@@ -164,7 +164,7 @@ def show_edit_recipe(un, recipe_id):
     try:
         if current_user.username != un or recipe is None:
             abort(404)
-        return render_template("edit_recipe.html", recipe=recipe, owner=un)
+        return render_template("edit_recipe.html", recipe=recipe, owner_un=un)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
@@ -218,7 +218,7 @@ def make_recipe_edit(un, recipe_id):
             db.session.add(new_ingredient)
         db.session.commit()
         
-        return redirect(f"/u/{user.username}")
+        return redirect(f"/u/{un}")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
@@ -341,6 +341,7 @@ def add_collaborator(un, recipe_id):
         collaber = User.query.filter_by(username=collab_username).first()
         if collab_username != "":
             recipe.collab_id = collaber.id
+            db.session.add(recipe)
         db.session.commit()
         return redirect(f"/u/{un}/{recipe_id}")
     except Exception as ex:
