@@ -20,37 +20,28 @@ def index():
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
 
+@main.route("/search", methods=["POST"])
+def search_recipes():
+    search_text = request.form["query"]
+    if search_text == None:
+        results = Recipe.query.filter_by(is_head=True, private=False).all()
+    results = Recipe.query.filter(Recipe.is_head: True,
+                                  Recipe.title.like("%" + search_text + "%")).all()
+    return render_template("search_results.html", recipes=results)
+
 @main.route("/u/<un>", methods=["GET"])
 def user(un):
     """
     Renders user profile page
     """
-    user = User.query.get(current_user.id)
-    other = User.query.filter_by(username=un).first()
-    if user == None or other == None:
-        abort(404)
+    user = User.query.get_or_404(current_user.id)
+    other = User.query.filter_by(username=un).first_or_404()
 
     try:
         if user.username == un:
             return render_template("user.html")
         else:
             return render_template("view_other_user.html", other=other)
-    except Exception as ex:
-        print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
-
-@main.route("/u/<un>/<recipe_id>", methods=["GET"])
-def view_recipe(un, recipe_id):
-    recipe = Recipe.query.get(int(recipe_id))
-    other_user = User.query.filter_by(username=un).first()
-    if recipe == None or other_user == None:
-        abort(404)
-
-    try:
-        if current_user.username == un:
-            return render_template("recipe.html", recipe=recipe)
-        else:
-            return render_template("view_public_recipe.html", recipe=recipe, other=other_user)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
@@ -68,7 +59,7 @@ def edit_user(un):
 
     new_data = request.form.get("new_data")
     type = request.form.get("item_changed")
-    user = User.query.filter_by(username=un).first()
+    user = User.query.get_or_404(current_user.id)
     if user:
         if type == "display-name":
             user.name = new_data
@@ -81,15 +72,26 @@ def edit_user(un):
     else:
         return jsonify({"status": "error", "message": "User not found."}), 400
 
+@main.route("/u/<un>/<recipe_id>", methods=["GET"])
+def view_recipe(un, recipe_id):
+    recipe = Recipe.query.get_or_404(int(recipe_id))
+    other_user = User.query.filter_by(username=un).first_or_404()
+
+    try:
+        if current_user.username == un:
+            return render_template("recipe.html", recipe=recipe)
+        else:
+            return render_template("view_public_recipe.html", recipe=recipe, other=other_user)
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)
+
 @main.route("/u/<un>/new-recipe", methods=["GET"])
 @login_required
 def recipe(un):
     """
     Renders create new recipe page
     """
-    user = User.query.filter_by(username=un).first()
-    if user is None:
-        return render_template("error.html", message="User Not Found")
     if current_user.username != un:
         abort(401)
 

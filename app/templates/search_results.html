@@ -1,0 +1,7 @@
+{% for recipe in recipes %}
+<div class="recipe-result">
+  <div>{{ recipe.title }}</div>
+</div class="recipe-result">
+{% else %}
+<p>No recipes found.</p>
+{% endfor %}
