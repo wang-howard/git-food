@@ -8,6 +8,10 @@
   border-radius: 5px;
 }
 
+.add-collaborator-button {
+
+}
+
 /* Set the width of text inputs and textareas to 100% */
 input[type="text"],
 input[type="number"],
@@ -78,6 +82,11 @@ select.select-arrow-active:after {
   margin-bottom: 8px;
 }
 
+.bottom-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Adjust the last element in the ingredient div to remove the margin-bottom */
 .ingredient>input:last-child {
   margin-bottom: 0;
@@ -103,7 +112,8 @@ select.select-arrow-active:after {
 
 /* Button styles */
 .add-ingredient-btn,
-input[type=submit] {
+input[type=submit],
+.add-collaborator-button {
   background-color: #213442;
   color: white;
   padding: 10px 15px;
@@ -134,9 +144,15 @@ input[type=submit] {
 
 .add-ingredient-btn:hover,
 input[type=submit]:hover,
-.cancel-btn:hover {
+.add-collaborator-button:hover{
   background-color: #216491;
 }
+
+.cancel-btn:hover {
+  background-color: #a72828;
+}
+
+
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {

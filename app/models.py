@@ -41,7 +41,7 @@ class Recipe(db.Model):
     is_head = db.Column(db.Boolean, default=True)
     child_id = db.Column(db.Integer, default=None)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    editors = db.Column(db.ARRAY(db.Integer()))
+    collab_id = db.Column(db.Integer, nullable=True, default=None)
 
     def __repr__(self):
         return f"<Recipe ID: {self.id}, Title: {self.title}>"

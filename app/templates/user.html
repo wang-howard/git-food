@@ -4,8 +4,9 @@
 Your Profile
 {% endblock %}
 
-{% block style %}
+{% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+<script src="{{ url_for('static', filename='script/user.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -55,6 +56,9 @@ Your Profile
       <p>{{ recipe.description or 'No description provided.' }}</p>
     </div>
     <div class="recipe-icons" style="padding-right: 20px;">
+      {% if recipe.private %}
+      <img src="../../static/img/eye-slash-icon.png" alt="private" class="priv-icon icon" id="priv-icon">
+      {% endif %}
       {% if recipe.gf %}
       <img src="../../static/img/gluten-free-icon.png" alt="gf" class="gf-icon" id="gf-icon">
       {% endif %}
@@ -69,8 +73,4 @@ Your Profile
   <p class="no-recipes">No current recipes.</p>
   {% endfor %}
 </section>
-{% endblock %}
-
-{% block script %}
-<script src="{{ url_for('static', filename='script/user.js') }}"></script>
 {% endblock %}
