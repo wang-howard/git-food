@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block title %}Bad Request{% endblock %}
+
+
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
@@ -8,8 +11,8 @@
 {% block content %}
 <div class="home-wrapper">
   <div class="welcome-container">
-    <h1>Oh no!</h1>
-    <p>Your request seems to have caused an issue.</p>
+    <h1 class="error-heading">Oh no!</h1>
+    <p>The server was unable to process your request.</p>
     <p>Please double check and try again.</p>
     <p class="emote">D:</p>
     <div class="error-code">(400 Bad Request)</div>

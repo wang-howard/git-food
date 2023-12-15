@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}Unauthorized Access{% endblock %}
+
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
@@ -8,7 +10,7 @@
 {% block content %}
 <div class="home-wrapper">
   <div class="welcome-container">
-    <h1>Oops!</h1>
+    <h1 class="error-heading">Oops!</h1>
     <p>It seems like you're not allowed to be here...</p>
     <p class="emote">:(</p>
     <div class="error-code">(401 unauthorized)</div>

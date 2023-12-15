@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
 .error-code {
   color: darkgray;
   font-size: 14px;
@@ -5,7 +7,13 @@
   margin-bottom: 10px;
 }
 
+.error-heading {
+  font-size: 48px;
+  font-weight: bold;
+}
+
 .emote {
+  font-family: "Noto Sans", sans-serif;
   font-size: 20px;
   font-weight: bold;
   font-stretch: expanded;
