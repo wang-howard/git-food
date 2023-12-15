@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
+  getRecipes(null)
+});
+
 $(document).ready(function () {
   $('#search-box').keyup(function () {
     var query = $(this).val();

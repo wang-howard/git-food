@@ -2,9 +2,10 @@
 
 {% block title %}GitFood Home{% endblock %}
 
-{% block style %}
+{% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+<script src="{{ url_for('static', filename='script/home.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -27,13 +28,4 @@
     </div>
   </div>
 </div>
-{% endblock %}
-
-{% block script %}
-<script src="{{ url_for('static', filename='script/home.js') }}"></script>
-<script>
-  $(document).ready(function () {
-    getRecipes(null)
-  });
-</script>
 {% endblock %}
