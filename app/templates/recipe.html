@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+<script src="{{ url_for('static', filename='script/restore.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -14,8 +15,9 @@
   <div class="recipe-content">
     <div class="recipe-top-own">
       <h1 class="recipe-title">{{ recipe.title }}</h1>
-      {% if not recipe.is_head %}
-      <button class="edit-btn" onclick="confirmRestoreVersion('{{ current_user.username }}', '{{ recipe.id }}')">Restore</button>
+      {% if not recipe.is_head and recipe.author_id == current_user.id %}
+      <button class="edit-btn"
+        onclick="confirmRestoreVersion('{{ current_user.username }}', '{{ recipe.id }}')">Restore</button>
       {% endif %}
       {% if recipe.is_head %}
       <div class="top-btns">
@@ -24,7 +26,7 @@
             window.location.href = '/u/{{ current_user.username }}/{{ recipe.id }}/versions';
           }
         </script>
-        {% if recipe.version != 1%}
+        {% if recipe.version != 1 and recipe.author_id == current_user.id %}
         <button class="prev-version-button" onclick="redirectToVersions()">Previous Versions</button>
         {% endif %}
         <button class="edit-btn"
@@ -57,30 +59,46 @@
       </div>
     </div>
     <div class="bottom-btns">
-        <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
+      <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
         Profile</button>
-        {% if recipe.is_head == false %}
-        <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/versions';">Back to Versions</button>
+      {% if recipe.is_head == false %}
+      <button class="back-to-profile-btn"
+        onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/versions';">Back to Versions</button>
+      {% endif %}
+      {% if recipe.is_head and recipe.author_id == current_user.id %}
+      <button type="button" class="collaborator-button" id="collaborator-button">
+        {% if recipe.collab_id != None %}
+        Edit Collaborator
+        {% else %}
+        Add Collaborator
         {% endif %}
-        {% if recipe.is_head %}
-        <button type="button" id="add-collaborator-button" class="add-collaborator-button">Add Collaborator</button>
-        {% endif %}
+      </button>
+      {% endif %}
     </div>
   </div>
-
 
   <div id="collaboratorModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2>Invite Collaborator</h2>
       <div class="modal-search-container">
-        <input type="text" id="collaboratorUsername" placeholder="Enter username (next to logout)" />
-        <button type="button" id="searchCollaborator">Search</button>
+        <form action="/u/{{ current_user.username }}/{{ recipe.id }}/add-collaborator" method="post" class="recipe-form"
+          onsubmit="return confirmCollab()">
+          <input type="text" id="collaborator-username" name="collaborator-username" default=""
+            placeholder="Enter collaborator" />
+          <input type="submit" class="recipe-submit" id="input-collaborator" value="Submit">
+        </form>
       </div>
-      <p class="disclaimer">Note: Max 1 collaborator</p>
+      <p class="disclaimer">
+        {% if recipe.collab_id %}
+        Submitting a new collaborator will replace the old one.
+        Submitting an empty username will remove the current collaborator.
+        {% else %}
+        Note: Max 1 collaborator
+        {% endif %}
+      </p>
     </div>
   </div>
 
   <script src="{{ url_for('static', filename='script/modal.js') }}"></script>
-  <script src="{{ url_for('static', filename='script/restore.js') }}"></script>
   {% endblock %}

@@ -162,7 +162,6 @@ def show_edit_recipe(un, recipe_id):
     if current_user.username != un and current_user.id != recipe.collab_id:
         abort (401)
     try:
-        recipe = Recipe.query.get(recipe_id)
         if current_user.username != un or recipe is None:
             abort(404)
         return render_template("edit_recipe.html", recipe=recipe)
@@ -256,8 +255,6 @@ def delete_recipe(un, recipe_id):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
-    
-
 
 @main.route("/u/<un>/<recipe_id>/restore", methods=["POST"])
 @login_required
@@ -268,12 +265,18 @@ def restore_version(un, recipe_id):
         restored_recipe = Recipe.query.get_or_404(int(recipe_id))
         if restored_recipe.author_id != current_user.id:
             return jsonify({"status": "error", "message": "Unauthorized"}), 403
+        
+        curr = restored_recipe
+        while not curr.is_head:
+            curr = Recipe.query.get(curr.child_id)
+        collab = curr.collab_id
 
         if not restored_recipe.is_head:
             restored_recipe.is_head = True
             delete_newer_versions(restored_recipe)
 
             restored_recipe.child_id = None
+            restored_recipe.collab_id = collab
             db.session.commit()
             return jsonify({"status": "success", "message": "Recipe version restored."})
         else:
@@ -281,7 +284,6 @@ def restore_version(un, recipe_id):
     except Exception as ex:
         print(ex, file=sys.stderr)
         return jsonify({"status": "error", "message": str(ex)}), 500
-    
 
 def delete_newer_versions(version):
     if version.child_id is None:
@@ -295,8 +297,6 @@ def delete_newer_versions(version):
             db.session.delete(ingredient)
         db.session.delete(child_version)
 
-    
-    
 @main.route("/u/<un>/<recipe_id>/versions", methods=["GET"])
 @login_required
 def view_versions(un, recipe_id):
@@ -329,3 +329,20 @@ def collect_previous_versions(recipe_id):
     # Return the list in reverse order to start from the first version
     return previous_recipes[::-1]
 
+@main.route("/u/<un>/<recipe_id>/add-collaborator", methods=["POST"])
+@login_required
+def add_collaborator(un, recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+
+    if current_user.username != un or recipe == None:
+        abort (401)
+    try:
+        collab_username = request.form.get("collaborator-username")
+        collaber = User.query.filter_by(username=collab_username).first()
+        if collab_username != "":
+            recipe.collab_id = collaber.id
+        db.session.commit()
+        return redirect(f"/u/{un}/{recipe_id}")
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        return render_template("error.html", message=ex)

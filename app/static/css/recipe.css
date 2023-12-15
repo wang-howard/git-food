@@ -123,7 +123,7 @@
 
 .edit-btn,
 .prev-version-button,
-.add-collaborator-button  {
+.collaborator-button {
     text-align: center;
     padding: 10px 20px;
     background-color: #213442;
@@ -149,6 +149,6 @@
 .back-to-profile-btn:hover,
 .edit-btn:hover,
 .prev-version-button:hover,
-.add-collaborator-button:hover {
+.collaborator-button:hover {
     background-color: #256692;
 }
