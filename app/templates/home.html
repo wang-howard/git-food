@@ -11,7 +11,13 @@
 {% block content %}
 <div class="home-wrapper">
   <div class="welcome-container">
-    <h1>Welcome to GitFood!</h1>
+    <h1>
+      {% if current_user.is_authenticated %}
+      Welcome Back, current_user.name!
+      {% else %}
+      Welcome to GitFood!
+      {% endif %}
+    </h1>
     <p>Discover and share amazing recipes with the world. Get started on your culinary adventure today!</p>
     {% if not current_user.is_authenticated %}
     <a href="/login" class="btn-primary">Log In</a>

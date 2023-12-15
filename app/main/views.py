@@ -9,7 +9,7 @@ from .common import generate_recipe_id, generate_ingredient_id
 @main.route("/", methods=["GET"])
 def index():
     """
-    Renders home/landing page
+    Renders home/landing page based on authentication status.
     """
     try:
         if current_user.is_authenticated:
@@ -22,6 +22,9 @@ def index():
 
 @main.route("/search", methods=["POST"])
 def search_recipes():
+    """
+    Called dynamically by AJAX to search recipe database with search box input.
+    """
     search_text = request.form["query"]
     results = None
     if search_text == None:
@@ -35,7 +38,7 @@ def search_recipes():
 @main.route("/u/<un>", methods=["GET"])
 def user(un):
     """
-    Renders user profile page
+    Renders a user profile page based on permissions.
     """
     other = User.query.filter_by(username=un).first_or_404()
 
@@ -76,6 +79,9 @@ def edit_user(un):
 
 @main.route("/u/<un>/<recipe_id>", methods=["GET"])
 def view_recipe(un, recipe_id):
+    """
+    Displays a recipe page based on permissions.
+    """
     recipe = Recipe.query.get_or_404(int(recipe_id))
     url_user = User.query.filter_by(username=un).first_or_404()
 
@@ -95,7 +101,7 @@ def view_recipe(un, recipe_id):
 @login_required
 def recipe(un):
     """
-    Renders create new recipe page
+    Renders form page to create a new recipe.
     """
     if current_user.username != un:
         abort(401)
@@ -109,6 +115,10 @@ def recipe(un):
 @main.route("/u/<un>/submit-recipe", methods=["POST"])
 @login_required
 def submit_recipe(un):
+    """
+    Retrieves form information, processes data, and add to database before
+    returning user to profile.
+    """
     user = User.query.filter_by(username=un).first()
     if user is None:
         return render_template("error.html", message="User Not Found")
