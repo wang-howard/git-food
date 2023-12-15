@@ -15,6 +15,8 @@
     margin-bottom: 20px;
 }
 
+
+
 .recipe-top-own {
     display: flex;
     justify-content: space-between;
@@ -119,8 +121,8 @@
     transition: background-color 0.3s;
 }
 
-.edit-btn {
-    width: 90px;
+.edit-btn,
+.prev-version-button  {
     text-align: center;
     padding: 10px 20px;
     background-color: #213442;
@@ -135,7 +137,16 @@
     transition: background-color 0.3s;
 }
 
+.prev-version-button span {
+    width: 120px;
+}
+
+.edit-btn span {
+    width: 90px;
+}
+
 .back-to-profile-btn:hover,
-.edit-btn:hover {
+.edit-btn:hover,
+.prev-version-button:hover {
     background-color: #256692;
 }

@@ -14,8 +14,18 @@
     <div class="recipe-content">
         <div class="recipe-top-own">
             <h1 class="recipe-title">{{ recipe.title }}</h1>
-            <button class="edit-btn"
-                onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
+            <div class="top-btns">
+                <script>
+                    function redirectToVersions() {
+                      window.location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/versions';
+                    }
+                </script>
+                {% if recipe.version == 1%}
+                {% else %}
+                <button class="prev-version-button" onclick="redirectToVersions()">Previous Versions</button>
+                {% endif %}
+                <button class="edit-btn" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
+            </div>
         </div>
         <h2 class="section-label">Description</h2>
         <p class="recipe-description">{{ recipe.description }}</p>
@@ -44,4 +54,5 @@
         <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
             Profile</button>
     </div>
+</div>
     {% endblock %}
