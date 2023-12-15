@@ -1,3 +1,8 @@
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
   .versions-container {
     width: 100%;
     padding-top: 100px;
@@ -13,6 +18,7 @@
   .version-top {
     display: flex;
     justify-content: space-between;
+    align-items: top;
   }
   
   .return-to-recipe {
@@ -87,11 +93,28 @@
     padding: 10px 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    font-weight: bold;
+  }
+
+  .back-btn {
+    text-decoration: none;
+    background-color: #213442;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 100px;
+    margin-top: 20px;
+    margin-left: 80px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    cursor: pointer;
   }
   
   .btn-view:hover,
-  .return-to-recipe:hover {
-    background-color: #0056b3;
+  .return-to-recipe:hover,
+  .back-btn:hover {
+    background-color: #256692;
   }
   
   /* Add padding at the bottom for the last item */

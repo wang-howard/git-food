@@ -21,7 +21,9 @@
             window.location.href = '/u/{{ current_user.username }}/{{ recipe.id }}/versions';
           }
         </script>
+        {% if recipe.version != 1%}
         <button class="prev-version-button" onclick="redirectToVersions()">Previous Versions</button>
+        {% endif %}
         <button class="edit-btn"
           onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
       </div>
@@ -54,7 +56,9 @@
     <div class="bottom-btns">
         <button class="back-to-profile-btn" onclick="location.href ='/u/{{ current_user.username }}';">Back to
         Profile</button>
+        {% if recipe.is_head %}
         <button type="button" id="add-collaborator-button" class="add-collaborator-button">Add Collaborator</button>
+        {% endif %}
     </div>
   </div>
 
