@@ -29,7 +29,7 @@ def search_recipes():
     else:
         results = Recipe.query.filter(Recipe.is_head==True,
                                       Recipe.private==False,
-                                      Recipe.title.like("%" + search_text + "%")).all()
+                                      Recipe.title.ilike(f"%{search_text}%")).all()
     return render_template("search_results.html", recipe_query=results, user=User)
 
 @main.route("/u/<un>", methods=["GET"])
@@ -179,7 +179,8 @@ def make_recipe_edit(un, recipe_id):
                         private=bool(request.form.get("is-private")) if request.form.get("is-private") else False,
                         instructions=request.form.get("instructions"),
                         version=parent_recipe.version+1,
-                        author_id = user.id)
+                        author_id = user.id,
+                        editors=[])
         db.session.add(new_recipe)
 
         parent_recipe.is_head = False
