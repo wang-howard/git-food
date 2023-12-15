@@ -16,4 +16,18 @@ Home
   <a href="/login" class="btn-primary">Log In</a>
   {% endif %}
 </div>
+
+<div class="recipe-container" id="public-recipes">
+  <h2>Public Recipes</h2>
+  <div class="search-container">
+    <input type="text" id="search-box" placeholder="Search recipes...">
+  </div>
+  <div id="search-results" class="scrollable-box">
+
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='script/home.js') }}"></script>
 {% endblock %}
