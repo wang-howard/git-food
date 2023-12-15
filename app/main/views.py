@@ -164,7 +164,7 @@ def show_edit_recipe(un, recipe_id):
     try:
         if current_user.username != un or recipe is None:
             abort(404)
-        return render_template("edit_recipe.html", recipe=recipe)
+        return render_template("edit_recipe.html", recipe=recipe, owner=un)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
@@ -176,7 +176,7 @@ def make_recipe_edit(un, recipe_id):
     Processes form submission and creates new version of recipe in database.
     """
     user = User.query.filter_by(username=un).first()
-    if user is None:
+    if user == None:
         return render_template("error.html", message="User Not Found")
 
     parent_recipe = Recipe.query.get(recipe_id)

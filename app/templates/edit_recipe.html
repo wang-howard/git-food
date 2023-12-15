@@ -15,7 +15,7 @@
       <h1 class="my-recipe">Edit the Recipe</h1>
     </div>
 
-    <form action="/u/{{ current_user.username }}/{{ recipe.id }}/save-recipe-edit" method="post" class="recipe-form">
+    <form action="/u/{{ owner.username }}/{{ recipe.id }}/save-recipe-edit" method="post" class="recipe-form">
       <div class="form-group">
         <label for="title">Recipe Name:</label>
         <input type="text" id="recipe-name" name="recipe-name" class="form-control" value="{{ recipe.title }}" required>
@@ -105,8 +105,7 @@
           required>{{ recipe.instructions }}</textarea>
       </div>
       <input type="submit" class="recipe-save" value="Save" onclick="countIngredients()">
-      <button type="button" class="cancel-btn"
-        onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}';">
+      <button type="button" class="cancel-btn" onclick="location.href ='/u/{{ owner.username }}/{{ recipe.id }}';">
         Cancel
       </button>
     </form>
