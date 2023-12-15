@@ -67,35 +67,6 @@
   margin-left: 8px;
 }
 
-.gf-icon {
-  width: 50px;
-}
-
-.v-icon {
-  width: 55px;
-  margin-bottom: 7px;
-}
-
-.priv-icon {
-  width: 50px;
-}
-
-.icon {
-  object-fit: contain;
-  width: 50px;
-  height: auto;
-  margin-left: 8px;
-}
-
-
-.remove-icon {
-  object-fit: contain;
-  margin: auto;
-  cursor: pointer;
-  width: auto;
-  height: 1rem;
-}
-
 .content {
   flex-grow: 1;
   background-color: #fff;
@@ -113,47 +84,6 @@
   width: 100%;
   max-width: 900px;
   margin: auto;
-}
-
-.my-recipe {
-  margin-bottom: 1%;
-  text-align: center;
-  font-weight: bold;
-  font-size: 30px;
-}
-
-.recipe-label {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-  margin-right: 5px;
-}
-
-.recipe-icons {
-  display: flex;
-  gap: 8px;
-
-}
-
-.recipe-btn {
-  width: 100px;
-  margin-bottom: 1rem;
-  text-align: center;
-  padding: 10px 20px;
-  background-color: #213442;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s;
-}
-
-.recipe-btn:hover {
-  background-color: #256692;
 }
 
 .recipes-list {
@@ -189,7 +119,6 @@
   cursor: pointer;
 }
 
-
 .recipe h2 {
   margin-top: 0;
   color: #213442;
@@ -211,36 +140,85 @@
   height: 100%;
 }
 
-.profile-container {
-  display: flex;
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 1rem;
-  box-sizing: border-box;
-  padding-top: 7%;
-}
-
-#login-button {
-  display: inline-block;
-  padding: 0
-}
-
-.delete-recipe-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
+.my-recipe {
+  margin-bottom: 1%;
   text-align: center;
   font-weight: bold;
+  font-size: 30px;
+}
+
+.recipe-label-wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+}
+
+.recipe-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  margin-right: 5px;
+}
+
+.recipe-btn {
+  width: 100px;
+  margin-bottom: 1rem;
+  text-align: center;
+  padding: 10px 20px;
+  background-color: #213442;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s;
+}
+
+.recipe-btn:hover {
+  background-color: #256692;
+}
+
+.recipe-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.icon {
+  object-fit: contain;
+  height: auto;
+  width: 35px;
+}
+
+.gf-icon {
+  width: 35px;
+}
+
+.v-icon {
+  width: 35px;
+}
+
+.priv-icon {
+  margin-left: 5px;
+}
+
+.remove-icon {
+  object-fit: contain;
+  cursor: pointer;
+  width: auto;
+  height: 1.4rem;
+  margin-left: 8px;
+}
+
+.remove-icon:hover,
+.remove-icon:focus {
+  color: #0275d8;
+  background-color: #f8f9fa;
 }
 
 #recipe-btn {
@@ -250,9 +228,4 @@
 .cancel-btn {
   background-color: #f44336;
   color: white;
-}
-
-.delete-recipe-btn:hover {
-  background-color: #c40000;
-  /* Darker shade of red for hover effect */
 }

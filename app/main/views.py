@@ -167,7 +167,7 @@ def make_recipe_edit(un, recipe_id):
     if parent_recipe == None:
         abort(500)
 
-    if current_user.id not in parent_recipe.editors:
+    if current_user.id == parent_recipe.collab_id:
         abort(401)
 
     try:
@@ -180,7 +180,7 @@ def make_recipe_edit(un, recipe_id):
                         instructions=request.form.get("instructions"),
                         version=parent_recipe.version+1,
                         author_id = user.id,
-                        editors=[])
+                        collab_id=parent_recipe.collab_id)
         db.session.add(new_recipe)
 
         parent_recipe.is_head = False
