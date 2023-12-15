@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Page Forbidden{% endblock %}
-
+{% block title %}GitFood Error{% endblock %}
 
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
@@ -11,16 +10,10 @@
 {% block content %}
 <div class="home-wrapper">
   <div class="welcome-container">
-    <h1 class="error-heading">Hey!</h1>
-    <p>You are trying to access a forbidden page.</p>
-    <p class="emote">>:(</p>
-    <div class="error-code">
-      {% if is_405 %}
-      (405 Method Not Allowed)
-      {% else %}
-      (403 Forbidden)
-      {% endif %}
-    </div>
+    <h1 class="error-heading">Something went wrong!</h1>
+    <p>We've ecountered an error on our end.</p>
+    <p>Please try again later!</p>
+    <div class="error-code">{{ message }}</div>
     <a class="home-link" href="/">Take me back home</a>
   </div>
 </div>

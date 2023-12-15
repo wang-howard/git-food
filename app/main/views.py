@@ -82,7 +82,7 @@ def view_recipe(un, recipe_id):
     """
     Displays a recipe page based on permissions.
     """
-    recipe = Recipe.query.get_or_404(int(recipe_id))
+    recipe = Recipe.query.get_or_404(recipe_id)
     url_user = User.query.filter_by(username=un).first_or_404()
 
     try:
@@ -159,7 +159,7 @@ def show_edit_recipe(un, recipe_id):
     if current_user.username != un and current_user.id != recipe.collab_id:
         abort (401)
     try:
-        recipe = Recipe.query.get(int(recipe_id))
+        recipe = Recipe.query.get(recipe_id)
         if current_user.username != un or recipe is None:
             abort(404)
         return render_template("edit_recipe.html", recipe=recipe)
@@ -174,7 +174,7 @@ def make_recipe_edit(un, recipe_id):
     if user is None:
         return render_template("error.html", message="User Not Found")
 
-    parent_recipe = Recipe.query.get(int(recipe_id))
+    parent_recipe = Recipe.query.get(recipe_id)
     if parent_recipe == None:
         abort(500)
 
@@ -182,8 +182,6 @@ def make_recipe_edit(un, recipe_id):
             abort(401)
         
     try:
-        
-
         new_recipe = Recipe(id=generate_recipe_id(),
                         title=request.form.get("recipe-name"),
                         description=request.form.get("description"),
@@ -230,13 +228,13 @@ def delete_recipe(un, recipe_id):
     if current_user.username != un:
         return jsonify({"status": "error", "message": "Unauthorized"}), 403
     try:
-        recipe = Recipe.query.get(int(recipe_id))
+        recipe = Recipe.query.get(recipe_id)
         parent_recipe = Recipe.query.filter_by(child_id=recipe_id).first()
         if parent_recipe != None:
             delete_recipe(un, parent_recipe.id)
         
         if recipe and recipe.author_id == current_user.id:
-            assoc_igs = Ingredient.query.filter_by(recipe_id=int(recipe_id)).all()
+            assoc_igs = Ingredient.query.filter_by(recipe_id=recipe_id).all()
             for ig in assoc_igs:
                 db.session.delete(ig)
             db.session.delete(recipe)
@@ -258,7 +256,7 @@ def view_versions(un, recipe_id):
         return abort(401)
 
     try:
-        current_recipe = Recipe.query.get_or_404(int(recipe_id))
+        current_recipe = Recipe.query.get_or_404(recipe_id)
         if current_recipe.author_id != current_user.id:
             return abort(401)
 
