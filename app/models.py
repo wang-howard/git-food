@@ -47,6 +47,11 @@ class Recipe(db.Model):
         return f"<Recipe ID: {self.id}, Title: {self.title}>"
 
     def __eq__(self, other):
+        if type(other) == type(None) and type(self)==type(None):
+            return True
+        if type(self) != type(other):
+            return False
+
         self_ingredients = Ingredient.query.filter_by(recipe_id=self.id).all()
         other_ingredients = Ingredient.query.filter_by(recipe_id=other.id).all()
 

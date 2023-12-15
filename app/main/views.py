@@ -155,6 +155,9 @@ def submit_recipe(un):
 @main.route("/u/<un>/<recipe_id>/edit", methods=["GET"])
 @login_required
 def show_edit_recipe(un, recipe_id):
+    """
+    Displays the edit page for a pre-existing recipe.
+    """
     recipe = Recipe.query.get_or_404(recipe_id)
     if current_user.username != un and current_user.id != recipe.collab_id:
         abort (401)
@@ -170,6 +173,9 @@ def show_edit_recipe(un, recipe_id):
 @main.route("/u/<un>/<recipe_id>/save-recipe-edit", methods=["POST"])
 @login_required
 def make_recipe_edit(un, recipe_id):
+    """
+    Processes form submission and creates new version of recipe in database.
+    """
     user = User.query.filter_by(username=un).first()
     if user is None:
         return render_template("error.html", message="User Not Found")
@@ -178,9 +184,9 @@ def make_recipe_edit(un, recipe_id):
     if parent_recipe == None:
         abort(500)
 
-    if current_user.username != user.username or current_user.id != parent_recipe.collab_id:
-            abort(401)
-        
+    if current_user.username != user.username and current_user.id != parent_recipe.collab_id:
+        abort(401)
+
     try:
         new_recipe = Recipe(id=generate_recipe_id(),
                         title=request.form.get("recipe-name"),
@@ -222,17 +228,18 @@ def make_recipe_edit(un, recipe_id):
 @login_required
 def delete_recipe(un, recipe_id):
     """
-    function called by deleteRecipe() JS function to delete a recipe from a
+    Function is called by the deleteRecipe() JS function to delete a recipe from a
     user's profile page without needing to refresh.
     """
     if current_user.username != un:
         return jsonify({"status": "error", "message": "Unauthorized"}), 403
+    
+    recipe = Recipe.query.get_or_404(recipe_id)
+    parent_recipe = Recipe.query.filter_by(child_id=recipe_id).first_or_404()
     try:
-        recipe = Recipe.query.get(recipe_id)
-        parent_recipe = Recipe.query.filter_by(child_id=recipe_id).first()
         if parent_recipe != None:
             delete_recipe(un, parent_recipe.id)
-        
+
         if recipe and recipe.author_id == current_user.id:
             assoc_igs = Ingredient.query.filter_by(recipe_id=recipe_id).all()
             for ig in assoc_igs:
@@ -277,3 +284,4 @@ def collect_previous_versions(recipe_id):
     
     # Return the list in reverse order to start from the first version
     return previous_recipes[::-1]
+
