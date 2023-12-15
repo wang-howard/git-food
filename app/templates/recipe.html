@@ -16,14 +16,17 @@
       <div class="top-btns">
         <script>
           function redirectToVersions() {
-            window.location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/versions';
+            window.location.href = '/u/{{ current_user.username }}/{{ recipe.id }}/versions';
           }
         </script>
         {% if recipe.version == 1%}
         {% else %}
         <button class="prev-version-button" onclick="redirectToVersions()">Previous Versions</button>
         {% endif %}
-        <button class="edit-btn" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
+        {% if recipe.is_head %}
+        <button class="edit-btn"
+          onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
+        {% endif %}
       </div>
     </div>
     <h2 class="section-label">Description</h2>
