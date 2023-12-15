@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html'
+%}
+{% block title %}GitFood Error{% endblock %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Error</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
-</head>
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+{% endblock %}
 
-<body>
-  <div class="container">
-    <h1>Error</h1>
-    <p class="message">Something went wrong. We're working on it!</p>
-    <p class="message">Error: {{ message }}</p>
-    <p><a href="/" class="home-link">Go back to the homepage</a></p>
-  </div>
-  <script src="{{ url_for('static', filename='script/error.js') }}"></script>
-</body>
-
-</html>
+{% block content %}
+<div class="container">
+  <h1>Error</h1>
+  <p class="message">Something went wrong. We're working on it!</p>
+  <p class="message">Error: {{ message }}</p>
+  <p><a href="/" class="home-link">Go back to the homepage</a></p>
+</div>
+{% endblock %}

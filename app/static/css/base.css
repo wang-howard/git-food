@@ -87,7 +87,7 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
+  font: "Rubik", "Helvetica Neue", Helvetica, Arial, sans-serif;
   vertical-align: baseline;
 }
 
@@ -111,10 +111,6 @@ a:visited,
 a:hover,
 a:active {
   text-decoration: none;
-}
-
-#logo {
-  color: #1c4764;
 }
 
 ol,
@@ -153,6 +149,10 @@ nav {
 .navbar-brand {
   font-family: "Righteous", sans-serif;
   font-size: 40px;
+}
+
+#logo {
+  color: #1c4764;
 }
 
 .nav-item {

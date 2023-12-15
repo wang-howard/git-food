@@ -77,13 +77,16 @@ def edit_user(un):
 @main.route("/u/<un>/<recipe_id>", methods=["GET"])
 def view_recipe(un, recipe_id):
     recipe = Recipe.query.get_or_404(int(recipe_id))
-    other_user = User.query.filter_by(username=un).first_or_404()
+    url_user = User.query.filter_by(username=un).first_or_404()
 
     try:
-        if current_user.is_authenticated and current_user.username == un:
-            return render_template("recipe.html", recipe=recipe)
+        if recipe.author_id == url_user.id:
+            if current_user.is_authenticated and current_user.username == url_user.username:
+                return render_template("recipe.html", recipe=recipe)
+            else:
+                return render_template("view_public_recipe.html", recipe=recipe, other=url_user)
         else:
-            return render_template("view_public_recipe.html", recipe=recipe, other=other_user)
+            abort(404)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
@@ -159,12 +162,13 @@ def make_recipe_edit(un, recipe_id):
     user = User.query.filter_by(username=un).first()
     if user is None:
         return render_template("error.html", message="User Not Found")
-    if current_user.username != un:
-        abort(401)
 
     parent_recipe = Recipe.query.get(int(recipe_id))
     if parent_recipe == None:
         abort(500)
+
+    if current_user.id not in parent_recipe.editors:
+        abort(401)
 
     try:
         new_recipe = Recipe(id=generate_recipe_id(),

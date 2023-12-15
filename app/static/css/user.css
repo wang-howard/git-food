@@ -45,6 +45,11 @@
   font-weight: bold;
 }
 
+.sub-user-text {
+  font-size: 16px;
+  color: grey;
+}
+
 .user-info {
   justify-content: center;
   display: flex;
@@ -63,18 +68,25 @@
 }
 
 .gf-icon {
+  width: 50px;
+}
+
+.v-icon {
+  width: 55px;
+  margin-bottom: 7px;
+}
+
+.priv-icon {
+  width: 50px;
+}
+
+.icon {
   object-fit: contain;
   width: 50px;
   height: auto;
   margin-left: 8px;
 }
 
-.v-icon {
-  object-fit: contain;
-  width: 55px;
-  height: auto;
-  margin-bottom: 7px;
-}
 
 .remove-icon {
   object-fit: contain;
