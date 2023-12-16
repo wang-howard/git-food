@@ -25,8 +25,7 @@ function editUsername(un) {
 function editAboutMe(un) {
   var aboutElem = document.getElementById('about-me-text');
   var currentAbout = aboutElem.textContent.trim();
-  var inputElem = '<input type="text" id="about-input" style="height:auto; width:100%; text-align:left;" value="' + currentAbout + '">';
-
+  var inputElem = `<textarea id="about-input" name="about-input" style="height:auto; width:100%; text-align:left; rows="10">${currentAbout}</textarea>`
   aboutElem.innerHTML = inputElem;
 
   // Focus on new input and select the text
