@@ -86,7 +86,7 @@ def view_recipe(un, recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
     url_user = User.query.filter_by(username=un).first_or_404()
 
-    if not recipe.is_head and recipe.author_id != url_user.id:
+    if not recipe.is_head and recipe.author_id != current_user.id:
         abort(403)
 
     try:
