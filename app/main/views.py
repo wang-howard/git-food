@@ -26,7 +26,8 @@ def search_recipes():
     Called dynamically by AJAX to search recipe database with search box input.
     """
     try:
-        search_text = request.form["query"]
+        data = request.get_json()
+        search_text = data.get("query") if data else None
         results = None
         if search_text == None:
             results = Recipe.query.filter_by(is_head=True, private=False).all()
@@ -35,7 +36,8 @@ def search_recipes():
                                         Recipe.private==False,
                                         Recipe.title.ilike(f"%{search_text}%")).all()
         recipes_html = render_template("search_results.html", recipe_query=results, user=User)
-        print(recipes_html)
+        print(search_text)
+        print(results)
         return jsonify({"status": "success", "data": recipes_html})
     except Exception as ex:
         return jsonify({"status": "error", "data": str(ex)})
