@@ -1,9 +1,9 @@
 # COS316 Final Project: GitFood #
 
 ## Group Members ##
-* Tuan Dinh '25 (td6955)
-* Nguyen Nguyen '25 (nn7955)
-* Howard Wang '24 (hw14)
+- Tuan Dinh '25 (td6955)
+- Nguyen Nguyen '25 (nn7955)
+- Howard Wang '24 (hw14)
 
 ## Running the App ##
 1. Unzip the package containing the app directory
@@ -26,4 +26,19 @@ export CALLBACK_URI=http://127.0.0.1:5553/callback
 
 ## Hosting Online ##
 Both the app and the database are hosted online using **Render**. The database is still accessible from a local instance of the app. The website, which can be found [here](https://www.gitfood.onrender.com/), is not fully functional due to our authentication implementation. In order to make authentication possible on `localhost`, the Google OAuth2 credentials must include a redirect URI to `http://127.0.0.1:5333/callback`, but this causes issues for when the app is hosted online because of redirect URI mismatches.
+
+## Tech Stack ##
+- Python
+- Jinja2
+- Flask (Flask-SqlAlchemy, Flask-Login, Flask-Migrate)
+- Google OAuth2
+- PostgreSQL
+- HTML, CSS
+- Javascript, jQuery/AJAX
+
+
+
+
+
+
 
