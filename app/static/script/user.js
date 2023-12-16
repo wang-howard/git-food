@@ -28,18 +28,15 @@ function editAboutMe(un) {
   var inputElem = `<textarea id="about-input" name="about-input" style="height:auto; width:100%; text-align:left; rows="10">${currentAbout}</textarea>`
   aboutElem.innerHTML = inputElem;
 
-  // Focus on new input and select the text
   var inputField = document.getElementById('about-input');
   inputField.focus();
   inputField.select();
 
-  // Handle when the user presses enter key to save the new name
   inputField.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       var newAbout = inputField.value;
       updateUser(un, newAbout, 'about-me');
 
-      // Set the username to the new value and remove the input box
       aboutElem.innerHTML = newAbout;
     }
   });

@@ -15,8 +15,6 @@
     margin-bottom: 20px;
 }
 
-
-
 .recipe-top-own {
     display: flex;
     justify-content: space-between;
@@ -58,8 +56,6 @@
 .version-lable span {
     font-size: 14px;
 }
-
-
 
 .ingredients-list {
     list-style: disc;

@@ -18,7 +18,7 @@ def index():
             return render_template("home.html")
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
+        return render_template("errors/error.html", message=ex)
 
 @main.route("/search", methods=["POST"])
 def search_recipes():
@@ -58,7 +58,7 @@ def user(un):
             return render_template("view_other_user.html", other=other)
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
+        return render_template("errors/error.html", message=ex)
 
 @main.route("/u/<un>/edit-user", methods=["POST"])
 @login_required
@@ -107,7 +107,7 @@ def view_recipe(un, recipe_id):
             abort(404)
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
+        return render_template("errors/error.html", message=ex)
 
 @main.route("/u/<un>/new-recipe", methods=["GET"])
 @login_required
@@ -122,7 +122,7 @@ def recipe(un):
         return render_template("new_recipe.html")
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
+        return render_template("errors/error.html", message=ex)
 
 @main.route("/u/<un>/submit-recipe", methods=["POST"])
 @login_required
@@ -133,7 +133,7 @@ def submit_recipe(un):
     """
     user = User.query.filter_by(username=un).first()
     if user is None:
-        return render_template("error.html", message="User Not Found")
+        return render_template("errors/error.html", message="User Not Found")
     if current_user.username != un:
         abort(401)
     
@@ -162,7 +162,7 @@ def submit_recipe(un):
         return redirect(f"/u/{user.username}")
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
+        return render_template("errors/error.html", message=ex)
     
 @main.route("/u/<un>/<recipe_id>/edit", methods=["GET"])
 @login_required
@@ -177,7 +177,7 @@ def show_edit_recipe(un, recipe_id):
         return render_template("edit_recipe.html", recipe=recipe, owner_un=un)
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
+        return render_template("errors/error.html", message=ex)
 
 @main.route("/u/<un>/<recipe_id>/save-recipe-edit", methods=["POST"])
 @login_required
@@ -187,7 +187,7 @@ def make_recipe_edit(un, recipe_id):
     """
     user = User.query.filter_by(username=un).first()
     if user == None:
-        return render_template("error.html", message="User Not Found")
+        return render_template("errors/error.html", message="User Not Found")
     
     if current_user.username == un:
         return_user = current_user
@@ -243,7 +243,7 @@ def make_recipe_edit(un, recipe_id):
         return redirect(f"/u/{return_user.username}")
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
+        return render_template("errors/error.html", message=ex)
 
 
 @main.route("/u/<un>/<recipe_id>/delete-recipe", methods=["POST"])
@@ -276,7 +276,7 @@ def delete_recipe(un, recipe_id):
             return jsonify({"status": "error", "message": "Recipe not found"}), 404
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
+        return render_template("errors/error.html", message=ex)
 
 @main.route("/u/<un>/<recipe_id>/restore", methods=["POST"])
 @login_required
@@ -349,7 +349,7 @@ def view_versions(un, recipe_id):
         return render_template("previous_versions.html", recipe=current_recipe, recipe_versions=previous_versions)
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=str(ex))
+        return render_template("errors/error.html", message=str(ex))
 
 def collect_previous_versions(recipe_id):
     """
@@ -384,4 +384,4 @@ def add_collaborator(un, recipe_id):
         return redirect(f"/u/{un}/{recipe_id}")
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
+        return render_template("errors/error.html", message=ex)

@@ -86,7 +86,7 @@ def callback():
         return redirect(f"/u/{user.username}")
     except Exception as ex:
         print(ex, file=sys.stderr)
-        return render_template("error.html", message=ex)
+        return render_template("errors/error.html", message=ex)
 
 @auth.route("/logout")
 @login_required

@@ -1,4 +1,3 @@
-/* Ensure that all form elements include padding and border in their width */
 .form-control {
   box-sizing: border-box;
   padding: 10px;
@@ -8,21 +7,16 @@
   border-radius: 5px;
 }
 
-/* Set the width of text inputs and textareas to 100% */
 input[type="text"],
 input[type="number"],
 textarea {
   width: 100%;
-  /* This will match the width of the title box */
 }
 
-/* Override the width for checkboxes to keep them at their default size */
 input[type="checkbox"] {
   width: auto;
-  /* Default width for checkboxes */
 }
 
-/* Align the labels for the checkboxes to the left */
 .checkbox-group {
   display: flex;
   justify-content: space-evenly;
@@ -34,15 +28,11 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-/* Align the checkboxes next to their labels */
 .checkbox-label {
   display: inline-block;
-  /* Allows the label to sit next to the checkbox */
   margin-right: 5px;
-  /* Spacing between the label and the checkbox */
 }
 
-/* Remove flex settings from ingredient container */
 .ingredient {
   display: flex;
   justify-content: space-around;
@@ -72,7 +62,6 @@ select.select-arrow-active:after {
   justify-content: center;
 }
 
-/* Style adjustments for ingredients section */
 .ingredient>label,
 .ingredient>input {
   margin-bottom: 8px;
@@ -83,7 +72,6 @@ select.select-arrow-active:after {
   justify-content: space-between;
 }
 
-/* Adjust the last element in the ingredient div to remove the margin-bottom */
 .ingredient>input:last-child {
   margin-bottom: 0;
 }
@@ -98,7 +86,6 @@ select.select-arrow-active:after {
 
 .form-wrapper {
   padding: 2rem;
-  /* This gives padding inside the form on all sides */
 }
 
 #instruction-container {
@@ -148,12 +135,7 @@ input[type=submit]:hover,
   background-color: #a72828;
 }
 
-
-
-/* Media query for smaller screens */
 @media (max-width: 768px) {
-
-  /* Undo any block display for ingredient inputs on smaller screens */
   .ingredient>label,
   .ingredient>input {
     display: inline-block;
@@ -161,6 +143,5 @@ input[type=submit]:hover,
 
   .form-control {
     width: auto;
-    /* Allow inputs to adjust to smaller screen sizes */
   }
 }
