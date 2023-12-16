@@ -1,5 +1,5 @@
 import sys
-from flask import render_template, abort, redirect, session, request, jsonify
+from flask import render_template, abort, redirect, request, jsonify
 from flask_login import login_required, current_user
 from . import main
 from .. import db
@@ -36,8 +36,6 @@ def search_recipes():
                                         Recipe.private==False,
                                         Recipe.title.ilike(f"%{search_text}%")).all()
         recipes_html = render_template("search_results.html", recipe_query=results, user=User)
-        print(search_text)
-        print(results)
         return jsonify({"status": "success", "data": recipes_html})
     except Exception as ex:
         return jsonify({"status": "error", "data": str(ex)})
@@ -51,7 +49,7 @@ def user(un):
 
     try:
         if current_user.is_authenticated and current_user.username == un:
-            shared_recipes = Recipe.query.filter_by(collab_id=current_user.id).all()
+            shared_recipes = Recipe.query.filter_by(collab_id=current_user.id).order_by(Recipe.created_at.desc()).all()
             return render_template("user.html", shared=shared_recipes, user=User)
         else:
             return render_template("view_other_user.html", other=other)
