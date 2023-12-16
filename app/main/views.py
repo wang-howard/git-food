@@ -229,7 +229,7 @@ def make_recipe_edit(un, recipe_id):
             db.session.add(new_ingredient)
         db.session.commit()
         
-        return redirect(f"/u/{current_user.username}")
+        return redirect(f"/u/{un}")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
