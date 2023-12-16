@@ -6,6 +6,8 @@
 - Howard Wang '24 (hw14)
 
 ## Running the App ##
+***please contact Howard if you would like access to this repo***
+
 1. Unzip the package containing the app directory
 2. Open your terminal and `cd` into the app directory (`/git-food`) and make sure you have `pip` installed
 3. Activate the virtual env by executing this line in the terminal: `source venv/bin/activate`
