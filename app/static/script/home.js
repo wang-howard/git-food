@@ -1,25 +1,26 @@
-document.addEventListener('DOMContentLoaded', () => {
-  getRecipes(null)
-});
+document.addEventListener('DOMContentLoaded', getRecipes(null));
 
-$(document).ready(function () {
-  $('#search-box').keyup(function () {
-    var query = $(this).val();
-    getRecipes(query)
-  });
-});
+const searchBox = document.getElementById("search-box")
+searchBox.addEventListener("keyup", getRecipes(searchBox.val()))
 
 function getRecipes(query) {
   if (query == "") {
     query = null
   }
-  $.ajax({
-    url: "/search",
-    method: "POST",
-    data: { query: query },
-    success: function (data) {
-      searchDisplay = document.getElementById("search-results")
-      searchDisplay.innerHTML = data
-    }
-  });
+  fetch("search", {
+    method: 'POST',
+    body: JSON.stringify({ "query": query }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        const searchDisplay = document.getElementById("search-results")
+        searchDisplay.innerHTML = data
+      } else {
+        alert(data.message);  // Show error message from server
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
