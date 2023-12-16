@@ -189,6 +189,9 @@ def make_recipe_edit(un, recipe_id):
         abort(401)
 
     try:
+        """
+        Create and add recipe object to db
+        """
         new_recipe = Recipe(id=generate_recipe_id(),
                         title=request.form.get("recipe-name"),
                         description=request.form.get("description"),
@@ -201,6 +204,9 @@ def make_recipe_edit(un, recipe_id):
                         collab_id=parent_recipe.collab_id)
         db.session.add(new_recipe)
 
+        """
+        Create and add recipe object to db
+        """
         if parent_recipe == new_recipe:
             db.session.remove(new_recipe)
             return redirect(f"/u/{un}")
@@ -261,6 +267,10 @@ def delete_recipe(un, recipe_id):
 @main.route("/u/<un>/<recipe_id>/restore", methods=["POST"])
 @login_required
 def restore_version(un, recipe_id):
+    """
+    Function called with JS AJAX to restore an older version as head and delete
+    later versions of the recipe.
+    """
     if current_user.username != un:
         return jsonify({"status": "error", "message": "Unauthorized"}), 403
     try:
@@ -288,6 +298,9 @@ def restore_version(un, recipe_id):
         return jsonify({"status": "error", "message": str(ex)}), 500
 
 def delete_newer_versions(version):
+    """
+    Recursively iterates through versions and deletes until version argument is reached
+    """
     if version.child_id is None:
         return
 
@@ -302,6 +315,9 @@ def delete_newer_versions(version):
 @main.route("/u/<un>/<recipe_id>/versions", methods=["GET"])
 @login_required
 def view_versions(un, recipe_id):
+    """
+    Show previous versions of a recipe if they exist.
+    """
     # Ensure that the user requesting the versions is the author
     if current_user.username != un:
         return abort(401)
@@ -321,6 +337,9 @@ def view_versions(un, recipe_id):
         return render_template("error.html", message=str(ex))
 
 def collect_previous_versions(recipe_id):
+    """
+    Helper function to return previous versions of a recipe.
+    """
     previous_recipes = []
     parent_recipe = Recipe.query.filter_by(child_id=recipe_id).first()
     
@@ -334,6 +353,9 @@ def collect_previous_versions(recipe_id):
 @main.route("/u/<un>/<recipe_id>/add-collaborator", methods=["POST"])
 @login_required
 def add_collaborator(un, recipe_id):
+    """
+    Adds collaborator to recipe
+    """
     recipe = Recipe.query.get_or_404(recipe_id)
 
     if current_user.username != un or recipe == None:

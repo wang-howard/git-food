@@ -1,5 +1,5 @@
 """
-Commonly used functions in code to avoid repitition
+Helper functions that randomly generate a username for a recipe or ingredient.
 """
 import random
 from .. import db

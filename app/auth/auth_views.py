@@ -37,12 +37,19 @@ def crc32_hash(num):
 
 @auth.route("/login")
 def login():
+    """
+    Redirects to Google OAuth via flow object.
+    """
     authorization_url, state = flow.authorization_url()
     session["state"] = state
     return redirect(authorization_url)
 
 @auth.route("/callback")
 def callback():
+    """
+    Retrieves user Google account information and processes it into a User
+    object, or retrieves existing user automatically.
+    """
     try:
         flow.fetch_token(authorization_response=request.url)
         if not session["state"] == request.args["state"]:
@@ -84,6 +91,9 @@ def callback():
 @auth.route("/logout")
 @login_required
 def logout():
+    """
+    Clears all session variables and removes user from user cache.
+    """
     session.clear()
     logout_user()
     return redirect(url_for("main.index"))
