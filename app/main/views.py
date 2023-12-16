@@ -43,9 +43,9 @@ def user(un):
     other = User.query.filter_by(username=un).first_or_404()
 
     try:
-        if current_user.is_authenticated and current_user.username != un:
-            shared_recipes = Recipe.query.filter_by(current_user.id).all()
-            return render_template("user.html", shared=shared_recipes)
+        if current_user.is_authenticated and current_user.username == un:
+            shared_recipes = Recipe.query.filter_by(collab_id=current_user.id).all()
+            return render_template("user.html", shared=shared_recipes, user=User)
         else:
             return render_template("view_other_user.html", other=other)
     except Exception as ex:
@@ -163,8 +163,6 @@ def show_edit_recipe(un, recipe_id):
     if current_user.username != un and current_user.id != recipe.collab_id:
         abort (401)
     try:
-        if current_user.username != un or recipe is None:
-            abort(404)
         return render_template("edit_recipe.html", recipe=recipe, owner_un=un)
     except Exception as ex:
         print(ex, file=sys.stderr)
@@ -184,7 +182,7 @@ def make_recipe_edit(un, recipe_id):
     if parent_recipe == None:
         abort(500)
 
-    if current_user.username != user.username and current_user.id != parent_recipe.collab_id:
+    if current_user.id != user.id and current_user.id != parent_recipe.collab_id:
         abort(401)
 
     try:
@@ -219,7 +217,7 @@ def make_recipe_edit(un, recipe_id):
             db.session.add(new_ingredient)
         db.session.commit()
         
-        return redirect(f"/u/{un}")
+        return redirect(f"/u/{current_user.username}")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
@@ -340,9 +338,8 @@ def add_collaborator(un, recipe_id):
     try:
         collab_username = request.form.get("collaborator-username")
         collaber = User.query.filter_by(username=collab_username).first()
-        if collab_username != "":
-            recipe.collab_id = collaber.id
-            db.session.add(recipe)
+        recipe.collab_id = collaber.id if collab_username != "" else None
+        db.session.add(recipe)
         db.session.commit()
         return redirect(f"/u/{un}/{recipe_id}")
     except Exception as ex:

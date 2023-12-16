@@ -19,8 +19,7 @@
       </div>
       {% if current_user.id == recipe.collab_id %}
       <div class="top-btns">
-        <button class="edit-btn"
-          onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
+        <button class="edit-btn" onclick="location.href ='/u/{{ other.username }}/{{ recipe.id }}/edit';">Edit</button>
       </div>
       {% endif %}
     </div>
