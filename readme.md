@@ -6,10 +6,11 @@
 * Howard Wang '24 (hw14)
 
 ## Running the App ##
-1. Open your terminal and `cd` into the app directory (`/git-food`) and make sure you have `pip` installed
-2. Activate the virtual env by executing this line in the terminal: `source venv/bin/activate`
-3. Ensure the virtual environment is properly set up by executing: `pip install -r requirements.txt`
-4. Set the following FIVE environment variables by executing in terminal:
+1. Unzip the package containing the app directory
+2. Open your terminal and `cd` into the app directory (`/git-food`) and make sure you have `pip` installed
+3. Activate the virtual env by executing this line in the terminal: `source venv/bin/activate`
+4. Ensure the virtual environment is properly set up by executing: `pip install -r requirements.txt`
+5. Set the following FIVE environment variables by executing in terminal:
 ```
 export FLASK_APP=gitfood.py
 export DB_URI=postgresql://git_food_user:uelFgIGe9GCTYYttir2XHNJ9Y4auBX4G@dpg-clrqa1cm7d1c73f483tg-a.ohio-postgres.render.com/git_food
