@@ -29,8 +29,11 @@
         {% if recipe.version != 1 and recipe.author_id == current_user.id %}
         <button class="prev-version-button" onclick="redirectToVersions()">Previous Versions</button>
         {% endif %}
+
+        {% if not recipe.is_head%}
         <button class="edit-btn"
           onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
+        {% endif %}
       </div>
       {% endif %}
     </div>
