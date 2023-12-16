@@ -43,10 +43,11 @@ def user(un):
     other = User.query.filter_by(username=un).first_or_404()
 
     try:
-        if not current_user.is_authenticated or current_user.username != un:
-            return render_template("view_other_user.html", other=other)
+        if current_user.is_authenticated and current_user.username != un:
+            shared_recipes = Recipe.query.filter_by(current_user.id).all()
+            return render_template("user.html", shared=shared_recipes)
         else:
-            return render_template("user.html")
+            return render_template("view_other_user.html", other=other)
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
