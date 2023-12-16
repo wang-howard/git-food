@@ -75,7 +75,7 @@ Your Profile
   {% endfor %}
 </section>
 
-{% if shared %}
+{% if shared|length > 0 %}
 <div class="recipes-header">
   <div class="my-recipe">
     <h1>Recipes Shared With Me</h1>
