@@ -54,10 +54,17 @@
 .user-info {
   justify-content: center;
   display: flex;
+  margin: auto;
   font-weight: bold;
   font-size: 24px;
+  max-width: 800px;
   text-align: center;
   padding: 1rem;
+}
+
+.about-me #about-me-text {
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .edit-icon {
@@ -96,11 +103,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-width: 880px;
   margin: auto;
-  overflow-y: scroll;
-  min-height: 300px;
-  max-height: 500px;
+  min-height: 280px;
   padding: 1rem;
-  margin-bottom: 50px;
 }
 
 .recipe {
@@ -132,6 +136,7 @@
 
 .recipe p {
   color: #333;
+  background-color: #f0f5f8
 }
 
 .no-recipes {
