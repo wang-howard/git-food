@@ -30,11 +30,11 @@ def search_recipes():
         search_text = data.get("query") if data else None
         results = None
         if search_text == None:
-            results = Recipe.query.filter_by(is_head=True, private=False).all()
+            results = Recipe.query.filter_by(is_head=True, private=False).order_by(Recipe.created_at.desc()).all()
         else:
             results = Recipe.query.filter(Recipe.is_head==True,
                                         Recipe.private==False,
-                                        Recipe.title.ilike(f"%{search_text}%")).all()
+                                        Recipe.title.ilike(f"%{search_text}%")).order_by(Recipe.created_at.desc()).all()
         recipes_html = render_template("search_results.html", recipe_query=results, user=User)
         return jsonify({"status": "success", "data": recipes_html})
     except Exception as ex:
@@ -49,8 +49,11 @@ def user(un):
 
     try:
         if current_user.is_authenticated and current_user.username == un:
-            shared_recipes = Recipe.query.filter_by(collab_id=current_user.id).order_by(Recipe.created_at.desc()).all()
-            return render_template("user.html", shared=shared_recipes, user=User)
+            owned_recipes = current_user.recipes.filter_by(is_head=True).order_by(Recipe.created_at.desc())
+            shared_recipes = Recipe.query.filter_by(collab_id=current_user.id,
+                                                    is_head=True).order_by(Recipe.created_at.desc()).all()
+            return render_template("user.html", owned=owned_recipes,
+                                   shared=shared_recipes, user=User)
         else:
             return render_template("view_other_user.html", other=other)
     except Exception as ex:
@@ -207,7 +210,8 @@ def make_recipe_edit(un, recipe_id):
         db.session.add(new_recipe)
 
         if parent_recipe == new_recipe:
-            db.session.remove(new_recipe)
+            db.session.delete(new_recipe)
+            db.session.commit()
             return redirect(f"/u/{un}")
 
         parent_recipe.is_head = False

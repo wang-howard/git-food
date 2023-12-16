@@ -57,17 +57,18 @@
         <div class="ingredient">
           <div>
             <label for="ingredient_name">Name</label>
-            <input type="text" name="ingredient-name{{ ct.c }}" class="form-control" value="{{ ingredient.name }}"
-              required>
+            <input type="text" class="ingredient-name-input" name="ingredient-name{{ ct.c }}" class="form-control"
+              value="{{ ingredient.name }}" required>
           </div>
           <div>
             <label for="quantity">Quantity</label>
-            <input type="number" name="quantity{{ ct.c }}" min="0" class="form-control" step="any"
-              value="{{ ingredient.quantity }}" required>
+            <input type="number" class="ingredient-quantity-input" name="quantity{{ ct.c }}" min="0"
+              class="form-control" step="any" value="{{ ingredient.quantity }}" required>
           </div>
           <div id=" select-unit">
             <label for="unit" style="margin-top: -10px;">Unit</label>
-            <select type="text" name="unit{{ ct.c }}" class="form-control" value="{{ ingredient.name }}" required>
+            <select type="text" class="ingredient-unit-input" name="unit{{ ct.c }}" class="form-control"
+              value="{{ ingredient.name }}" required>
               <option value="count">count</option>
               <option value="tsp">tsp</option>
               <option value="tbsp">tbsp</option>
