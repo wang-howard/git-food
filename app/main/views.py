@@ -1,5 +1,5 @@
 import sys
-from flask import render_template, abort, redirect, session, request, jsonify
+from flask import render_template, abort, redirect, request, jsonify
 from flask_login import login_required, current_user
 from . import main
 from .. import db
@@ -25,15 +25,20 @@ def search_recipes():
     """
     Called dynamically by AJAX to search recipe database with search box input.
     """
-    search_text = request.form["query"]
-    results = None
-    if search_text == None:
-        results = Recipe.query.filter_by(is_head=True, private=False).all()
-    else:
-        results = Recipe.query.filter(Recipe.is_head==True,
-                                      Recipe.private==False,
-                                      Recipe.title.ilike(f"%{search_text}%")).all()
-    return render_template("search_results.html", recipe_query=results, user=User)
+    try:
+        data = request.get_json()
+        search_text = data.get("query") if data else None
+        results = None
+        if search_text == None:
+            results = Recipe.query.filter_by(is_head=True, private=False).order_by(Recipe.created_at.desc()).all()
+        else:
+            results = Recipe.query.filter(Recipe.is_head==True,
+                                        Recipe.private==False,
+                                        Recipe.title.ilike(f"%{search_text}%")).order_by(Recipe.created_at.desc()).all()
+        recipes_html = render_template("search_results.html", recipe_query=results, user=User)
+        return jsonify({"status": "success", "data": recipes_html})
+    except Exception as ex:
+        return jsonify({"status": "error", "data": str(ex)})
 
 @main.route("/u/<un>", methods=["GET"])
 def user(un):
@@ -44,8 +49,11 @@ def user(un):
 
     try:
         if current_user.is_authenticated and current_user.username == un:
-            shared_recipes = Recipe.query.filter_by(collab_id=current_user.id).all()
-            return render_template("user.html", shared=shared_recipes, user=User)
+            owned_recipes = current_user.recipes.filter_by(is_head=True).order_by(Recipe.created_at.desc())
+            shared_recipes = Recipe.query.filter_by(collab_id=current_user.id,
+                                                    is_head=True).order_by(Recipe.created_at.desc()).all()
+            return render_template("user.html", owned=owned_recipes,
+                                   shared=shared_recipes, user=User)
         else:
             return render_template("view_other_user.html", other=other)
     except Exception as ex:
@@ -180,6 +188,11 @@ def make_recipe_edit(un, recipe_id):
     user = User.query.filter_by(username=un).first()
     if user == None:
         return render_template("error.html", message="User Not Found")
+    
+    if current_user.username == un:
+        return_user = current_user
+    else:
+        return_user = user
 
     parent_recipe = Recipe.query.get(recipe_id)
     if parent_recipe == None:
@@ -208,8 +221,9 @@ def make_recipe_edit(un, recipe_id):
         Create and add recipe object to db
         """
         if parent_recipe == new_recipe:
-            db.session.remove(new_recipe)
-            return redirect(f"/u/{un}")
+            db.session.delete(new_recipe)
+            db.session.commit()
+            return redirect(f"/u/{return_user.username}")
 
         parent_recipe.is_head = False
         parent_recipe.child_id = new_recipe.id
@@ -226,7 +240,7 @@ def make_recipe_edit(un, recipe_id):
             db.session.add(new_ingredient)
         db.session.commit()
         
-        return redirect(f"/u/{current_user.username}")
+        return redirect(f"/u/{return_user.username}")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
@@ -289,6 +303,7 @@ def restore_version(un, recipe_id):
 
             restored_recipe.child_id = None
             restored_recipe.collab_id = collab
+            db.session.add(restored_recipe)
             db.session.commit()
             return jsonify({"status": "success", "message": "Recipe version restored."})
         else:

@@ -30,7 +30,7 @@
         <button class="prev-version-button" onclick="redirectToVersions()">Previous Versions</button>
         {% endif %}
 
-        {% if not recipe.is_head%}
+        {% if recipe.is_head %}
         <button class="edit-btn"
           onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}/edit';">Edit</button>
         {% endif %}

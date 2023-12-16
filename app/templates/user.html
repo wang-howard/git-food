@@ -48,7 +48,7 @@ Your Profile
 </div>
 
 <section class="recipes-list" id="recipes-list">
-  {% for recipe in current_user.recipes if recipe.is_head %}
+  {% for recipe in owned %}
   <div class="recipe" onclick="location.href ='/u/{{ current_user.username }}/{{ recipe.id }}';">
     <div class="recipe-label-wrapper">
       <div class="recipe-label">
@@ -75,7 +75,7 @@ Your Profile
   {% endfor %}
 </section>
 
-{% if shared %}
+{% if shared|length > 0 %}
 <div class="recipes-header">
   <div class="my-recipe">
     <h1>Recipes Shared With Me</h1>
@@ -83,7 +83,7 @@ Your Profile
 </div>
 
 <section class="recipes-list" id="recipes-list">
-  {% for recipe in shared if recipe.is_head %}
+  {% for recipe in shared %}
   <div class="recipe" onclick="location.href ='/u/{{ user.query.get(recipe.author_id).username }}/{{ recipe.id }}';">
     <div class="recipe-label-wrapper">
       <div class="recipe-label">
