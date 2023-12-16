@@ -14,7 +14,7 @@ import google.auth.transport.requests
 
 from . import auth
 from .. import db
-from ..models import User, Recipe, Ingredient
+from ..models import User
 
 GOOGLE_CLIENT_ID = "213256229846-rappmhrpskr8hj7pp3lekhpiki14id7g.apps.googleusercontent.com"
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
