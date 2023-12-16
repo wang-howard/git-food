@@ -288,6 +288,7 @@ def restore_version(un, recipe_id):
 
             restored_recipe.child_id = None
             restored_recipe.collab_id = collab
+            db.session.add(restored_recipe)
             db.session.commit()
             return jsonify({"status": "success", "message": "Recipe version restored."})
         else:
