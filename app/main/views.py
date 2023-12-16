@@ -188,6 +188,11 @@ def make_recipe_edit(un, recipe_id):
     user = User.query.filter_by(username=un).first()
     if user == None:
         return render_template("error.html", message="User Not Found")
+    
+    if current_user.username == un:
+        return_user = current_user
+    else:
+        return_user = user
 
     parent_recipe = Recipe.query.get(recipe_id)
     if parent_recipe == None:
@@ -212,7 +217,7 @@ def make_recipe_edit(un, recipe_id):
         if parent_recipe == new_recipe:
             db.session.delete(new_recipe)
             db.session.commit()
-            return redirect(f"/u/{un}")
+            return redirect(f"/u/{return_user.username}")
 
         parent_recipe.is_head = False
         parent_recipe.child_id = new_recipe.id
@@ -229,7 +234,7 @@ def make_recipe_edit(un, recipe_id):
             db.session.add(new_ingredient)
         db.session.commit()
         
-        return redirect(f"/u/{un}")
+        return redirect(f"/u/{return_user.username}")
     except Exception as ex:
         print(ex, file=sys.stderr)
         return render_template("error.html", message=ex)
