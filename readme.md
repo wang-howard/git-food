@@ -1,4 +1,5 @@
 # COS316 Final Project: GitFood #
+**The website no longer works as of 3/27/2024 due to Render offloading our database.**
 
 ## Group Members ##
 - Tuan Dinh '25 (td6955)
